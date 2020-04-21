@@ -1,12 +1,18 @@
+<?php
+$getUser = $this->session->userdata('session_username_perusahaan');
+$getId = $this->session->userdata('session_id_perusahaan');
+if ($getUser == '' or $getId == '') {
+  redirect('login');
+}
+?>
 <section class="sidebar">
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="../../img/pengusaha/user/<?php echo $gambar2;?>" class="img-circle" alt="User Image">
+      <img src="" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
-      <p><?php echo $_SESSION['USERNAME'] ?></p>
-      <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+      <p></p>
     </div>
   </div>
   <!-- /.search form -->
@@ -14,34 +20,34 @@
   <ul class="sidebar-menu">
     <li class="header">NAVIGASI</li>
     <li class="treeview">
-      <a href="./index">
+      <a href="<?= base_url('Pperusahaan')?>">
         <i class="fa fa-dashboard"></i> <span>Beranda</span>
       </a>
     </li>
     <li class="treeview">
-      <a href="./riwayat">
+      <a href="<?= base_url('Priwayat'); ?>">
         <i class="fa fa-send"></i> <span>Riwayat Pemesanan</span>
         <span class="pull-right-container">
         </span>
       </a>
     </li>
     <li class="treeview">
-      <a href="./viewlaporan">
+      <a href="<?= base_url('Plappesan'); ?>">
         <i class="fa fa-book"></i> <span>Laporan Pemesanan</span>
         <span class="pull-right-container">
         </span>
       </a>
     </li>
-    
-    <?php  if($nama_pengguna != ""){            
-          ?>
-    <li class="treeview">
-      <a href="../frontend/cariHasil">
-        <button class="btn btn-success btn-md"><span>Pesan Disini</span></button> 
-        <span class="pull-right-container">
-        </span>
-      </a>
-        </li> <?php }?>
+
+    <?php if ($getId != "") {
+    ?>
+      <li class="treeview">
+        <a href="../frontend/cariHasil">
+          <button class="btn btn-success btn-md"><span>Pesan Disini</span></button>
+          <span class="pull-right-container">
+          </span>
+        </a>
+      </li> <?php } ?>
   </ul>
 
-  </section>
+</section>

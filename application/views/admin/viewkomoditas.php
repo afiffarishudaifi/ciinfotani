@@ -29,7 +29,7 @@ $this->load->view("_partials/head.php");
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Data Tabel Komoditas</h3>
+                                <h3 style="text-align: center;">Data Komoditas</h3>
                                 <h3><a href="<?php echo base_url('Akomoditas/tambah') ?>"><span class="fa fa-plus" style="position:static;float:Left"> Tambah Data</span></a></h3>
 
                             </div>

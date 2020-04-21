@@ -29,7 +29,7 @@ $this->load->view("_partials/head.php");
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Data Laporan Panen</h3>
+                                <h3 style="text-align: center;">Laporan Panen</h3>
                                 <form action="<?php echo base_url('Alappanen/sortKomoditas') ?>" method="POST">
                                     <?php
                                     date_default_timezone_set('Asia/Jakarta');

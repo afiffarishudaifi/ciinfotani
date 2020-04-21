@@ -9,13 +9,13 @@ $this->load->view("_partials/head.php");
 
         <!--header-->
         <?php
-        $this->load->view("_partials/header.php");
+        $this->load->view("_partials/headerusaha.php");
         ?>
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
             <?php
-            $this->load->view("_partials/sidebar.php");
+            $this->load->view("_partials/sidebarusaha.php");
             ?>
             <!-- /.sidebar -->
         </aside>
@@ -30,15 +30,15 @@ $this->load->view("_partials/head.php");
                         <div class="box">
                             <div class="box-header">
                                 <h3 style="text-align: center;">Laporan Pemesanan</h3>
-                                <form action="<?php echo base_url('Alappesan/sortTahun') ?>" method="POST">
+                                <form action="<?php echo base_url('Plappesan/sortTahun') ?>" method="POST">
                                     <?php
                                     date_default_timezone_set('Asia/Jakarta');
-                                    $tahun = date("Y");
+                                    $tahun = date("M");
                                     echo "<select name='pilih' class='form-control hidden-print'>";
-                                    echo "<option value='' selected>--Pilih Tahun--</option>";
-                                    foreach ($getTahun as $data) :
+                                    echo "<option value='' selected>--Pilih Bulan--</option>";
+                                    foreach ($getBulan as $data) :
                                     ?>
-                                        <option value="<?php echo $data['tahun']; ?>"><?php echo $data['tahun']; ?></option>
+                                        <option value="<?php echo $data['bulan']; ?>"><?php echo $data['bulan']; ?></option>
                                     <?php
                                     endforeach;
 
@@ -49,7 +49,8 @@ $this->load->view("_partials/head.php");
                                 </form>
                             </div>
                             <?php foreach ($jumpesan as $jumlahpesan) : ?>
-                                <h3 class="box-title">Jumlah Pemesanan : <b class="uang"><?php echo $jumlahpesan['jumlah']; ?> </b><b> KG</b> </h3>
+                                <h4 class="box-title">Jumlah Pemesanan : <b class="uang"><?php echo $jumlahpesan['jumlah']; ?> </b><b> KG</b> </h4>
+                                <h4 class="box-title">Total Harga : <b> Rp. </b><b class="uang"><?php echo $jumlahpesan['total']; ?> </b> </h4>
                             <?php endforeach; ?>
                             <br>
                             <!-- /.box-header -->

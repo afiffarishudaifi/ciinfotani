@@ -37,7 +37,7 @@ $this->load->view("_partials/head.php");
                 <div class="container">
                     <br>
                     <!--membuat sebuah form-->
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="<?php echo base_url('Auser/tambah'); ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>ID Level</label>
                             <?php
@@ -60,23 +60,22 @@ $this->load->view("_partials/head.php");
                             </div>
                         </div>
 
-
-                        <div class="form-group">
-                            <label for="name">Photo</label>
-                            <input class="form-control-file <?php echo form_error('price') ? 'is-invalid' : '' ?>" type="file" name="image" />
-                            <div class="invalid-feedback">
-                                <h5 class="text-danger text-form">
-                                    <?php echo form_error('image') ?>
-                                </h5>
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <label>Kata Sandi</label>
                             <input type="password" class="form-control" name="password" placeholder="Kata Sandi">
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
                                     <?php echo form_error('password') ?>
+                                </h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Photo</label>
+                            <input class="form-control-file" type="file" name="image" />
+                            <div class="invalid-feedback">
+                                <h5 class="text-danger text-form">
+                                    <?php echo form_error('image') ?>
                                 </h5>
                             </div>
                         </div>

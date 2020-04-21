@@ -29,7 +29,7 @@ $this->load->view("_partials/head.php");
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Data Tabel Desa</h3>
+                                <h3 style="text-align: center;">Data Desa</h3>
                                 <h3><a href="<?php echo site_url('Adesa/tambah') ?>"><span class="fa fa-plus" style="position:static;float:Left"> Tambah Data</span></a></h3>
                             </div>
                             <?php if ($this->session->flashdata('desadiubah')) : ?>

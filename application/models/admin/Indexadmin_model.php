@@ -1,6 +1,6 @@
 <?php
 
-class Admin_model extends CI_Model{
+class Indexadmin_model extends CI_Model{
 
     private $_table = "kecamatan";
     public function jumDesa()
@@ -44,21 +44,6 @@ class Admin_model extends CI_Model{
             $this->db->query("SELECT count(*) as nov FROM panen WHERE month(TGL_PANEN) = 11 and year(TGL_PANEN) = $tahun")->result_array(),
             $this->db->query("SELECT count(*) as dess FROM panen WHERE month(TGL_PANEN) = 12 and year(TGL_PANEN) = $tahun")->result_array()
         ];
-        /*[
-            "jan" => $this->db->query("SELECT count(*) as 'jan' FROM panen WHERE month(TGL_PANEN) = 01 and year(TGL_PANEN) = $tahun")->result_array()
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 02 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 03 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 04 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 05 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 06 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 07 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 08 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 09 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 10 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 11 and year(TGL_PANEN) = $tahun")->result_array(),
-            $this->db->query("SELECT count(*) FROM panen WHERE month(TGL_PANEN) = 12 and year(TGL_PANEN) = $tahun")->result_array()
-        ];*/
-        //return var_dump($data);
         return $data;
     }
     public function dataPemesanan()

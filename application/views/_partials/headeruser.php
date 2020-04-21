@@ -1,29 +1,14 @@
 <?php
-    require_once "../../controller/koneksi.php";
-    include "../../controller/session.php";
-  if(!isset($login_session)) {
-      ?>
-      <script language="JavaScript">
-  		alert('Anda Belum Login !');
-  		setTimeout(function() {window.location.href="../frontend/login"},10);
-  		</script>
-      <?php
-	mysqli_close($koneksi); // Menutup koneksi
-	header('Location: ../frontend/login'); // Mengarahkan ke Home Page
-	}
-
-  if ($_SESSION['ID_LEVEL']!=2){
-  ?>
-	<script language="JavaScript">
-		alert('Anda Bukan User !');
-		setTimeout(function() {window.location.href="../frontend/login"},10);
-		</script>
-	<?php
+$getUser = $this->session->userdata('session_user');
+$getAkses = $this->session->userdata('session_akses');
+$getId = $this->session->userdata('session_id');
+if ($getUser == '' or $getAkses == '' or $getId == '') {
+  redirect('login');
 }
 ?>
 <header class="main-header">
   <!-- Logo -->
-  <a href="../frontend/index" class="logo">
+  <a href="<?php site_url('frontend/index') ?>" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>I</b>T</span>
     <!-- logo for regular state and mobile devices -->
@@ -41,25 +26,26 @@
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../../img/user/<?php echo $gambar;?>" class="user-image" alt="User Image">
-            <span class="hidden-xs"><?php echo $_SESSION['USERNAME'] ?></span>
+            <img src="" class="user-image" alt="User Image">
+            <span class="hidden-xs"></span>
           </a>
           <ul class="dropdown-menu">
-            <!-- Menu Footer-->
+            <!-- User image -->
             <li class="user-header">
-              <img src="../../img/user/<?php echo $gambar;?>" class="img-circle" alt="User Image">
+              <img src="" class="img-circle" alt="User Image">
 
               <p>
-                <?php echo $_SESSION['USERNAME'] ?>
-                <small>Akun Info Tani</small>
+                <?php echo $getUser; ?>
+                <small>Admin Info Tani</small>
               </p>
             </li>
+            <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="./pengaturan" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
+                <a href="<?php echo base_url('admin/pengaturan'); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
               </div>
               <div class="pull-right">
-                <a href="../../controller/logout" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>
+                <a href="<?php echo base_url('Login/logout') ?>" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>
               </div>
             </li>
           </ul>

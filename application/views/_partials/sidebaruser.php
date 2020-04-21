@@ -2,10 +2,10 @@
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="../../img/user/<?php echo $gambar;?>" class="img-circle" alt="User Image">
+      <img src="../../img/user/<?php echo $gambar; ?>" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
-      <p><?php echo $_SESSION['USERNAME'] ?></p>
+      <p><?php //echo $_SESSION['USERNAME']; ?></p>
     </div>
   </div>
   <!-- /.search form -->
@@ -48,4 +48,4 @@
     </li>
   </ul>
 
-  </section>
+</section>

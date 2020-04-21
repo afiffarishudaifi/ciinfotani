@@ -29,57 +29,52 @@ $this->load->view("_partials/head.php");
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 style="text-align: center;">Data Kecamatan</h3>
-                                <h3><a href="<?php echo site_url('Akecamatan/tambah') ?>"><span class="fa fa-plus" style="position:static;float:Left"> Tambah Data</span></a></h3>
+                                <h3 style="text-align: center;">Laporan Pemesanan</h3>
+                                <form action="<?php echo base_url('Ulappesan/sortTahun') ?>" method="POST">
+                                    <?php
+                                    date_default_timezone_set('Asia/Jakarta');
+                                    $tahun = date("Y");
+                                    echo "<select name='pilih' class='form-control hidden-print'>";
+                                    echo "<option value='' selected>--Pilih Tahun--</option>";
+                                    foreach ($getTahun as $data) :
+                                    ?>
+                                        <option value="<?php echo $data['tahun']; ?>"><?php echo $data['tahun']; ?></option>
+                                    <?php
+                                    endforeach;
+
+                                    echo "</select><br>";
+                                    echo "<button type='submit' name='submit' class='btn btn-warning hidden-print'>Pilih</button>";
+
+                                    ?>
+                                </form>
                             </div>
-                            <?php if ($this->session->flashdata('kecamatanditambah')) : ?>
-                                <div class="alert alert-info alert-dismissible fade in">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>Sukses </strong> <?php echo $this->session->flashdata('kecamatanditambah'); ?> !
-                                </div>
-
-                            <?php endif; ?>
-                            <?php if ($this->session->flashdata('kecamatandihapus')) : ?>
-                                <div class="alert alert-danger alert-dismissible fade in">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>Sukses </strong> <?php echo $this->session->flashdata('kecamatandihapus'); ?> !
-                                </div>
-
-                            <?php endif; ?>
-                            <?php if ($this->session->flashdata('kecamatandiubah')) : ?>
-                                <div class="alert alert-warning alert-dismissible fade in">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>Sukses </strong> <?php echo $this->session->flashdata('kecamatandiubah'); ?> !
-                                </div>
-
-                            <?php endif; ?>
+                            <?php foreach ($jumpesan as $jumlahpesan) : ?>
+                                <h3 class="box-title">Jumlah Pemesanan : <b class="uang"><?php echo $jumlahpesan['jumlah']; ?> </b><b> KG</b> </h3>
+                            <?php endforeach; ?>
+                            <br>
                             <!-- /.box-header -->
-                            <div class="box-body table-responsive">
+                            <div class="box-body table-responsive no-padding">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>ID KECAMATAN</th>
-                                            <th>NAMA KECAMATAN</th>
-                                            <th>AKSI</th>
+                                            <th>ID PEMESANAN</th>
+                                            <th>NAMA PERUSAHAAN</th>
+                                            <th>TANGGAL</th>
+                                            <th>JUMLAH_PESAN (KG)</th>
+                                            <th>TOTAL BIAYA (RP)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-
-                                        foreach ($kecamatan as $row) {  //merubah array dari objek ke array yang biasanya
+                                        foreach ($lappesan as $row) {  //merubah array dari objek ke array yang biasanya
                                         ?>
                                             <tr>
                                                 <!--memangambil data dari tabel dengan mengisikan data di table-->
-                                                <td><?php echo $row['ID_KECAMATAN']; ?></td>
-                                                <td><?php echo $row['NAMA_KECAMATAN']; ?></td>
-                                                <td>
-                                                    <a href="<?php base_url() ?>Akecamatan/ubah/<?php echo $row['ID_KECAMATAN']; ?>"><button class="pilih btn btn-primary"><span class="fa fa-pencil">
-                                                            </span></button></a>
-                                                    <a href="<?php base_url() ?>Akecamatan/hapus/<?php echo $row['ID_KECAMATAN']; ?>" data-toggle="modal" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus <?php echo $row['NAMA_KECAMATAN']; ?>?');"><span class="fa fa-trash"></a>
-                                                    <!-- Delete -->
-
-                                                    <!-- /.modal -->
-                                                </td>
+                                                <td><?php echo $data['ID_PESAN']; ?></td>
+                                                <td><?php echo $data['NAMA_PERUSAHAAN']; ?></td>
+                                                <td><?php echo $data['TANGGAL']; ?></td>
+                                                <td class="uang"><?php echo $data['JUMLAH_PESAN']; ?></td>
+                                                <td class="uang"><?php echo $data['TOTAL_BIAYA']; ?></td>
                                             </tr>
                                         <?php
                                         } ?>

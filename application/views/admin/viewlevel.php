@@ -29,7 +29,7 @@ $this->load->view("_partials/head.php");
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 class="box-title">Data Tabel Level</h3>
+                                <h3 style="text-align: center;">Data Level</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body table-responsive">

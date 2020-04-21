@@ -1,3 +1,17 @@
+<?php
+$getUser = $this->session->userdata('session_user');
+$getAkses = $this->session->userdata('session_akses');
+$getId = $this->session->userdata('session_id');
+if ($getUser == '' or $getAkses == '' or $getId == '') {
+  redirect('login');
+} /*else {
+  if ($getAkses == 1) {
+    redirect('Admin');
+  } elseif ($getAkses == 2) {
+    redirect('User');
+  } 
+}*/
+?>
 <header class="main-header">
   <!-- Logo -->
   <a href="<?php site_url('frontend/index') ?>" class="logo">
@@ -27,17 +41,17 @@
               <img src="" class="img-circle" alt="User Image">
 
               <p>
-
+                <?php echo $getUser; ?>
                 <small>Admin Info Tani</small>
               </p>
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="<?php site_url('admin/pengaturan'); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
+                <a href="<?php echo base_url('admin/pengaturan'); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
               </div>
               <div class="pull-right">
-                <a href="" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>
+                <a href="<?php echo base_url('Login/logout') ?>" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>
               </div>
             </li>
           </ul>

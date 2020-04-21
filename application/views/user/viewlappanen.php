@@ -29,57 +29,59 @@ $this->load->view("_partials/head.php");
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                                <h3 style="text-align: center;">Data Kecamatan</h3>
-                                <h3><a href="<?php echo site_url('Akecamatan/tambah') ?>"><span class="fa fa-plus" style="position:static;float:Left"> Tambah Data</span></a></h3>
+                                <h3 style="text-align: center;">Laporan Panen</h3>
+                                <form action="<?php echo base_url('Ulappanen/sortKomoditas') ?>" method="POST">
+                                    <?php
+                                    date_default_timezone_set('Asia/Jakarta');
+                                    $tahun = date("Y");
+                                    echo "<select name='pilih' class='form-control hidden-print'>";
+                                    echo "<option value='' selected>--Pilih Komoditas--</option>";
+                                    foreach ($getKomo as $data) :
+                                    ?>
+                                        <option value="<?php echo $data['ID_KOMODITAS']; ?>"><?php echo $data['NAMA_KOMODITAS']; ?></option>
+                                    <?php
+                                    endforeach;
+
+                                    echo "</select><br>";
+                                    echo "<button type='submit' name='submit' class='btn btn-warning hidden-print'>Pilih</button>";
+
+                                    ?>
+                                </form>
                             </div>
-                            <?php if ($this->session->flashdata('kecamatanditambah')) : ?>
-                                <div class="alert alert-info alert-dismissible fade in">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>Sukses </strong> <?php echo $this->session->flashdata('kecamatanditambah'); ?> !
-                                </div>
-
-                            <?php endif; ?>
-                            <?php if ($this->session->flashdata('kecamatandihapus')) : ?>
-                                <div class="alert alert-danger alert-dismissible fade in">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>Sukses </strong> <?php echo $this->session->flashdata('kecamatandihapus'); ?> !
-                                </div>
-
-                            <?php endif; ?>
-                            <?php if ($this->session->flashdata('kecamatandiubah')) : ?>
-                                <div class="alert alert-warning alert-dismissible fade in">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    <strong>Sukses </strong> <?php echo $this->session->flashdata('kecamatandiubah'); ?> !
-                                </div>
-
-                            <?php endif; ?>
+                            <?php foreach ($jumpanen as $jumlahpanen) : ?>
+                                <h3 class="box-title">Jumlah Awal Panen : <b class="uang"><?php echo $jumlahpanen['jumlahawal']; ?></b><b> KG</b> </h3>
+                                <h3 class="box-title">Jumlah Sisa Panen :<b class="uang"><?php echo $jumlahpanen['jumlahakhir']; ?></b><b> KG</b> </h3>
+                            <?php endforeach; ?>
+                            <br>
                             <!-- /.box-header -->
-                            <div class="box-body table-responsive">
+                            <div class="box-body table-responsive no-padding">
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>ID KECAMATAN</th>
-                                            <th>NAMA KECAMATAN</th>
-                                            <th>AKSI</th>
+                                            <th>ID PANEN</th>
+                                            <th>KTP</th>
+                                            <th>KOMODITAS</th>
+                                            <th>TANGGAL PANEN</th>
+                                            <th>HASIL AWAL PANEN (KG)</th>
+                                            <th>SISA PANEN (KG)</th>
+                                            <th>HARGA/KG (RP)</th>
+                                            <th>STATUS PANEN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-
-                                        foreach ($kecamatan as $row) {  //merubah array dari objek ke array yang biasanya
+                                        foreach ($lappanen as $data) {  //merubah array dari objek ke array yang biasanya
                                         ?>
                                             <tr>
                                                 <!--memangambil data dari tabel dengan mengisikan data di table-->
-                                                <td><?php echo $row['ID_KECAMATAN']; ?></td>
-                                                <td><?php echo $row['NAMA_KECAMATAN']; ?></td>
-                                                <td>
-                                                    <a href="<?php base_url() ?>Akecamatan/ubah/<?php echo $row['ID_KECAMATAN']; ?>"><button class="pilih btn btn-primary"><span class="fa fa-pencil">
-                                                            </span></button></a>
-                                                    <a href="<?php base_url() ?>Akecamatan/hapus/<?php echo $row['ID_KECAMATAN']; ?>" data-toggle="modal" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus <?php echo $row['NAMA_KECAMATAN']; ?>?');"><span class="fa fa-trash"></a>
-                                                    <!-- Delete -->
-
-                                                    <!-- /.modal -->
-                                                </td>
+                                                <td><?php echo $data['ID_PANEN']; ?></td>
+                                                <td><?php echo $data['KTP']; ?></td>
+                                                <td><?php echo $data['NAMA_KOMODITAS']; ?></td>
+                                                <td><?php echo $data['TGL_PANEN']; ?></td>
+                                                <td class="uang"><?php echo $data['HASIL_AWAL']; ?></td>
+                                                <td class="uang"><?php echo $data['HASIL']; ?></td>
+                                                <td class="uang"><?php echo $data['HARGA']; ?></td>
+                                                <td><?php echo $data['STATUS_PANEN']; ?></td>
                                             </tr>
                                         <?php
                                         } ?>

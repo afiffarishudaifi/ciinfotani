@@ -32,7 +32,6 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="<?php echo base_url('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') ?>">
 
-
 </head>
 <?php
 date_default_timezone_set('Asia/Jakarta');
