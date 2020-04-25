@@ -36,11 +36,12 @@ $this->load->view("_partials/head.php");
                                     $tahun = date("M");
                                     echo "<select name='pilih' class='form-control hidden-print'>";
                                     echo "<option value='' selected>--Pilih Bulan--</option>";
-                                    foreach ($getBulan as $data) :
+
+                                    for ($a = 1; $a <= 12; $a++) {
                                     ?>
-                                        <option value="<?php echo $data['bulan']; ?>"><?php echo $data['bulan']; ?></option>
+                                        <option value="<?php echo $a; ?>"><?php echo $a; ?></option>
                                     <?php
-                                    endforeach;
+                                    }
 
                                     echo "</select><br>";
                                     echo "<button type='submit' name='submit' class='btn btn-warning hidden-print'>Pilih</button>";

@@ -37,7 +37,8 @@ $this->load->view("_partials/head.php");
                 <div class="container">
                     <br>
                     <!--membuat sebuah form-->
-                    <form action="<?php echo base_url('Auser/tambah'); ?>" method="post" enctype="multipart/form-data">
+
+                    <form action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>ID Level</label>
                             <?php
@@ -49,40 +50,35 @@ $this->load->view("_partials/head.php");
                             echo "</select>";
                             ?>
                         </div>
-
                         <div class="form-group">
                             <label>Nama Pengguna</label>
-                            <input type="text" class="form-control" name="namapengguna" placeholder="Nama Pengguna">
-                            <div class="invalid-feedback">
-                                <h5 class="text-danger text-form">
-                                    <?php echo form_error('namapengguna') ?>
-                                </h5>
+                            <input class="form-control <?php echo form_error('namapengguna') ? 'is-invalid' : '' ?>" type="text" name="namapengguna" placeholder="Nama Pengguna" />
+                            <div class="text-danger text-form invalid-feedback">
+                                <?php echo form_error('namapengguna') ?>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Kata Sandi</label>
-                            <input type="password" class="form-control" name="password" placeholder="Kata Sandi">
-                            <div class="invalid-feedback">
-                                <h5 class="text-danger text-form">
-                                    <?php echo form_error('password') ?>
-                                </h5>
+                            <label>Katasandi</label>
+                            <input class="form-control <?php echo form_error('password') ? 'is-invalid' : '' ?>" type="password" name="password" min="0" placeholder="Katasandi" />
+                            <div class="text-danger text-form invalid-feedback">
+                                <?php echo form_error('password') ?>
                             </div>
                         </div>
+
 
                         <div class="form-group">
                             <label for="name">Photo</label>
-                            <input class="form-control-file" type="file" name="image" />
-                            <div class="invalid-feedback">
-                                <h5 class="text-danger text-form">
-                                    <?php echo form_error('image') ?>
-                                </h5>
+                            <input class="form-control-file <?php echo form_error('foto') ? 'is-invalid' : '' ?>" type="file" name="foto" />
+                            <div class="text-danger text-form invalid-feedback">
+                                <?php echo form_error('foto') ?>
                             </div>
                         </div>
 
-                        <input class="btn btn-success" type="submit" name="btn" value="Save" />
+                        <input class="btn btn-success" type="submit" name="btn" value="Simpan" />
                         <a href="<?= base_url(); ?>Auser" class="btn btn-danger" value="Kembali">Kembali</a>
                     </form>
+
                 </div>
             </section>
             <br><br>

@@ -28,8 +28,24 @@ class User_model extends CI_Model{
         $this->ID_USER = uniqid();     //membuat id unik
         $this->USERNAME = $post["namapengguna"];
         $this->PASSWORD = md5($post["password"]);
-        $this->FOTO_USER = $this->_uploadImage();
         $this->ID_LEVEL = $post['idlevel'];
+        $this->FOTO_USER = $_FILES['foto'];
+        if($this->FOTO_USER = $_FILES['foto'] == ''){
+
+        } else {
+            $config['upload_path']        = 'img/user/';  //menentukan lokasi
+            $config['allowed_types']    = 'gif|jpg|png';    //type yang dieprbolehkan
+            $config['file_name']        = $this->ID_USER;   //nama file diambil dari produk id
+            $config['overwrite']        = true;    //menindihkan file yang sudah terupload
+            $config['max_size']            = 10240;   //max size
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('foto')) {
+                return $this->upload->data("file_name");
+            }
+            return "default.jpg";
+        }
 
         //query ke database
         $this->db->insert('user', $this);
@@ -52,7 +68,7 @@ class User_model extends CI_Model{
 
         $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload('image')) {
+        if ($this->upload->do_upload('foto')) {
             return $this->upload->data("file_name");
         } 
         return "default.jpg";

@@ -21,7 +21,7 @@ class Auser extends CI_Controller{
         $data['idlevel'] = $this->User_model->tambahIdLevel();
         $this->form_validation->set_rules('namapengguna' , 'Nama Pengguna', 'alpha|required');
         $this->form_validation->set_rules('password' , 'Kata Sandi' , 'required');
-        $this->form_validation->set_rules('image', 'Gambar', 'required');
+        $this->form_validation->set_rules('foto', 'Gambar', 'required');
         $this->form_validation->set_rules('idlevel' , 'ID Level', 'required');
         if($this->form_validation->run() == FALSE){
             $this->load->view('admin/tambahuser', $data);
