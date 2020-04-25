@@ -36,13 +36,13 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
 
               <p>
                 <?php echo $getUser; ?>
-                <small>Admin Info Tani</small>
+                <small>User Info Tani</small>
               </p>
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="<?php echo base_url('admin/pengaturan'); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
+                <a href="<?php echo base_url('Upengaturan/edit/'.$getId); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
               </div>
               <div class="pull-right">
                 <a href="<?php echo base_url('Login/logout') ?>" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>

@@ -37,14 +37,14 @@ if ($getUser == ' ' or $getId == ' ') {
                                                   ?>" class="img-circle" alt="User Image">
 
               <p>
-                <?php //echo $_SESSION['USERNAME'] 
+                <?php echo $getUser; 
                 ?>
                 <small>Akun Info Tani</small>
               </p>
             </li>
             <li class="user-footer">
               <div class="pull-left">
-                <a href="<?php echo base_url('admin/pengaturan'); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
+              <a href="<?php echo base_url('Ppengaturan/edit/'.$getId); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
               </div>
               <div class="pull-right">
                 <a href="<?php echo base_url('Login/logout') ?>" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>

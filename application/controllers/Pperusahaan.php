@@ -16,7 +16,8 @@ class Pperusahaan extends CI_Controller{
             $no = $row['NO_TELP_PERUSAHAAN'];
             $manager = $row['NAMA_MANAGER'];
             if($nama == "" || $email == "" || $alamat == "" || $no == "" || $manager == ""){
-                redirect('Uperusahaan');
+                echo "<script>alert('Lengkapi Data!');</script>";
+                $this->load->view('perusahaan/tambah_data');
             }
         endforeach;
         $data['pemesanan'] = $this->Indexperusahaan_model->dataPemesanan();

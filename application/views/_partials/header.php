@@ -39,7 +39,7 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
             <!-- User image -->
             <li class="user-header">
               <img src="" class="img-circle" alt="User Image">
-
+ 
               <p>
                 <?php echo $getUser; ?>
                 <small>Admin Info Tani</small>
@@ -48,7 +48,7 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="<?php echo base_url('admin/pengaturan'); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
+                <a href="<?php echo base_url('Apengaturan/edit/'.$getId); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
               </div>
               <div class="pull-right">
                 <a href="<?php echo base_url('Login/logout') ?>" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>
