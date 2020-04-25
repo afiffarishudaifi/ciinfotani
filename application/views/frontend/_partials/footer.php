@@ -7,7 +7,7 @@
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="single-footer-widget mb-80">
                     <!-- Footer Logo -->
-                    <a href="./index" class="footer-logo">Info Tani</a>
+                    <a href="<?= base_url('beranda')?>" class="footer-logo">Info Tani</a>
 
                     <p class="mb-30">Kita akan berusaha memberikan pelayanan yang maksimal untuk Anda</p>
 
@@ -53,7 +53,7 @@ Copyright &copy;2019 Seluruh Hak Cipta | Oleh CAMRI </a>
                     <!-- Contact Address -->
                     <div class="contact-address">
                         <p>Telp: (+62) 882 1641 6650</p>
-                        <p>E-mail: <a href="./contact">infotani.mif@gmail.com</a></p>
+                        <p>E-mail: <a href="<?= base_url('kontak')?>">infotani.mif@gmail.com</a></p>
                         <p>Alamat: <a href="#">Jl. Mastrip</p>
                     </div>
                 </div>

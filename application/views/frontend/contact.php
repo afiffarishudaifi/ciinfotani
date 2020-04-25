@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-12">
                     <!-- Form -->
-                    <form action="Kontak/mail" method="post" class="akame-contact-form border-0 p-0">
+                    <form action="<?= base_url('kontak/send_mail')?>" method="post" class="akame-contact-form border-0 p-0">
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="text" name="nama" class="form-control mb-30" placeholder="Masukkan Nama" required>

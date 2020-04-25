@@ -25,7 +25,7 @@
   <body>
 
     <div class="container">
-      <form class="form-signin" action="../../controller/frontend/proses_register_pengusaha" method="post" enctype="multipart/form-data">
+      <form class="form-signin" action="<?= base_url('register/pengusaha_tambah')?>" method="post" enctype="multipart/form-data">
       
       
         <br> 
@@ -43,7 +43,7 @@
         <input type="file" id="foto" name="foto" >
         <br>
         <br>
-        <a href="<?= base_url('register');?>" class="btn btn-lg btn-warning">Batal</a>
+        <a href="<?= base_url('login');?>" class="btn btn-lg btn-warning">Batal</a>
         <button class="btn btn-lg btn-success " type="submit" name="submit">Registrasi</button>
       </form>
     </div> <!-- /container -->

@@ -23,15 +23,15 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul id="nav">
-                                <li><a href="beranda">Beranda</a></li>
+                                <li><a href="<?= base_url('beranda')?>">Beranda</a></li>
                                 <li><a href="#cari" target="_top" onclick="document.getElementById(&#39;popup_searchBox&#39;).style.display = &#39;block&#39;;" id="search-text" name="cari" placeholder="" type="text" >Cari</a></li>
-                                <li><a href="tentangkami">Tentang Kami</a></li>
-                                <li><a href="kontak">Kontak</a></li>
+                                <li><a href="<?= base_url('tentangkami')?>">Tentang Kami</a></li>
+                                <li><a href="<?= base_url('kontak')?>">Kontak</a></li>
                             </ul>
 
                             <!-- Book Icon -->
                             <div class="book-now-btn ml-5 mt-4 mt-lg-0 ml-md-4">
-                                <a href="./login" class="btn akame-btn"><?php if(isset($login_session)||isset($id_pengguna)){ 
+                                <a href="<?= base_url('login')?>" class="btn akame-btn"><?php if(isset($login_session)||isset($id_pengguna)){ 
                                     echo "Dashboard";
                                     }else{ echo "Masuk";}?></a>
                             </div>
@@ -48,7 +48,7 @@
   <button class='keluar' onclick="document.getElementById('popup_searchBox').style.display = 'none';">Close</button>
   <div id="popup_searchBox_Data">
     <div class="search-form-wrapper" style="display: block;">
-      <form action="cariHasil" class="search-form" method="post">
+      <form action="<?= base_url('carihasil/search')?>" class="search-form" method="post">
         <input class="search-text" placeholder="Cari Data" name="cari" type="text" value="" />
         <button type="submit" class="btn btn-md" name="submitcari" ><svg width="15px" height="15px" style="color:white;">
                             <path d="M11.618 9.897l4.224 4.212c.092.09.1.23.02.312l-1.464 1.46c-.08.08-.222.072-.314-.02L9.868

@@ -25,7 +25,7 @@
   <body>
 
     <div class="container">
-      <form class="form-signin" id="login" name="login" action="../../controller/frontend/proses_login" method="post">
+      <form class="form-signin" id="login" name="login">
         <br>
         <h2 class="form-signin-heading" align="center" style="color: #FFFFFF;">PILIH REGISTRASI</h2>
 

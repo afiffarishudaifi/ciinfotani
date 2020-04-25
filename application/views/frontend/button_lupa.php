@@ -27,16 +27,16 @@
   <body>
 
     <div class="container">
-      <form class="form-signin" id="login" name="login" action="../../controller/frontend/proses_login" method="post">
+      <form class="form-signin" id="login" name="login">
         <br>
         <h2 class="form-signin-heading" align="center" style="color: #FFFFFF;">LUPA KATASANDI</h2>
 
         <br>
        
-	<a href="<?= base_url('Lupa/petani')?>" class="btn btn-primary btn-block">PETANI</a>
-  <a href="<?= base_url('Lupa/pengusaha')?>" class="btn btn-warning btn-block">PENGUSAHA</a>
+	<a href="<?= base_url('lupa/petani')?>" class="btn btn-primary btn-block">PETANI</a>
+  <a href="<?= base_url('lupa/pengusaha')?>" class="btn btn-warning btn-block">PENGUSAHA</a>
   <br>
-   <a href="<?= base_url('Login')?>" class="btn btn- btn-block">kembali</a>
+   <a href="<?= base_url('login')?>" class="btn btn- btn-block">kembali</a>
       <br>
       </form>
     </div> <!-- /container -->

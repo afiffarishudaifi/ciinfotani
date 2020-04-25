@@ -35,37 +35,6 @@
     </section>
     <!-- Breadcrumb Area End -->
 
-    
-    <?php
-if(isset($_POST['submitcari'])||isset($_POST['submitcariHasil'])):
-    $_SESSION['pos']=$_POST;
-elseif(isset($_POST['filter'])):
-    $_SESSION['posF']=$_POST;
-endif;
-if (isset($_SESSION['pos'])):
-    $cari =$_SESSION['pos']['cari'];
-elseif(isset($_SESSION['posF'])):
-    if (isset($_POST['komoditas'])):
-        $komoditas = $_SESSION['posF']['komoditas'];
-    endif;
-    if (isset($_REQUEST['kecamatan'])):
-        $kecamatan = $_SESSION['posF']['kecamatan'];
-        //foreach ($_SESSION['posF']['kecamatan'] as $kecamatan){     
-          //   $camat[] = mysqli_real_escape_string ($koneksi, $kecamatan);
-        //}
-    endif;
-    if (isset($_POST['tglpanen'])):
-        $tglpanen= $_SESSION['posF']['tglpanen'];
-    endif;
-else:
-    $cari="";
-    $komoditas ="";
-    $tglpanen = "";
-    $kecamatan = "";
-endif;
-?>
-
-
 <div id="flipkart-navbar" class="navbar navbar-top">
     <div class="container">
         <div class="row row1">
@@ -82,22 +51,10 @@ endif;
             <div class="flipkart-navbar-search smallsearch col-sm-8 col-xs-11">
                 <div class="row">
 
-                  <form role="search" action="cariHasil" method="post">
-                  <?php 
-                  if(isset($_POST['submitcari'])||isset($_SESSION['pos']['cari'])){
-                      if(isset($_POST['cari'])){
-                      $cari=$_POST['cari'];
-                      }else{
-                          $cari=$_SESSION['pos']['cari'];
-                      }
-                ?>
-                    <input class="flipkart-navbar-input col-xs-11 cari" type="text" id="cari" name="cari" placeholder="Cari Data..." value="<?php echo $cari;?>">
-                <?php
-                }else{?>
+                  <form role="search" action="<?= base_url('carihasil/search')?>" method="post">
+                  
                <input class="flipkart-navbar-input col-xs-11 cari" type="text" id="cari" name="cari" placeholder="Cari Data..." value="">
-                <?php
-               }
-                ?>
+                
                   
                   <button class="flipkart-navbar-button col-xs-1" id="btnsearch" name="submitcariHasil" onclick="" >
                         <svg width="15px" height="15px">
@@ -108,6 +65,7 @@ endif;
                         </svg>
                     </button>  
                 </div>
+            </form>
             </div> 
             </div>                
         </div>
@@ -116,6 +74,7 @@ endif;
 
 <div class="fluid-container">
     <div class="left-sidebar col">
+        <form role="filter" action="<?= base_url('carihasil/filter')?>" method="post">
     <h3><span class="fa fa-filter"> Filters </span></h3>
         <details class="navigasi" open>
             <summary><h4>Komoditas</h4></summary>
@@ -159,16 +118,7 @@ endif;
             <br/><br/>
                 <!--<button type="submit" class="btn btn-success" name="filter" value="Filter">Cari Filter</button>-->
                 <button type="submit" class="btn btn-success" name="filter" value="Filter">Filter</button>    
-            <br/><br/>
-                <button class="btn btn-warning" name="reset" title="Klik 2X">Reset</button>  
-                    
-            
-            <?php if(isset($_POST['reset'])){
-                        
-                unset($_SESSION['posF']['komoditas']);
-                unset($_SESSION['posF']['kecamatan']);
-                unset($_SESSION['posF']['tglpanen']);
-             }?>
+        </form>
 </div>
 <div class="container">
 <div class ="content">

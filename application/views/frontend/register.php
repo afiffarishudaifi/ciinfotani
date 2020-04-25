@@ -26,25 +26,27 @@
   <body>
 
     <div class="container">
-      <form class="form-signin" action="../../controller/frontend/proses_register" method="post" enctype="multipart/form-data">
+      <form class="form-signin" action="<?= base_url('register/petani_tambah')?>" method="post" enctype="multipart/form-data">
       
       
         <br> 
         <h2 class="form-signin-heading" align="center" >REGISTRASI</h2>
-        
         <br>
         <label for="username" >Nama Pengguna</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="Nama Pengguna" required autofocus>
+        <input type="text" id="username" name="username" class="form-control" 
+        value="<?php echo set_value('username'); ?>" placeholder="Nama Pengguna" required autofocus>
         
         <label for="password" >Kata Sandi</label>
         <input type="password" id="password" name="password" class="form-control" placeholder="Kata Sandi" required autofocus>
         <label for="passwordConf" >Konfirmasi password</label>
         <input type="password" id="passwordConf" name="passwordConf" class="form-control" placeholder="Ulangi Kata Sandi" required>
         <label for="foto" > Foto KTP </label>
-        <input type="file" id="foto" name="foto" >
+        <input type="file" id="foto" name="foto">
+        <!-- <div style="color: red;"><?php //echo (isset($message))? $message : ""; ?></div> -->
+   
         <br>
         <br>
-        <a href="<?= base_url('register');?>" class="btn btn-lg btn-warning">Batal</a>
+        <a href="<?= base_url('login');?>" class="btn btn-lg btn-warning">Batal</a>
         <button class="btn btn-lg btn-success " type="submit" name="submit">Registrasi</button>
       </form>
     </div> <!-- /container -->
