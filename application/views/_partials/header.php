@@ -39,7 +39,7 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="../../img/user/<?php echo $getGambar; ?>" class="user-image" alt="User Image">
+              <img src="../../img/user/<?php echo $getGambar; ?>" class="img-circle" alt="User Image">
 
               <p>
                 <?php echo $getUser; ?>

@@ -2,6 +2,7 @@
 $getUser = $this->session->userdata('session_user');
 $getAkses = $this->session->userdata('session_akses');
 $getId = $this->session->userdata('session_id');
+$getGambar = $this->session->userdata('session_gambar');
 if ($getUser == '' or $getAkses == '' or $getId == '') {
   redirect('login');
 }
@@ -32,7 +33,7 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="../../img/user/<?php echo $getGambar; ?>" class="user-image" alt="User Image">
+              <img src="../../img/user/<?php echo $getGambar; ?>" class="img-circle" lt="User Image">
 
               <p>
                 <?php echo $getUser; ?>

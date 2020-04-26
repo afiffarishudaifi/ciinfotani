@@ -33,7 +33,7 @@ if ($getUser == ' ' or $getId == ' ') {
           <ul class="dropdown-menu">
             <!-- Menu Footer-->
             <li class="user-header">
-              <img src="../../img/pengusaha/user/<?php echo $getLogo; ?>" class="user-image" alt="User Image">
+              <img src="../../img/pengusaha/user/<?php echo $getLogo; ?>" class="img-circle" alt="User Image">
 
               <p>
                 <?php echo $getUser;
