@@ -26,18 +26,16 @@ if ($getUser == ' ' or $getId == ' ') {
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../../img/pengusaha/user/<?php echo $getLogo; ?>" class="user-image" alt="User Image">
-            <span class="hidden-xs"><?php //echo $_SESSION['USERNAME'] 
-                                    ?></span>
+            <img src="<?php echo base_url('img/perusahaan/user/') . $getLogo; ?>" class="user-image" alt="User Image">
+            <span class="hidden-xs"><?php echo $getUser ?></span>
           </a>
           <ul class="dropdown-menu">
             <!-- Menu Footer-->
             <li class="user-header">
-              <img src="../../img/pengusaha/user/<?php echo $getLogo; ?>" class="img-circle" alt="User Image">
+              <img src="<?php echo base_url('img/perusahaan/user/') . $getLogo; ?>" class="img-circle" alt="User Image">
 
               <p>
-                <?php echo $getUser;
-                ?>
+                <?php echo $getUser ?>
                 <small>Akun Info Tani</small>
               </p>
             </li>

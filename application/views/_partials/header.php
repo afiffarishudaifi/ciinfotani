@@ -15,7 +15,7 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
 ?>
 <header class="main-header">
   <!-- Logo -->
-  <a href="<?php site_url('frontend/index') ?>" class="logo">
+  <a href="../frontend/index" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>I</b>T</span>
     <!-- logo for regular state and mobile devices -->
@@ -33,13 +33,13 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../../img/user/<?php echo $getGambar; ?>" class="user-image" alt="User Image">
-            <span class="hidden-xs"></span>
+            <img src="<?php echo base_url('img/user/') . $getGambar; ?>" class="user-image" alt="User Image">
+            <span class="hidden-xs"><?php echo $getUser; ?></span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="../../img/user/<?php echo $getGambar; ?>" class="img-circle" alt="User Image">
+              <img src="<?php echo base_url('img/user/') . $getGambar; ?>" class="img-circle" alt="User Image">
 
               <p>
                 <?php echo $getUser; ?>

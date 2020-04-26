@@ -10,7 +10,7 @@ if ($getUser == '' or $getId == '') {
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="../../img/pengusaha/user/<?php echo $getLogo; ?>" class="img-circle" alt="User Image">
+      <img src="<?php echo base_url('img/perusahaan/user/') . $getLogo; ?>" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
       <p></p>

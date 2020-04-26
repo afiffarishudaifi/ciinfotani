@@ -39,10 +39,7 @@ $this->load->view('_partials/head');
           ?>
           <!--membuat sebuah form-->
           <?php
-          foreach ($cekktp as $hasil) :
-            $hasilktp = $hasil['KTP'];
-          endforeach;
-          if ($hasilktp == 0) {
+          if ($cekktp == 0) {
           ?>
             <?php if ($this->session->flashdata('petanilengkapidata')) : ?>
               <div class="alert alert-info alert-dismissible fade in">
@@ -196,7 +193,7 @@ $this->load->view('_partials/head');
                 ?>
               </div>
               <input type="submit" name="simpan" class="btn btn-success" value="Simpan">
-              <input type="reset" name="reset" class="btn btn-danger" value="Hapus">
+              <a href="<?php echo base_url('User'); ?>" class="btn btn-danger" value="Kembali">Kembali</a>
             </form>
             <?php
           } else {
@@ -316,7 +313,7 @@ $this->load->view('_partials/head');
                   </div>
 
                   <input type="submit" name="ubah" class="btn btn-success" value="Simpan">
-                  <input type="reset" name="reset" class="btn btn-danger" value="Hapus">
+                  <a href="<?php echo base_url('User'); ?>" class="btn btn-danger" value="Kembali">Kembali</a>
                 <?php endforeach; ?>
               </form>
             <?php } else {
@@ -382,7 +379,7 @@ $this->load->view('_partials/head');
 
 
                   <input type="submit" name="ubah" class="btn btn-success" value="Simpan">
-                  <input type="reset" name="reset" class="btn btn-danger" value="Hapus">
+                  <a href="<?php echo base_url('User'); ?>" class="btn btn-danger" value="Kembali">Kembali</a>
                 <?php endforeach; ?>
               </form>
           <?php

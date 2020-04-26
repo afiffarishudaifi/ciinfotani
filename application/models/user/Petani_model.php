@@ -25,10 +25,8 @@ class Petani_model extends CI_Model{
     public function cek_user()
     {
         $getId = $this->session->userdata('session_id');
-        $this->db->select('USERNAME','ID_USER');
-        $this->db->where('ID_USER', $getId);
-        $this->db->from('user');
-        return $this->db->get()->result_array();
+        $query = $this->db->query("SELECT USERNAME, ID_USER FROM USER WHERE ID_USER = $getId");
+        return $query->result_array();
     }
     public function getKomoditas()
     {
@@ -73,7 +71,7 @@ class Petani_model extends CI_Model{
             "ID_DESA" => $this->input->post('iddesa'),
             "ID_KOMODITAS" => $this->input->post('idkomoditas'),
             "ID_USER" => $this->input->post('iduser'),
-            "ID_STATUS" => $this->input->post('istatus'),
+            "ID_STATUS" => $this->input->post('idstatus'),
             "NAMA_PETANI" => $this->input->post('namapetani'),
             "ALAMAT_PETANI" => $this->input->post('alamatpetani'),
             "LUAS_SAWAH" => $this->input->post('luassawah'),

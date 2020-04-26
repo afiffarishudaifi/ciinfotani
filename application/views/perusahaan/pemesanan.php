@@ -180,9 +180,7 @@ $this->load->view("_partials/head.php");
                                     return _value;
                                 }
                             </script>
-                            <!-- Button trigger modal-->
-                            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPush">Launch modal</button>-->
-
+                         
                             <!--Modal: modalPush-->
                             <div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-notify modal-info" role="document">

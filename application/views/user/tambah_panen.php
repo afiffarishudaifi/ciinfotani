@@ -107,7 +107,7 @@ $this->load->view('_partials/head');
                             </div>
                             <input type="hidden" class="form-control" readonly name="panen" value="Panen">
                             <input type="submit" name="ubah" class="btn btn-success" value="Simpan">
-                            <input type="reset" name="reset" class="btn btn-danger" value="Hapus">
+                            <a href="<?php echo base_url('User'); ?>" class="btn btn-danger" value="Kembali">Kembali</a>
                         <?php
                         endforeach; ?>
                     </form>

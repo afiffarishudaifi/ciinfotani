@@ -66,7 +66,7 @@ class Register extends CI_Controller{
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
  
-                $gambar=$gbr['file_name'];
+                $gambar=$gbr['file_name']."jpg";
                 $username=$this->input->post('username');
                 $password = md5($this->input->post('password'));
                 $this->Register_model->simpan_Petani($username,$password,$gambar);
@@ -104,7 +104,7 @@ class Register extends CI_Controller{
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
  
-                $gambar=$gbr['file_name'];
+                $gambar=$gbr['file_name'] . "jpg";
                 $username=$this->input->post('username');
                 $password = md5($this->input->post('password'));
                 $this->Register_model->simpan_Perusahaan($username,$password,$gambar);

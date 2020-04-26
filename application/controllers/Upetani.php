@@ -10,7 +10,7 @@ class Upetani extends CI_Controller{
 
     public function index()
     {
-        $data['cekktp'] = $this->Petani_model->cekktp();
+        $data['cekktp'] = $this->session->userdata('session_ktp');
         $data['lengkap'] = $this->Petani_model->cek_user();
         $data['komoditas'] = $this->Petani_model->getKomoditas();
         $data['desa'] = $this->Petani_model->getDesa();
@@ -32,14 +32,14 @@ class Upetani extends CI_Controller{
         $this->form_validation->set_rules('alamatsawah', 'Alamat Sawah', 'required');
         $this->form_validation->set_rules('luassawah', 'Luas Sawah', 'required|integer');
         $this->form_validation->set_rules('iddesa', 'ID Desa', 'required');
-        $this->form_validation->set_rules('idstatus', 'ID Status', 'required|min_length[5]|max_length[12]');
-        $this->form_validation->set_rules('idkomoditas', 'ID Komoditas', 'required|min_length[5]|max_length[12]');
+        $this->form_validation->set_rules('idstatus', 'ID Status', 'required');
+        $this->form_validation->set_rules('idkomoditas', 'ID Komoditas', 'required');
         if ($this->form_validation->run() == FALSE) {
-            redirect('Upetani');
+            $this->load->view('user/viewpetani');
         } else {
             $this->Petani_model->lengkapiData();
             $this->session->set_flashdata('petanilengkapidata', 'Tersimpan');
-            redirect('User');
+            redirect('Login/logout');
         }
     }
     public function update(){

@@ -28,6 +28,13 @@ class Login extends CI_Controller{
             $this->session->set_userdata('session_user', $user);
             $this->session->set_userdata('session_akses', $level);
             $this->session->set_userdata('session_gambar', $foto);
+            //ambil ktp untuk viewpetani
+            $ktp = $this->Login_model->cekKtp($id);
+            foreach($ktp as $hasil):
+                $hasilktp = $hasil['KTP'];
+            endforeach;
+            $this->session->set_userdata('session_ktp', $hasilktp);
+
             $this->session->set_flashdata('tampil', 'Selamat Sudah Login'.$user);
             if($level == 1){
                 redirect('Admin');

@@ -11,6 +11,13 @@ class Login_model extends CI_Model{
         $query = $this->db->get();
         return $query;
     }
+
+    function cekKtp($iduser)
+    {
+        $query = $this->db->query("SELECT * FROM petani WHERE ID_USER = $iduser");
+        return $query->result_array();
+    }
+
     function loginPerusahaan($user, $pass)
     {
         $this->db->select('*');

@@ -18,10 +18,18 @@ class Pperusahaan extends CI_Controller{
             if($nama == "" || $email == "" || $alamat == "" || $no == "" || $manager == ""){
                 echo "<script>alert('Lengkapi Data!');</script>";
                 $this->load->view('perusahaan/tambah_data');
+            } else {
+                $data['pemesanan'] = $this->Indexperusahaan_model->dataPemesanan();
+                $this->load->view('perusahaan/index', $data);
             }
         endforeach;
-        $data['pemesanan'] = $this->Indexperusahaan_model->dataPemesanan();
-        $this->load->view('perusahaan/index', $data);
+        
+    }
+
+
+    public function tambahData()
+    {
+        
     }
 }
 
