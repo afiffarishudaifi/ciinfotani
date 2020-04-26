@@ -6,7 +6,7 @@ class Aperusahaan extends CI_Controller{
     {
         parent:: __construct();
         $this->load->model('admin/Perusahaan_model');
-    }
+    } 
 
     public function index()
     {
@@ -14,25 +14,82 @@ class Aperusahaan extends CI_Controller{
         $data['perusahaan'] = $this->Perusahaan_model->get_all();
         $this->load->view('admin/viewperusahaan.php', $data);
     }
-    public function tambah()
-    {
-        $this->form_validation->set_rules('username', 'Nama Pengguna', 'required|alpha');
-        $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('notelp', 'No Telp', 'required|integer');
-        $this->form_validation->set_rules('namaperusahaan', 'Nama Perusahaan', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
-        
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('admin/tambahperusahaan');
-        } else {
-            $this->Perusahaan_model->tambahDataPerusahaan();
-            $this->session->set_flashdata('perusahaanditambah', 'Ditambah');
-            redirect('Aperusahaan');
-        }
+    public function formtambah(){
+        $this->load->view('admin/tambahperusahaan');
     }
-    public function ubah($id)
-    {
+    public function tambah(){
+        $username = $this->input->post('username');
+        $password = md5($this->input->post('password'));
+        $siup = $this->input->post('siup');
+        $logo = $this->input->post('logo');
+        $namaperusahaan = $this->input->post('namaperusahaan');
+        $email = $this->input->post('email');
+        $alamat = $this->input->post('alamat');
+        $notelp = $this->input->post('notelp');
+        $manager = $this->input->post('manager');
+ 
+        if(!empty($_FILES['siup']['name'])){
+            $config['upload_path'] = './img/perusahaan/siup/'; //path folder
+            $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+            $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
+            $this->upload->initialize($config);
+            if ($this->upload->do_upload('siup')){
+                $gbr = $this->upload->data();
+                //Compress Image
+                $config['image_library']='gd2';
+                $config['source_image']='./img/perusahaan/siup/'.$gbr['file_name'];
+                $config['create_thumb']= FALSE;
+                $config['maintain_ratio']= FALSE;
+                $config['quality']= '50%';
+                $config['width']= 600;
+                $config['height']= 400;
+                $config['new_image']= './img/perusahaan/siup/'.$gbr['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+ 
+                $siup=$gbr['file_name'];
+            }
+        }
+            if(!empty($_FILES['logo']['name'])){
+                $config['upload_path'] = './img/perusahaan/user/'; //path folder
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+                $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
+                $this->upload->initialize($config);
+                if ($this->upload->do_upload('logo')){
+                    $gbr1 = $this->upload->data();
+                    //Compress Image
+                    $config['image_library']='gd2';
+                    $config['source_image']='./img/perusahaan/user/'.$gbr1['file_name'];
+                    $config['create_thumb']= FALSE;
+                    $config['maintain_ratio']= FALSE;
+                    $config['quality']= '50%';
+                    $config['width']= 600;
+                    $config['height']= 400;
+                    $config['new_image']= './img/perusahaan/user/'.$gbr1['file_name'];
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->resize();
+     
+                    $logo=$gbr1['file_name'];
+                }
+            }
+                $data = array(
+                    'USERNAME' => $username,
+                    'PASSWORD' => $password,
+                    'SIUP' => $siup,
+                    'LOGO' => $logo,
+                    'NAMA_PERUSAHAAN' => $namaperusahaan,
+                    'EMAIL' => $email,
+                    'ALAMAT_PERUSAHAAN' => $alamat,
+                    'NO_TELP_PERUSAHAAN' => $notelp,
+                    'NAMA_MANAGER' => $manager,
+                    'ID_LEVEL' => 3
+                );
+                $this->Perusahaan_model->input_data($data,'perusahaan');
+                redirect('Aperusahaan');
+    }
+                 
+    
+    public function ubah($id){
         $data['perusahaan'] = $this->Perusahaan_model->getPerusahaanById($id);
         $this->form_validation->set_rules('username', 'Nama Pengguna', 'required|alpha');
         $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
@@ -49,8 +106,101 @@ class Aperusahaan extends CI_Controller{
             redirect('Aperusahaan');
         }
     }
+    public function update(){
+        $id = $this->input->post('idperusahaan');
+        $username = $this->input->post('username');
+        $password = md5($this->input->post('password'));
+        $siup = $this->input->post('siup');
+        $siuplama = $this->input->post('siuplama');
+        $logo = $this->input->post('logo');
+        $logolama = $this->input->post('logolama');
+        $namaperusahaan = $this->input->post('namaperusahaan');
+        $email = $this->input->post('email');
+        $alamat = $this->input->post('alamat');
+        $notelp = $this->input->post('notelp');
+        $manager = $this->input->post('manager');
+        $where = array('ID_PERUSAHAAN'=>$id);
+
+        $cek = $this->Perusahaan_model->cek_id($id,'perusahaan')->result();
+        if($cek != FALSE){
+            if(!empty($_FILES['siup']['name'])){
+                $config['upload_path'] = './img/perusahaan/siup/'; //path folder
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+                $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
+
+                $this->upload->initialize($config); 
+                if ($this->upload->do_upload('siup')){
+                    if(file_exists($lok=FCPATH.'./img/perusahaan/siup/'.$siuplama)){
+                        unlink($lok);
+                    }
+                    $gbr = $this->upload->data();
+                    //Compress Image
+                    $config['image_library']='gd2';
+                    $config['source_image']='./img/perusahaan/siup/'.$gbr['file_name'];
+                    $config['create_thumb']= FALSE;
+                    $config['maintain_ratio']= FALSE;
+                    $config['quality']= '50%';
+                    $config['width']= 600;
+                    $config['height']= 400;
+                    $config['new_image']= './img/perusahaan/siup/'.$gbr['file_name'];
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->resize();
+                    
+                        $siup=$gbr['file_name'];
+                    
+                }
+            }
+            if(!empty($_FILES['logo']['name'])){
+                $config['upload_path'] = './img/perusahaan/user/'; //path folder
+                $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+                $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
+
+                $this->upload->initialize($config); 
+                if ($this->upload->do_upload('logo')){
+                    if(file_exists($lok=FCPATH.'/img/perusahaan/user/'.$logolama)){
+                        unlink($lok);
+                    }
+                    $gbr1 = $this->upload->data();
+                    //Compress Image
+                    $config['image_library']='gd2';
+                    $config['source_image']='./img/perusahaan/user/'.$gbr1['file_name'];
+                    $config['create_thumb']= FALSE;
+                    $config['maintain_ratio']= FALSE;
+                    $config['quality']= '50%';
+                    $config['width']= 600;
+                    $config['height']= 400;
+                    $config['new_image']= './img/perusahaan/user/'.$gbr1['file_name'];
+                    $this->load->library('image_lib', $config);
+                    $this->image_lib->resize();
+    
+                    $logo=$gbr1['file_name'];
+                    
+                }
+            }
+            $data = array(
+                'USERNAME' => $username,
+                'SIUP' => $siup,
+                'LOGO' => $logo,
+                'NAMA_PERUSAHAAN' => $namaperusahaan,
+                'EMAIL' => $email,
+                'ALAMAT_PERUSAHAAN' => $alamat,
+                'NO_TELP_PERUSAHAAN' => $notelp,
+                'NAMA_MANAGER' => $manager,
+            );
+                $this->Perusahaan_model->update_data($where,$data);
+                echo "<script>alert('Update Data Berhasil!');history.go(-1);</script>";
+        }else{
+                echo "<script>alert('Data Tidak Ditemukan!');history.go(-1);</script>";
+        }
+    }
+
     public function hapus($id)
     {
+        $data = $this->Perusahaan_model->ambil_foto($id);
+        $path = './img/perusahaan/siup/';
+        @unlink($path.$data->SIUP);
+        $path1 = './img/perusahaan/user/';
+        @unlink($path1.$data->LOGO);
         $this->Perusahaan_model->hapusDataPerusahaan($id);
         $this->session->set_flashdata('perusahaandihapus', 'Dihapus');
         redirect('Aperusahaan');

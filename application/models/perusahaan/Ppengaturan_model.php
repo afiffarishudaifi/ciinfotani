@@ -13,6 +13,13 @@ class Ppengaturan_model extends CI_Model{
         $query = $this->db->get();
         return $query;
     }
+    public function cek_id($id,$table){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where('ID_PERUSAHAAN', $id);
+        $query = $this->db->get();
+        return $query;
+    }
     public function update_data($where,$data){
         $this->db->where($where);
         $this->db->update('perusahaan',$data);

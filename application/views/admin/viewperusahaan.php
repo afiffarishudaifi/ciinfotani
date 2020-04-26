@@ -30,7 +30,7 @@ $this->load->view("_partials/head.php");
                         <div class="box">
                             <div class="box-header">
                                 <h3 style="text-align: center;">Data Perusahaan</h3>
-                                <h3><a href="<?php echo site_url('Aperusahaan/tambah') ?>"><span class="fa fa-plus" style="position:static;float:Left"> Tambah Data</span></a></h3>
+                                <h3><a href="<?php echo site_url('Aperusahaan/formtambah') ?>"><span class="fa fa-plus" style="position:static;float:Left"> Tambah Data</span></a></h3>
                             </div>
                             <?php if ($this->session->flashdata('perusahaanditambah')) : ?>
                                 <div class="alert alert-info alert-dismissible fade in">
@@ -59,7 +59,6 @@ $this->load->view("_partials/head.php");
                                         <tr>
                                             <th>ID PERUSAHAAN</th>
                                             <th>USERNAME</th>
-                                            <th>PASSWORD</th>
                                             <th>SIUP</th>
                                             <th>LOGO</th>
                                             <th>NAMA_PERUSAHAAN</th>
@@ -79,7 +78,6 @@ $this->load->view("_partials/head.php");
                                                 <!--memangambil data dari tabel dengan mengisikan data di table-->
                                                 <td><?php echo $row['ID_PERUSAHAAN']; ?></td>
                                                 <td><?php echo $row['USERNAME']; ?></td>
-                                                <td><?php echo $row['PASSWORD']; ?></td>
                                                 <td><img style="height:160px; width:120px;" src="<?php echo base_url('img/perusahaan/SIUP/') . $row['SIUP']; ?>"></td>
                                                 <td><img style="height:160px; width:120px;" src="<?php echo base_url('img/perusahaan/user/') . $row['LOGO']; ?>"></td>
                                                 <td><?php echo $row['NAMA_PERUSAHAAN']; ?></td>

@@ -35,7 +35,7 @@ $this->load->view('_partials/head');
             <section class="content">
                 <div class="container">
                     <br>
-                    <form method="post" action="<?php base_url('Ptambahdata/tambahData'); ?>" enctype="multipart/form-data">
+                    <form method="post" action="<?= base_url('Ptambahdata/tambahData'); ?>" enctype="multipart/form-data">
                         <?php
                             $getUser = $this->session->userdata('session_username_perusahaan');
                             $getId = $this->session->userdata('session_id_perusahaan');

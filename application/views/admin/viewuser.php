@@ -61,7 +61,6 @@ $this->load->view("_partials/head.php");
                                             <th>ID USER</th>
                                             <th>ID LEVEL</th>
                                             <th>USERNAME</th>
-                                            <th>PASSWORD</th>
                                             <th>FOTO USER</th>
                                             <th>AKSI</th>
                                         </tr>
@@ -76,12 +75,11 @@ $this->load->view("_partials/head.php");
                                                 <td><?php echo $row['ID_USER']; ?></td>
                                                 <td><?php echo $row['ID_LEVEL']; ?></td>
                                                 <td><?php echo $row['USERNAME']; ?></td>
-                                                <td><?php echo $row['PASSWORD']; ?></td>
                                                 <td><img style="height:160px; width:120px;" src="<?php echo base_url('img/user/') . $row['FOTO_USER']; ?>"></td>
                                                 <td>
-                                                    <a href="<?php base_url() ?>Auser/ubah/<?php echo $row['ID_USER']; ?>"><button class="pilih btn btn-primary"><span class="fa fa-pencil">
+                                                    <a href="<?= base_url() ?>Auser/ubah/<?php echo $row['ID_USER']; ?>"><button class="pilih btn btn-primary"><span class="fa fa-pencil">
                                                             </span></button></a>
-                                                    <a href="<?php base_url() ?>Auser/hapus/<?php echo $row['ID_USER']; ?>" data-toggle="modal" onclick="return confirm('Apa yakin ingin menghapus <?php echo $row['USERNAME']; ?> ?')" class=" btn btn-danger"><span class=" fa fa-trash"></a>
+                                                    <a href="<?= base_url() ?>Auser/hapus/<?php echo $row['ID_USER']; ?>" data-toggle="modal" onclick="return confirm('Apa yakin ingin menghapus <?php echo $row['USERNAME']; ?> ?')" class=" btn btn-danger"><span class=" fa fa-trash"></a>
                                                     <!-- Delete -->
 
                                                     <!-- /.modal -->

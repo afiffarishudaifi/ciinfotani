@@ -38,7 +38,7 @@ $this->load->view("_partials/head.php");
                     <br>
                     <!--membuat sebuah form-->
 
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="<?= base_url('Auser/user_tambah')?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>ID Level</label>
                             <?php

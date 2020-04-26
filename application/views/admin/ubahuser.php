@@ -44,8 +44,9 @@ $this->load->view("_partials/head.php");
                         </div>
                     <?php endif; ?>
                     <!--membuat sebuah form-->
-                    <form method="post" action="" enctype="multipart/form-data">
+                    <form method="post" action="<?= base_url('auser/update')?>" enctype="multipart/form-data">
                         <div class="form-group">
+                        <input type="hidden" name="userid" value="<?php echo $user['ID_USER'] ?>" />
                             <label>ID Level</label>
                             <?php
                             echo "<select name='idlevel' class='form-control' onchange='changeValue(this.value)' required>";
@@ -66,18 +67,10 @@ $this->load->view("_partials/head.php");
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Kata Sandi</label>
-                            <input type="text" class="form-control" name="password" value="<?php echo $user['PASSWORD'] ?>" placeholder="Kata Sandi">
-                            <div class="invalid-feedback">
-                                <h5 class="text-danger text-form">
-                                    <?php echo form_error('password') ?>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="name">Foto Pengguna</label>
-                            <input type="hidden" name="old_image" value="<?php echo $user['FOTO_USER'] ?>" />
-                            <input class="form-control-file" type="file" name="image">
+                            <img src="<?= base_url().'/img/user/'.$user['FOTO_USER'] ?>" style="height:160px; width:120px;" class="img-rectangle" alt="User Image">
+                            <input type="hidden" name="fotolama" value="<?php echo $user['FOTO_USER'] ?>" />
+                            <input class="form-control-file" type="file" name="foto">
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
                                     <?php echo form_error('image') ?>
@@ -85,7 +78,7 @@ $this->load->view("_partials/head.php");
                             </div>
                         </div>
                         <input type="submit" name="simpan" class="btn btn-success" value="Simpan">
-                        <a href="<?= base_url(); ?>Adesa" class="btn btn-danger" value="Kembali">Kembali</a>
+                        <a href="<?= base_url(); ?>Auser" class="btn btn-danger" value="Kembali">Kembali</a>
                     </form>
                 </div>
             </section>

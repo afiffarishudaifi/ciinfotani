@@ -45,7 +45,7 @@
                         	<input type="hidden" name="userid" id="userid" value="<?= $row->ID_PERUSAHAAN ?>">
                             <div class="form-group">
                         		Foto
-                                <img src="<?= base_url().'/img/pengusaha/user/'.$row->LOGO ?>" style="height:160px; width:120px;" class="img-rectangle" alt="User Image">
+                                <img src="<?= base_url().'/img/perusahaan/user/'.$row->LOGO ?>" style="height:160px; width:120px;" class="img-rectangle" alt="User Image">
                                 <input type="hidden" name="fotouser" id="fotouser" value="<?= $row->LOGO ?>">
                             <?php } ?>
                                 <input type="file" id="foto" name="foto" >

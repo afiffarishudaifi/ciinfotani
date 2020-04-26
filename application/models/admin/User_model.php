@@ -8,6 +8,29 @@ class User_model extends CI_Model{
         return $query->result_array();
         
     }
+    function simpan_user($id_level,$username,$password,$gambar){
+        $hasil=$this->db->query("INSERT INTO user(ID_LEVEL,USERNAME,PASSWORD,FOTO_USER) VALUES ($id_level,'$username','$password','$gambar')");
+        return $hasil;
+    }
+    public function update_data($where,$data){
+        $this->db->where($where);
+        $this->db->update('user',$data);
+    }
+    public function cek_id($id,$table){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where('ID_USER', $id);
+        $query = $this->db->get();
+        return $query;
+    }
+    public function ambil_foto($id){
+        $this->db->from('user');
+        $this->db->where('ID_USER',$id);
+        $result = $this->db->get('');
+        if($result->num_rows()>0){
+            return $result->row();
+        }
+    }
 
     public function tambahIdLevel()
     {

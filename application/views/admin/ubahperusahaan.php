@@ -26,20 +26,21 @@ $this->load->view("_partials/head.php");
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Tambah Data Pengusaha
+                    Ubah Data Pengusaha
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="index"><i class="fa fa-dashboard"></i> Beranda</a></li>
-                    <li class="active">Tambah Pengusaha</li>
+                    <li class="active">Ubah Pengusaha</li>
                 </ol>
             </section>
             <section class="content">
                 <div class="container">
                     <br>
-                    <form method="POST" action="<?= base_url('aperusahaan/tambah')?>" enctype="multipart/form-data">
+                    <form method="POST" action="<?= base_url('aperusahaan/update')?>" enctype="multipart/form-data">
+                    <input type="hidden" class="form-control" name="idperusahaan" value="<?= $perusahaan['ID_PERUSAHAAN']?>">
                         <div class="form-group">
                             <label>Nama Pengguna</label>
-                            <input type="text" class="form-control" placeholder="Masukkan nama pengguna" name="username" required>
+                            <input type="text" class="form-control" placeholder="Masukkan nama pengguna" name="username" value="<?= $perusahaan['USERNAME']?>" required>
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
                                     <?php echo form_error('username') ?>
@@ -47,16 +48,9 @@ $this->load->view("_partials/head.php");
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Kata Sandi</label>
-                            <input type="password" class="form-control" placeholder="Masukkan nama pengguna" name="password" required>
-                            <div class="invalid-feedback">
-                                <h5 class="text-danger text-form">
-                                    <?php echo form_error('password') ?>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label>SIUP</label>
+                            <img style="height:160px; width:120px;" src="<?php echo base_url('img/perusahaan/siup/') . $perusahaan['SIUP']; ?>"></td>
+                            <input type="hidden" class="form-control" name="siuplama" value="<?= $perusahaan['SIUP']?>">
                             <input type="file" name="siup" id="foto">
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
@@ -66,6 +60,8 @@ $this->load->view("_partials/head.php");
                         </div>
                         <div class="form-group">
                             <label>LOGO</label>
+                            <img style="height:160px; width:120px;" src="<?php echo base_url('img/perusahaan/user/') . $perusahaan['LOGO']; ?>"></td>
+                            <input type="hidden" class="form-control" name="logolama" value="<?= $perusahaan['LOGO']?>">
                             <input type="file" name="logo" id="foto">
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
@@ -75,7 +71,7 @@ $this->load->view("_partials/head.php");
                         </div>
                         <div class="form-group">
                             <label>Nama Perusahaan</label>
-                            <input type="text" class="form-control" placeholder="Masukkan nama Perusahaan" name="namaperusahaan" required>
+                            <input type="text" class="form-control" placeholder="Masukkan nama Perusahaan" name="namaperusahaan" value="<?= $perusahaan['NAMA_PERUSAHAAN']?>">
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
                                     <?php echo form_error('namaperusahaan') ?>
@@ -84,7 +80,7 @@ $this->load->view("_partials/head.php");
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" placeholder="Masukkan nama email" name="email" required>
+                            <input type="email" class="form-control" placeholder="Masukkan nama email" name="email" value="<?= $perusahaan['EMAIL']?>" required>
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
                                     <?php echo form_error('email') ?>
@@ -93,7 +89,7 @@ $this->load->view("_partials/head.php");
                         </div>
                         <div class="form-group">
                             <label>Alamat Perusahaan</label>
-                            <input type="text" class="form-control" placeholder="Masukkan Alamat" name="alamat" required>
+                            <input type="text" class="form-control" placeholder="Masukkan Alamat" name="alamat" value="<?= $perusahaan['ALAMAT_PERUSAHAAN']?>" required>
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
                                     <?php echo form_error('alamat') ?>
@@ -102,7 +98,7 @@ $this->load->view("_partials/head.php");
                         </div>
                         <div class="form-group">
                             <label>No Telp</label>
-                            <input type="text" class="form-control" placeholder="Masukkan No Telp Perusahaan" name="notelp" required>
+                            <input type="text" class="form-control" placeholder="Masukkan No Telp Perusahaan" name="notelp" value="<?= $perusahaan['NO_TELP_PERUSAHAAN']?>" required>
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
                                     <?php echo form_error('notelp') ?>
@@ -111,7 +107,7 @@ $this->load->view("_partials/head.php");
                         </div>
                         <div class="form-group">
                             <label>Nama Manager</label>
-                            <input type="text" class="form-control" placeholder="Masukkan Nama Manager" name="manager" required>
+                            <input type="text" class="form-control" placeholder="Masukkan Nama Manager" name="manager" value="<?= $perusahaan['NAMA_MANAGER']?>" required>
                             <div class="invalid-feedback">
                                 <h5 class="text-danger text-form">
                                     <?php echo form_error('manager') ?>
