@@ -2,6 +2,7 @@
 $getUser = $this->session->userdata('session_user');
 $getAkses = $this->session->userdata('session_akses');
 $getId = $this->session->userdata('session_id');
+$getGambar = $this->session->userdata('session_gambar');
 if ($getUser == '' or $getAkses == '' or $getId == '') {
   redirect('login');
 } /*else {
@@ -32,14 +33,14 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="" class="user-image" alt="User Image">
+            <img src="../../img/user/<?php echo $getGambar; ?>" class="user-image" alt="User Image">
             <span class="hidden-xs"></span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="" class="img-circle" alt="User Image">
- 
+              <img src="../../img/user/<?php echo $getGambar; ?>" class="user-image" alt="User Image">
+
               <p>
                 <?php echo $getUser; ?>
                 <small>Admin Info Tani</small>
@@ -48,7 +49,7 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="<?php echo base_url('Apengaturan/edit/'.$getId); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
+                <a href="<?php echo base_url('Apengaturan/edit/' . $getId); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
               </div>
               <div class="pull-right">
                 <a href="<?php echo base_url('Login/logout') ?>" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>

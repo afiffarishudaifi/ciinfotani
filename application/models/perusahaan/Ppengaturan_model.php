@@ -8,7 +8,7 @@ class Ppengaturan_model extends CI_Model{
     public function cek_pass($id,$passlama,$table){
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->where('ID_USER', $id);
+        $this->db->where('ID_PERUSAHAAN', $id);
         $this->db->where('PASSWORD', $passlama);
         $query = $this->db->get();
         return $query;

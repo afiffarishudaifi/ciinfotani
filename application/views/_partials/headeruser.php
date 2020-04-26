@@ -2,6 +2,7 @@
 $getUser = $this->session->userdata('session_user');
 $getAkses = $this->session->userdata('session_akses');
 $getId = $this->session->userdata('session_id');
+$getGambar = $this->session->userdata('session_gambar');
 if ($getUser == '' or $getAkses == '' or $getId == '') {
   redirect('login');
 }
@@ -35,7 +36,7 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
               <img src="" class="img-circle" alt="User Image">
 
               <p>
-                <?php echo $getUser; ?>
+                <?php echo $bar = $this->session->userdata('session_gambar');$getGambar = $this->session->userdata('session_gambar');; ?>
                 <small>User Info Tani</small>
               </p>
             </li>

@@ -22,10 +22,12 @@ class Login extends CI_Controller{
                 $id = $row->ID_USER;
                 $user = $row->USERNAME;
                 $level = $row->ID_LEVEL;
+                $foto = $row->FOTO_USER;
             }
             $this->session->set_userdata('session_id', $id);
             $this->session->set_userdata('session_user', $user);
             $this->session->set_userdata('session_akses', $level);
+            $this->session->set_userdata('session_gambar', $foto);
             $this->session->set_flashdata('tampil', 'Selamat Sudah Login'.$user);
             if($level == 1){
                 redirect('Admin');
@@ -38,9 +40,11 @@ class Login extends CI_Controller{
                 foreach($cekperusahaan as $row){
                     $id = $row->ID_PERUSAHAAN;
                     $user = $row->USERNAME;
+                    $logo = $row->LOGO;
                 }
                 $this->session->set_userdata('session_id_perusahaan', $id);
                 $this->session->set_userdata('session_username_perusahaan', $user);
+                $this->session->set_userdata('session_logo_perusahaan', $logo);
                 redirect('Pperusahaan');
             }
             $this->load->view('frontend/login');

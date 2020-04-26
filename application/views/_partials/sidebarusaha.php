@@ -1,6 +1,7 @@
 <?php
 $getUser = $this->session->userdata('session_username_perusahaan');
 $getId = $this->session->userdata('session_id_perusahaan');
+$getLogo = $this->session->userdata('session_logo_perusahaan');
 if ($getUser == '' or $getId == '') {
   redirect('login');
 }
@@ -9,7 +10,7 @@ if ($getUser == '' or $getId == '') {
   <!-- Sidebar user panel -->
   <div class="user-panel">
     <div class="pull-left image">
-      <img src="" class="img-circle" alt="User Image">
+      <img src="../../img/pengusaha/user/<?php echo $getLogo; ?>" class="img-circle" alt="User Image">
     </div>
     <div class="pull-left info">
       <p></p>
@@ -20,7 +21,7 @@ if ($getUser == '' or $getId == '') {
   <ul class="sidebar-menu">
     <li class="header">NAVIGASI</li>
     <li class="treeview">
-      <a href="<?= base_url('Pperusahaan')?>">
+      <a href="<?= base_url('Pperusahaan') ?>">
         <i class="fa fa-dashboard"></i> <span>Beranda</span>
       </a>
     </li>

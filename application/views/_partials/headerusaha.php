@@ -1,6 +1,7 @@
 <?php
 $getUser = $this->session->userdata('session_username_perusahaan');
 $getId = $this->session->userdata('session_id_perusahaan');
+$getLogo = $this->session->userdata('session_logo_perusahaan');
 if ($getUser == ' ' or $getId == ' ') {
   redirect('login');
 }
@@ -25,26 +26,24 @@ if ($getUser == ' ' or $getId == ' ') {
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="../../img/pengusaha/user/<?php //echo $gambar2; 
-                                                ?>" class="user-image" alt="User Image">
+            <img src="../../img/pengusaha/user/<?php echo $getLogo; ?>" class="user-image" alt="User Image">
             <span class="hidden-xs"><?php //echo $_SESSION['USERNAME'] 
                                     ?></span>
           </a>
           <ul class="dropdown-menu">
             <!-- Menu Footer-->
             <li class="user-header">
-              <img src="../../img/pengusaha/user/<?php //echo $gambar2; 
-                                                  ?>" class="img-circle" alt="User Image">
+              <img src="../../img/pengusaha/user/<?php echo $getLogo; ?>" class="user-image" alt="User Image">
 
               <p>
-                <?php echo $getUser; 
+                <?php echo $getUser;
                 ?>
                 <small>Akun Info Tani</small>
               </p>
             </li>
             <li class="user-footer">
               <div class="pull-left">
-              <a href="<?php echo base_url('Ppengaturan/edit/'.$getId); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
+                <a href="<?php echo base_url('Ppengaturan/edit/' . $getId); ?>" class="btn btn-default btn-flat"><span class="fa fa-gears"></span>Pengaturan</a>
               </div>
               <div class="pull-right">
                 <a href="<?php echo base_url('Login/logout') ?>" class="btn btn-default btn-flat"><span class="fa fa-power-off"></span>Keluar</a>

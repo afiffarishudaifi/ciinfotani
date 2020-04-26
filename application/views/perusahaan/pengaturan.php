@@ -8,13 +8,13 @@
 
     <!--header-->
     <?php
-        $this->load->view("_partials/header.php");
+        $this->load->view("_partials/headerusaha.php");
     ?>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <?php
-        $this->load->view("_partials/sidebar.php");
+        $this->load->view("_partials/sidebarusaha.php");
     ?>
     </section>
     <!-- /.sidebar -->
@@ -40,13 +40,13 @@
                     <div class="panel-heading"><span class="fa fa-hand-o-right" style="position:static"></span>
                 	Form Update Foto </div>
                     <div class="panel-body" style="min-height:450px">
-                        <form action="<?= base_url('apengaturan/update')?>" method="POST" name="ganti_password" enctype="multipart/form-data">
+                        <form action="<?= base_url('Ppengaturan/update')?>" method="POST" name="ganti_password" enctype="multipart/form-data">
                         <?php foreach($user as $row){ ?>
-                        	<input type="hidden" name="userid" id="userid" value="<?= $row->ID_USER ?>">
+                        	<input type="hidden" name="userid" id="userid" value="<?= $row->ID_PERUSAHAAN ?>">
                             <div class="form-group">
                         		Foto
-                                <img src="<?= base_url().'/img/user/'.$row->FOTO_USER ?>" style="height:160px; width:120px;" class="img-rectangle" alt="User Image">
-                                <input type="hidden" name="fotouser" id="fotouser" value="<?= $row->FOTO_USER ?>">
+                                <img src="<?= base_url().'/img/pengusaha/user/'.$row->LOGO ?>" style="height:160px; width:120px;" class="img-rectangle" alt="User Image">
+                                <input type="hidden" name="fotouser" id="fotouser" value="<?= $row->LOGO ?>">
                             <?php } ?>
                                 <input type="file" id="foto" name="foto" >
                             </div>
