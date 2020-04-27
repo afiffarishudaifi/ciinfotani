@@ -19,33 +19,15 @@ class Auser extends CI_Controller{
     public function tambah()
     {
         $data['idlevel'] = $this->User_model->tambahIdLevel();
-        $this->form_validation->set_rules('namapengguna' , 'Nama Pengguna', 'alpha|required');
-        $this->form_validation->set_rules('password' , 'Kata Sandi' , 'required');
-        $this->form_validation->set_rules('foto', 'Gambar', 'required');
-        $this->form_validation->set_rules('idlevel' , 'ID Level', 'required');
-        if($this->form_validation->run() == FALSE){
             $this->load->view('admin/tambahuser', $data);
-        } else {
-            $this->User_model->tambahDataUser();
-            $this->session->set_flashdata('penggunaditambah', 'Ditambah');
-            redirect('Auser');
-        }
     }
 
     public function ubah($id)
     {
         $data['idlevel'] = $this->User_model->tambahIdLevel();
         $data['user'] = $this->User_model->getUserById($id);
-        $this->form_validation->set_rules('namapengguna', 'Nama Pengguna', 'alpha|required');
-        $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
-        $this->form_validation->set_rules('idlevel', 'ID Level', 'required|numeric');
-        if ($this->form_validation->run() == FALSE) {
-            $this->load->view('admin/ubahuser', $data);
-        } else {
-            $this->User_model->ubahDataUser();
-            $this->session->set_flashdata('penggunadiubah', 'Diubah');
-            redirect('Auser');
-        }
+        $this->load->view('admin/ubahuser', $data);
+        
     }
     public function hapus($id){   
         $data = $this->User_model->ambil_foto($id);

@@ -14,10 +14,10 @@ class Aperusahaan extends CI_Controller{
         $data['perusahaan'] = $this->Perusahaan_model->get_all();
         $this->load->view('admin/viewperusahaan.php', $data);
     }
-    public function formtambah(){
+    public function formtambah(){ //membuka form tambah
         $this->load->view('admin/tambahperusahaan');
     }
-    public function tambah(){
+    public function tambah(){ //fungsi menambah data
         $username = $this->input->post('username');
         $password = md5($this->input->post('password'));
         $siup = $this->input->post('siup');
@@ -44,29 +44,29 @@ class Aperusahaan extends CI_Controller{
                 $config['width']= 600;
                 $config['height']= 400;
                 $config['new_image']= './img/perusahaan/siup/'.$gbr['file_name'];
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
+                // $this->load->library('image_lib', $config);
+                // $this->image_lib->resize();
  
                 $siup=$gbr['file_name'];
             }
         }
             if(!empty($_FILES['logo']['name'])){
-                $config['upload_path'] = './img/perusahaan/user/'; //path folder
-                $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
-                $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
-                $this->upload->initialize($config);
+                $config1['upload_path'] = './img/perusahaan/user/'; //path folder
+                $config1['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
+                $config1['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
+                $this->upload->initialize($config1);
                 if ($this->upload->do_upload('logo')){
                     $gbr1 = $this->upload->data();
                     //Compress Image
-                    $config['image_library']='gd2';
-                    $config['source_image']='./img/perusahaan/user/'.$gbr1['file_name'];
-                    $config['create_thumb']= FALSE;
-                    $config['maintain_ratio']= FALSE;
-                    $config['quality']= '50%';
-                    $config['width']= 600;
-                    $config['height']= 400;
-                    $config['new_image']= './img/perusahaan/user/'.$gbr1['file_name'];
-                    $this->load->library('image_lib', $config);
+                    $config1['image_library']='gd2';
+                    $config1['source_image']='./img/perusahaan/user/'.$gbr1['file_name'];
+                    $config1['create_thumb']= FALSE;
+                    $config1['maintain_ratio']= FALSE;
+                    $config1['quality']= '50%';
+                    $config1['width']= 600;
+                    $config1['height']= 400;
+                    $config1['new_image']= './img/perusahaan/user/'.$gbr1['file_name'];
+                    $this->load->library('image_lib', $config1);
                     $this->image_lib->resize();
      
                     $logo=$gbr1['file_name'];
@@ -89,24 +89,11 @@ class Aperusahaan extends CI_Controller{
     }
                  
     
-    public function ubah($id){
+    public function ubah($id){ //membuka form ubah
         $data['perusahaan'] = $this->Perusahaan_model->getPerusahaanById($id);
-        $this->form_validation->set_rules('username', 'Nama Pengguna', 'required|alpha');
-        $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('notelp', 'No Telp', 'required|integer');
-        $this->form_validation->set_rules('namaperusahaan', 'Nama Perusahaan', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'valid_email|required');
-
-        if ($this->form_validation->run() == FALSE) {
             $this->load->view('admin/ubahperusahaan', $data);
-        } else {
-            $this->Perusahaan_model->tambahDataPerusahaan();
-            $this->session->set_flashdata('perusahaanditambah', 'Ditambah');
-            redirect('Aperusahaan');
-        }
     }
-    public function update(){
+    public function update(){ //fungsi mengubah
         $id = $this->input->post('idperusahaan');
         $username = $this->input->post('username');
         $password = md5($this->input->post('password'));
@@ -130,7 +117,7 @@ class Aperusahaan extends CI_Controller{
 
                 $this->upload->initialize($config); 
                 if ($this->upload->do_upload('siup')){
-                    if(file_exists($lok=FCPATH.'./img/perusahaan/siup/'.$siuplama)){
+                    if(file_exists($lok=FCPATH.'/img/perusahaan/siup/'.$siuplama)){
                         unlink($lok);
                     }
                     $gbr = $this->upload->data();
@@ -143,12 +130,14 @@ class Aperusahaan extends CI_Controller{
                     $config['width']= 600;
                     $config['height']= 400;
                     $config['new_image']= './img/perusahaan/siup/'.$gbr['file_name'];
-                    $this->load->library('image_lib', $config);
-                    $this->image_lib->resize();
+                    // $this->load->library('image_lib', $config);
+                    // $this->image_lib->resize();
                     
                         $siup=$gbr['file_name'];
                     
                 }
+            }else{
+                $siup= $siuplama;
             }
             if(!empty($_FILES['logo']['name'])){
                 $config['upload_path'] = './img/perusahaan/user/'; //path folder
@@ -176,6 +165,8 @@ class Aperusahaan extends CI_Controller{
                     $logo=$gbr1['file_name'];
                     
                 }
+            }else{
+                $logo=$logolama;
             }
             $data = array(
                 'USERNAME' => $username,
@@ -188,7 +179,7 @@ class Aperusahaan extends CI_Controller{
                 'NAMA_MANAGER' => $manager,
             );
                 $this->Perusahaan_model->update_data($where,$data);
-                echo "<script>alert('Update Data Berhasil!');history.go(-1);</script>";
+                redirect('aperusahaan');
         }else{
                 echo "<script>alert('Data Tidak Ditemukan!');history.go(-1);</script>";
         }
