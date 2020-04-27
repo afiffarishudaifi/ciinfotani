@@ -43,7 +43,7 @@ if ($getUser == '' or $getId == '') {
     <?php if ($getId != "") {
     ?>
       <li class="treeview">
-        <a href="../frontend/cariHasil">
+        <a href="<?= base_url('carihasil')?>">
           <button class="btn btn-success btn-md"><span>Pesan Disini</span></button>
           <span class="pull-right-container">
           </span>
