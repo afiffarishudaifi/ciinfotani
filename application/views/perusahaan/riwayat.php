@@ -29,7 +29,7 @@ $this->load->view('_partials/head');
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header">
-                            
+
                                 <h3 style="text-align: center;">Data Tabel Pemesanan</h3>
                             </div>
                             <!-- /.box-header -->
@@ -70,7 +70,7 @@ $this->load->view('_partials/head');
                                                         } ?>
                                                     <!-- Delete -->
                                                     <div class="modal fade" id="del<?php echo $data['ID_PESAN']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                        <form action="<?php echo base_url('Priwayat/fixPemesanan')?>" method="post" enctype="multipart/form-data">
+                                                        <form action="<?php echo base_url('Priwayat/fixPemesanan') ?>" method="post" enctype="multipart/form-data">
                                                             <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -81,11 +81,11 @@ $this->load->view('_partials/head');
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <!-- pilihan button yang terdapat dalam delete ada cancel dan delete -->
-                                                                        <input type="text" name="idhapus" value="<?php echo $data['ID_PESAN']; ?>">
-                                                                        <input type="text" name="jmlpesan" value="<?php echo $data['JUMLAH_PESAN'] ?>">
-                                                                        <input type="text" name="ktp" value="<?php echo $data['KTP'] ?>">
-                                                                        <input type="text" name="idpanen" value="<?php echo $data['ID_PANEN'] ?>">
-                                                                        <input type="text" name="idperusahaan" value="<?php echo $data['ID_PERUSAHAAN'] ?>">
+                                                                        <input type="hidden" name="idhapus" value="<?php echo $data['ID_PESAN']; ?>">
+                                                                        <input type="hidden" name="jmlpesan" value="<?php echo $data['JUMLAH_PESAN'] ?>">
+                                                                        <input type="hidden" name="ktp" value="<?php echo $data['KTP'] ?>">
+                                                                        <input type="hidden" name="idpanen" value="<?php echo $data['ID_PANEN'] ?>">
+                                                                        <input type="hidden" name="idperusahaan" value="<?php echo $data['ID_PERUSAHAAN'] ?>">
                                                                         <h5>
                                                                             <center>Apakah yakin ingin membatalkan pesanan <strong><?php echo $data['ID_PESAN']; ?></strong> ?</center>
                                                                         </h5>
