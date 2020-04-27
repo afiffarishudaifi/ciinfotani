@@ -149,11 +149,12 @@
                         <td><?php echo $row->ALAMAT_PETANI; echo ", ";
                                 echo "Desa/Kel. "; echo $row->NAMA_DESA; 
                                 echo", Kec. "; echo $row->NAMA_KECAMATAN;
-                            ?></td>
+                            ?></td> 
                         <td><?php echo $row->NO_HP ?></td>
                         <td class="uang text-right"><?php echo $row->HASIL ?></td>
                     </form>
-                    <td class="text-center"><a href="../pengusaha/pemesanan?id=<?php echo $row->ID_PANEN ?>&tgl=<?php echo $row->TGL_PANEN ?>"><button class="pilih btn btn-primary btn-xs">Pesan</button></a></td>
+                    <?php $getId = $this->session->userdata('session_id_perusahaan');?>
+                    <td class="text-center"><a href="<?=base_url('Ppemesanan')?>?id=<?php echo $row->ID_PANEN ?>&tgl=<?php echo $row->TGL_PANEN ?>&idanda=<?= $getId?>"><button class="pilih btn btn-primary btn-xs">Pesan</button></a></td>
                     </tr>
                     <?php
                     } ?>

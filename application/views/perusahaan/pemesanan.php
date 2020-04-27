@@ -2,11 +2,14 @@
 <html>
 <?php
 $this->load->view("_partials/head.php");
+$getUser = $this->session->userdata('session_username_perusahaan');
+$getId = $this->session->userdata('session_id_perusahaan');
+$getLogo = $this->session->userdata('session_logo_perusahaan');
 ?>
 
 <body class="hold-transition skin-green sidebar-collapse sidebar-mini">
     <div class="wrapper">
-
+ 
         <!--header-->
         <?php
         $this->load->view("_partials/headerusaha.php");
@@ -38,88 +41,82 @@ $this->load->view("_partials/head.php");
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="../../controller/pengusaha/pemesanan" method="post">
+                        <form action="<?= base_url('ppemesanan/insertPesanan')?>" method="post">
                             <?php
-                            if (isset($_GET['id'])) {
-                                $id = $_GET['id'];
-                                $tgl = $_GET['tgl'];
-                                $query_tampil = mysqli_query($koneksi, "SELECT * FROM panen
-                    INNER JOIN petani on petani.KTP = panen.KTP
-                    INNER JOIN komoditas on komoditas.ID_KOMODITAS = panen.KOMODITAS
-                    INNER JOIN desa on desa.ID_DESA = petani.ID_DESA
-                    where panen.ID_PANEN = '$id' and panen.TGL_PANEN = '$tgl'
-                    and panen.HASIL !=0 
-                ") or die(mysqli_error($koneksi));
-                                while ($data = mysqli_fetch_array($query_tampil)) {
-                                    $nohppetani = $data['NO_HP'];
+                                // echo $geid;
+                                    // $nohppetani = $data['NO_HP'];
+                                    foreach($getPesanan as $row){
+                                        $nohppetani = $row->NO_HP
                             ?>
                                     <fieldset>
                                         <legend>
                                             <h5>Data Petani</h5>
                                         </legend>
-                                        <input type="hidden" name="idpanen" value="<?php echo $data['ID_PANEN'] ?>">
+                                        <input type="hidden" name="idpanen" value="<?php echo $row->ID_PANEN ?>">
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">KTP Petani</label>
-                                                <input type="text" name="ktp" value="<?php echo $data['KTP'] ?>" class="form-control" readonly>
+                                                <input type="text" name="ktp" value="<?php echo $row->KTP ?>" class="form-control" readonly>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword4">Nama Petani</label>
-                                                <input type="text" name="namapetani" class="form-control" value="<?php echo $data['NAMA_PETANI'] ?>" readonly>
+                                                <input type="text" name="namapetani" class="form-control" value="<?php echo $row->NAMA_PETANI ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Komoditas</label>
-                                                <input type="text" name="komoditas" class="form-control" value="<?php echo $data['NAMA_KOMODITAS'] ?>" readonly>
+                                                <input type="text" name="komoditas" class="form-control" value="<?php echo $row->NAMA_KOMODITAS ?>" readonly>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword4">Hasil Panen (Kg)</label>
-                                                <input type="text" id="hasil" name="hasil" class="uang form-control" value="<?php echo $data['HASIL'] ?>" readonly>
+                                                <input type="text" id="hasil" name="hasil" class="uang form-control" value="<?php echo $row->HASIL ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Tanggal Panen</label>
-                                                <input type="text" name="tglpanen" class="form-control" value="<?php echo DATE_FORMAT(date_create($data['TGL_PANEN']), 'd M Y') ?>" readonly>
+                                                <input type="text" name="tglpanen" class="form-control" value="<?php echo DATE_FORMAT(date_create($row->TGL_PANEN), 'd M Y') ?>" readonly>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="inputPassword4">Alamat</label>
-                                                <input type="text" name="alamatpetani" class="form-control" value="<?php echo $data['ALAMAT_PETANI'] ?>" readonly>
+                                                <input type="text" name="alamatpetani" class="form-control" value="<?php echo $row->ALAMAT_PETANI ?>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputEmail4">Harga/Kg (Rp)</label>
-                                                <input type="text" id="harga" name="harga" class="uang form-control" readonly value="<?php echo $data['HARGA'] ?>" onkeyup="sum();">
+                                                <input type="text" id="harga" name="harga" class="uang form-control" readonly value="<?php echo $row->HARGA ?>" onkeyup="sum();">
                                             </div>
                                         </div>
                                     </fieldset><?php }
-                                        } ?>
+                                        ?>
                             <fieldset>
                                 <legend>
                                     <h5>Data Pengusaha</h5>
                                 </legend>
+                                <?php foreach($getUsaha as $row){?>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">ID Usaha</label>
-                                        <input type="text" value="<?php echo $pengusaha; ?>" name="idperusahaan" class="form-control" readonly>
+                                        <input type="text" value="<?php echo $row->ID_PERUSAHAAN; ?>" name="idperusahaan" class="form-control" readonly>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputPassword4">Nama Usaha</label>
-                                        <input type="text" name="namapengusaha" value="<?php echo $nama_pengguna; ?>" class="form-control" readonly>
+                                        <input type="text" name="namapengusaha" value="<?php echo $row->USERNAME; ?>" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Alamat Usaha</label>
-                                        <input type="text" name="alamatpengusaha" value="<?php echo $alamat_usaha; ?>" class="form-control" readonly>
+                                        <input type="text" name="alamatpengusaha" value="<?php echo $row->ALAMAT_PERUSAHAAN; ?>" class="form-control" readonly>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputPassword4">Nama Manager</label>
-                                        <input type="text" name="namamanager" value="<?php echo $nama_manager; ?>" class="form-control" readonly>
+                                        <input type="text" name="namamanager" value="<?php echo $row->NAMA_MANAGER; ?>" class="form-control" readonly>
                                     </div>
                                 </div>
+                                <?php }?>
                             </fieldset>
                             <fieldset>
                                 <legend>
@@ -137,11 +134,11 @@ $this->load->view("_partials/head.php");
                                         </div>
                                     </div>
                             </fieldset>
-                            <input type="hidden" name="email" class="form-control" readonly>
-                            <?php $jmlpesan = $_POST['jmlpesan']; ?>
+                            <!-- <input type="hidden" name="email" class="form-control" readonly>
+                            <?php //$jmlpesan = $_POST['jmlpesan']; ?> -->
                             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalPush">Lanjut</button>
                             <!--<input type="submit" name="pesan" class="btn btn-success" value="Lanjut">-->
-                            <a href="../frontend/cariHasil" class="btn btn-danger" value="Kembali">Kembali</a>
+                            <a href="<?= base_url('carihasil')?>" class="btn btn-danger" value="Kembali">Kembali</a>
                             <!--<a href="https://api.whatsapp.com/send?phone=6289697020078&text=Halo%20mau%20order%20gan">coba</a>-->
                             <?php //$harga = $_POST['harga'];
                             //$harga_new = str_replace(".","","$harga");
@@ -195,7 +192,7 @@ $this->load->view("_partials/head.php");
                                         <div class="modal-body">
 
                                             <i class="fa fa-bell fa-4x animated rotateIn mb-4"></i>
-                                            <p>Silahkan Hubungan No HP petani yaitu <?php echo $nohppetani ?> untuk melanjutkan proses pemesanan panen</p>
+                                            <p>Silahkan Hubungi No HP petani yaitu <?php echo $nohppetani ?> untuk melanjutkan proses pemesanan panen</p>
 
                                         </div>
 

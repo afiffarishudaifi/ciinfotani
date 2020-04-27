@@ -13,10 +13,14 @@ class Uriwayat extends CI_Controller{
             $ktp = $row['KTP'];
         }
         $data['getAll'] = $this->Uriwayat_model->getAll($ktp);
-        foreach ($data['getAll'] = $this->Uriwayat_model->getAll($ktp) as $row) {
-            $idpesan = $row['ID_PESAN'];
-        }
-        $data['dataPesan'] = $this->Uriwayat_model->getPemesanan($idpesan);
+        foreach ($this->Uriwayat_model->getAll($ktp) as $row) :
+            if ($row['ID_PESAN'] != NULL || $row['ID_PESAN'] != "") {
+                $idpesan = $row['ID_PESAN'];
+                $data['dataPesan'] = $this->Uriwayat_model->getPemesanan($idpesan);
+            } else {
+                redirect('User');
+            }
+        endforeach;
         $this->load->view('user/riwayat.php', $data);
     }
 

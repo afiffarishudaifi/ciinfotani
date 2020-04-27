@@ -59,7 +59,7 @@ $tahun = date("Y");
                             <div class="icon">
                                 <i class="fa fa-map-pin"></i>
                             </div>
-                            <a href="./viewdesa" class="small-box-footer">Informasi Lengkap<i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('Adesa'); ?>" class="small-box-footer">Informasi Lengkap<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -80,7 +80,7 @@ $tahun = date("Y");
                             <div class="icon">
                                 <i class="fa fa-tree"></i>
                             </div>
-                            <a href="./viewkomoditas" class="small-box-footer">Informasi Lengkap<i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('Akomoditas'); ?>" class="small-box-footer">Informasi Lengkap<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -101,7 +101,7 @@ $tahun = date("Y");
                             <div class="icon">
                                 <i class="fa fa-users"></i>
                             </div>
-                            <a href="./viewpetani" class="small-box-footer">Informasi Lengkap<i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('Apetani'); ?>" class="small-box-footer">Informasi Lengkap<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -122,7 +122,7 @@ $tahun = date("Y");
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="./viewuser" class="small-box-footer">Informasi Lengkap<i class="fa fa-arrow-circle-right"></i></a>
+                            <a href="<?= base_url('Aperusahaan'); ?>" class="small-box-footer">Informasi Lengkap<i class="fa fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -134,16 +134,16 @@ $tahun = date("Y");
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                     </button>
                                     <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="box-body">
-                            <div class="chart">
-                                <canvas id="areaChart" style="height:250px"></canvas>
+                            <div class="box-body">
+                                <div class="chart">
+                                    <canvas id="areaChart" style="height:250px"></canvas>
+                                </div>
                             </div>
+                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box-body -->
                     </div>
-                </div>
             </section>
             <!-- /.content -->
         </div>
