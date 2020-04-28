@@ -66,7 +66,7 @@ $this->load->view("_partials/head.php");
                                     </thead>
                                     <tbody>
                                         <?php
-                                        foreach ($lappesan as $row) {  //merubah array dari objek ke array yang biasanya
+                                        foreach ($lappesan as $data) {  //merubah array dari objek ke array yang biasanya
                                         ?>
                                             <tr>
                                                 <!--memangambil data dari tabel dengan mengisikan data di table-->

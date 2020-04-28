@@ -13,7 +13,11 @@ class Ulappesan extends CI_Controller{
         $data['judul'] = "Info Tani";
         $data['cekktp'] = $this->Ulappesan_model->cekktp();
         foreach ($data['cekktp'] as $hasil) :
-            $hasilktp = $hasil['KTP'];
+            if($hasil['KTP'] != "" || $hasil['KTP'] != NULL){
+                $hasilktp = $hasil['KTP'];
+            } else {
+                $hasilktp = 0;
+            }
         endforeach;
         $data['lappesan'] = $this->Ulappesan_model->get_all($hasilktp);
         $data['getTahun'] = $this->Ulappesan_model->getTahun();
@@ -26,7 +30,11 @@ class Ulappesan extends CI_Controller{
         if($this->input->post('pilih') != NULL){
             $data['cekktp'] = $this->Ulappesan_model->cekktp();
             foreach ($data['cekktp'] as $hasil) :
-                $hasilktp = $hasil['KTP'];
+                if ($hasil['KTP'] != "" || $hasil['KTP'] != NULL) {
+                    $hasilktp = $hasil['KTP'];
+                } else {
+                    $hasilktp = 0;
+                }
             endforeach;
             $data['getTahun'] = $this->Ulappesan_model->getTahun();
             $data['lappesan'] = $this->Ulappesan_model->sortTahun($hasilktp);
@@ -35,7 +43,11 @@ class Ulappesan extends CI_Controller{
         } else {
             $data['cekktp'] = $this->Ulappesan_model->cekktp();
             foreach ($data['cekktp'] as $hasil) :
-                $hasilktp = $hasil['KTP'];
+                if ($hasil['KTP'] != "" || $hasil['KTP'] != NULL) {
+                    $hasilktp = $hasil['KTP'];
+                } else {
+                    $hasilktp = 0;
+                }
             endforeach;
             $data['lappesan'] = $this->Ulappesan_model->get_all($hasilktp);
             $data['getTahun'] = $this->Ulappesan_model->getTahun();
