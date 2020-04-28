@@ -3,7 +3,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>InfoTani</title>
   <!-- logo infotani -->
-  <link rel="icon" href="<?php echo site_url('img/logo.png'); ?>">
+  <link rel="icon" href="<?php echo base_url('assets/img/logo.png') ?>">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->

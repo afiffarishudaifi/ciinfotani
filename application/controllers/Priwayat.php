@@ -11,10 +11,14 @@ class Priwayat extends CI_Controller{
     public function index()
     {
         $data['getAll'] = $this->Priwayat_model->getAll();
-        foreach($data['getAll'] = $this->Priwayat_model->getAll() as $drow):
-            $idpesan = $drow['ID_PESAN'];
+        foreach($this->Priwayat_model->getAll() as $drow):
+            if($drow['ID_PESAN'] != NULL || $drow['ID_HASIL'] != "") {
+                $idpesan = $drow['ID_PESAN'];
+                $data['dataPesan'] = $this->Priwayat_model->getPemesanan($idpesan);
+            } else {
+                redirect('Pperusahaan');
+            }
         endforeach;
-        $data['dataPesan'] = $this->Priwayat_model->getPemesanan($idpesan);
         $this->load->view('perusahaan/riwayat', $data);
     }
     public function fixPemesanan()

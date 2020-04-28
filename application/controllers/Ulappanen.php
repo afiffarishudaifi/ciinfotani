@@ -8,8 +8,6 @@ class Ulappanen extends CI_Controller{
         $this->load->model('user/Ulappanen_model');
     }
 
-    
-
     public function index()
     {
         $data['judul'] = "Info Tani";

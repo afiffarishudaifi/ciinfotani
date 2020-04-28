@@ -93,7 +93,7 @@ $tahun = date("Y");
                             </form>
                         <?php } else {
                         ?>
-                            <form action="<?php echo base_url('Ukonfirmasi/fixPemesanan'); ?>" method="post" enctype="multipart/form-data">
+                            <form action="<?php echo base_url('Ukonfirmasi/batalPemesanan'); ?>" method="post" enctype="multipart/form-data">
                                 <?php
                                 foreach ($getAll as $data) : ?>
                                     <fieldset>
