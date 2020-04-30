@@ -21,6 +21,7 @@ class Upanen extends CI_Controller{
         if ($this->form_validation->run() == FALSE) {
             redirect('Upanen');
         } else {
+        
             $this->Panen_model->tambahPanen();
             $this->session->set_flashdata('panenditambah', 'Ditambah');
             redirect('Upanen');
