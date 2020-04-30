@@ -24,6 +24,10 @@
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('admin/tambahdesa', $data);
             } else {
+                $data = [
+                    "NAMA_DESA" => $this->input->post('namadesa'),
+                    "ID_KECAMATAN" => $this->input->post('idkecamatan')
+                ];
                 $this->Desa_model->tambahDataDesa();
                 $this->session->set_flashdata('desaditambah', 'Ditambah');
                 redirect('Adesa');
