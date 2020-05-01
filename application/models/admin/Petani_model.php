@@ -11,7 +11,21 @@ class Petani_model extends CI_Model{
 
     public function tambahDataPetani()
     {
-        
+        $post = $this->input->post();
+        $data = [
+            "KTP" => $post['ktp'],
+            "ID_DESA" => $post['iddesa'],
+            "ID_KOMODITAS" => $post['idkomoditas'],
+            "ID_USER" => $post['iduser'],
+            "ID_STATUS" => $post['idstatuspanen'],
+            "NAMA_PETANI" => $post['namapetani'],
+            "ALAMAT_PETANI" => $post['alamatpetani'],
+            "LUAS_SAWAH" => $post['luassawah'],
+            "ALAMAT_SAWAH" => $post['alamatsawah'],
+            "TANAM" => $post['tgltanam'],
+            "PANEN" => $post['tglpanen'],
+            "NO_HP" => $post['nohp']
+        ];
         $this->db->insert('petani', $data);
     }
 
