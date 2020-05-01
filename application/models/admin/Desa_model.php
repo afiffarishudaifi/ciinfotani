@@ -36,7 +36,6 @@ class Desa_model extends CI_Model{
     {
         $data = [
             "NAMA_DESA" => $this->input->post('namadesa'),
-            "ID_KECAMATAN" => $this->input->post('idkecamatan')
         ];
         $this->db->where('ID_DESA', $id);
         $this->db->update('desa', $data);
