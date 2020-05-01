@@ -23,6 +23,9 @@
             if($this->form_validation->run() == FALSE){
                 $this->load->view('admin/tambahkecamatan');
             } else {
+                $data = [
+                    "NAMA_KECAMATAN" => $this->input->post('namakecamatan', true)
+                ];
                 $this->Kecamatan_model->tambahDataKecamatan();
                 $this->session->set_flashdata('kecamatanditambah', 'Ditambahkan');
                 redirect('Akecamatan');
@@ -50,7 +53,10 @@
             if($this->form_validation->run() == FALSE){
                 $this->load->view('admin/ubahkecamatan', $data);
             } else {
-                $this->Kecamatan_model->ubahDataKecamatan($id);
+                $data = [
+                    "NAMA_KECAMATAN" => $this->input->post('namakecamatan')
+                ];
+                $this->Kecamatan_model->ubahDataKecamatan($id,$data);
                 $this->session->set_flashdata('kecamatandiubah', 'Diubah');
                 redirect('Akecamatan');
             }

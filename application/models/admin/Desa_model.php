@@ -14,10 +14,6 @@ class Desa_model extends CI_Model{
 
     public function tambahDataDesa()
     {
-        $data = [
-            "NAMA_DESA" => $this->input->post('namadesa'),
-            "ID_KECAMATAN" => $this->input->post('idkecamatan')
-        ];
         $this->db->insert('desa', $data);
     }
 

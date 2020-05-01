@@ -85,13 +85,7 @@ class Petani_model extends CI_Model{
 
     public function update()
     {
-        $id = $this->session->userdata('session_id');
-        $data = [
-            "ID_KOMODITAS" => $this->input->post('idkomoditas'),
-            "TANAM" => $this->input->post('tgltanam'),
-            "PANEN" => $this->input->post('tglpanen'),
-            "ID_STATUS" => $this->input->post('idstatus')
-        ];
+
         $this->db->where('ID_USER', $id);
         $this->db->update('petani', $data);
     }

@@ -18,13 +18,7 @@ class Panen_model extends CI_Model{
 
     public function tambahPanen()
     {
-        /*$awal = str_replace(".", "", $this->input->post('hasil'));
-        $akhir = str_replace(".", "", $this->input->post('hasil'));
-        $harga = str_replace(".", "", $this->input->post('harga'));
-        $status = "Panen";
-        $max = $this->input->post('max');
-       
-        $query = $this->db->query("UPDATE panen SET HASIL_AWAL=$awal,HASIL=$akhir, HARGA=$harga, STATUS_PANEN='$status' where ID_PANEN=$max");*/
+
         $data = [
             "HASIL_AWAL" => str_replace(".", "", $this->input->post('hasil')),
             "HASIL" => str_replace(".", "", $this->input->post('hasil')),
