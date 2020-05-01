@@ -200,7 +200,7 @@ foreach($panen as $row){  //merubah array dari objek ke array yang biasanya
         </div>
             </div>
         </div>
-    </section>
+    </section> 
     <!-- Our Expert Area End -->
 
     <!-- Border -->

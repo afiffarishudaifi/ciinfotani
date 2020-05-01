@@ -15,7 +15,7 @@ if ($getUser == '' or $getAkses == '' or $getId == '') {
 ?>
 <header class="main-header">
   <!-- Logo -->
-  <a href="../frontend/index" class="logo">
+  <a href="<?= base_url('beranda')?>" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>I</b>T</span>
     <!-- logo for regular state and mobile devices -->

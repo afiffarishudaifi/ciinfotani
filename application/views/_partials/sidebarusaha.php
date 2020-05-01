@@ -44,11 +44,10 @@ if ($getUser == '' or $getId == '') {
     ?>
       <li class="treeview">
         <a href="<?= base_url('carihasil')?>">
-          <button class="btn btn-success btn-md"><span>Pesan Disini</span></button>
+          <i class="btn btn-success btn-md"><span>Pesan Disini</span></i>
           <span class="pull-right-container">
           </span>
         </a>
       </li> <?php } ?>
   </ul>
-
 </section>
