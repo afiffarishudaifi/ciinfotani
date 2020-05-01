@@ -53,13 +53,6 @@ class Upetani extends CI_Controller{
         if ($this->form_validation->run() == FALSE) {
             redirect('Upetani');
         } else {
-                    $id = $this->session->userdata('session_id');
-        $data = [
-            "ID_KOMODITAS" => $this->input->post('idkomoditas'),
-            "TANAM" => $this->input->post('tgltanam'),
-            "PANEN" => $this->input->post('tglpanen'),
-            "ID_STATUS" => $this->input->post('idstatus')
-        ];
             $this->Petani_model->update();
             $this->session->set_flashdata('petaniupdate', 'Diubah');
             redirect('Upetani');

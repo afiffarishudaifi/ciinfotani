@@ -24,10 +24,7 @@
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('admin/tambahkomoditas');
             } else {
-                $data = [
-                    //menaruh data dari db => mengambil inputan dari tambah
-                    "NAMA_KOMODITAS" => $this->input->post('namakomoditas', true)
-                ];
+                
                 $this->Komoditas_model->tambahDataKomoditas();
                 //nama session dan isi
                 $this->session->set_flashdata('komoditasditambah', 'Ditambahkan');
@@ -58,11 +55,8 @@
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('admin/ubahkomoditas', $data);
             } else {
-                $data = [
-                    //menaruh data dari db => mengambil inputan dari tambah
-                    "NAMA_KOMODITAS" => $this->input->post('namakomoditas', true)
-                ];
-                $this->Komoditas_model->ubahDataKomoditas($id,$data);
+                
+                $this->Komoditas_model->ubahDataKomoditas($id);
                 //nama session dan isi
                 $this->session->set_flashdata('komoditasdiubah', 'Diubah');
                 redirect('Akomoditas');

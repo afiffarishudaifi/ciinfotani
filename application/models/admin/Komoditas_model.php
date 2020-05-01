@@ -16,7 +16,10 @@ class Komoditas_model extends CI_Model{
 
     public function tambahDataKomoditas()
     {
-        
+        $data = [
+            //menaruh data dari db => mengambil inputan dari tambah
+            "NAMA_KOMODITAS" => $this->input->post('namakomoditas', true)
+        ];
         $this->db->insert($this->_table, $data);
 
     }
@@ -34,7 +37,10 @@ class Komoditas_model extends CI_Model{
     }
     public function ubahDataKomoditas($id)
     {
-        
+        $data = [
+            //menaruh data dari db => mengambil inputan dari tambah
+            "NAMA_KOMODITAS" => $this->input->post('namakomoditas', true)
+        ];
         $this->db->where('ID_KOMODITAS', $this->input->post('idkomoditas'));
         $this->db->update($this->_table, $data);
     }

@@ -15,7 +15,9 @@ class Kecamatan_model extends CI_Model{
 
     public function tambahDataKecamatan()
     {
-        
+        $data = [
+            "NAMA_KECAMATAN" => $this->input->post('namakecamatan', true)
+        ];
         $this->db->insert('kecamatan', $data);
     }
 
@@ -32,6 +34,9 @@ class Kecamatan_model extends CI_Model{
 
     public function ubahDataKecamatan($id)
     {
+        $data = [
+            "NAMA_KECAMATAN" => $this->input->post('namakecamatan')
+        ];
         $this->db->where('ID_KECAMATAN', $id);
         $this->db->update($this->_table, $data);
     } 
