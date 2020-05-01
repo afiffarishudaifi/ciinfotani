@@ -49,7 +49,7 @@
             $data['desa'] = $this->Desa_model->getDesaByid($id);
             $this->form_validation->set_rules('namadesa', 'Nama Desa', 'required');
             if($this->form_validation->run() == FALSE){
-                $this->load->view('admin/ubahdesa');
+                $this->load->view('admin/ubahdesa', $data);
             } else {
                 $this->Desa_model->ubahDataDesa($id);
                 $this->session->set_flashdata('desadiubah', 'Diubah');
