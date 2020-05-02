@@ -44,6 +44,14 @@ class User_model extends CI_Model{
         return $this->db->get_where('user', ['ID_USER' => $id])->row_array();
     }
 
+    public function cekKeberadaan($id)
+    {
+        $this->db->select("KTP");
+        $this->db->from("petani");
+        $this->db->where("ID_USER", $id);
+        return $this->db->get()->result_array();
+    }
+
     public function hapusDataUser($id)
     {
         return $this->db->delete('user', array("ID_USER" => $id));

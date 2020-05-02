@@ -23,6 +23,13 @@ class Komoditas_model extends CI_Model{
         $this->db->insert($this->_table, $data);
 
     }
+
+    public function cekKeberadaan($id){
+        $this->db->select("KTP");
+        $this->db->from("petani");
+        $this->db->where("ID_KOMODITAS", $id);
+        return $this->db->get()->result_array();
+    }
     public function hapusDataKomoditas($id)
     {
         $this->db->where('ID_KOMODITAS', $id);
@@ -44,5 +51,7 @@ class Komoditas_model extends CI_Model{
         $this->db->where('ID_KOMODITAS', $this->input->post('idkomoditas'));
         $this->db->update($this->_table, $data);
     }
+
+    
 }
 ?>

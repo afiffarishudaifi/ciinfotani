@@ -36,6 +36,8 @@ class Upetani extends CI_Controller{
         $this->form_validation->set_rules('idkomoditas', 'ID Komoditas', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('user/viewpetani');
+            //echo "<script>alert('Lengkapi Data Gagal! Pastikan Semua data Benar');history.go(-1);</script>";
+            //redirect('User');
         } else {
             $this->Petani_model->lengkapiData();
             $this->session->set_flashdata('petanilengkapidata', 'Tersimpan');

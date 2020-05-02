@@ -29,13 +29,21 @@ class Auser extends CI_Controller{
         $this->load->view('admin/ubahuser', $data);
         
     }
-    public function hapus($id){   
-        $data = $this->User_model->ambil_foto($id);
-        $path = './img/user/';
-        @unlink($path.$data->FOTO_USER);
-        $this->User_model->hapusDataUser($id);
-        $this->session->set_flashdata('penggunadihapus', 'Dihapus');
-        redirect('Auser');
+    public function hapus($id){
+        foreach ($this->User_model->cekKeberadaan($id) as $hasilada) :
+            $hasil = $hasilada['KTP'];
+        endforeach;
+        if ($hasil == 0) {
+            $data = $this->User_model->ambil_foto($id);
+            $path = './img/user/';
+            @unlink($path . $data->FOTO_USER);
+            $this->User_model->hapusDataUser($id);
+            $this->session->set_flashdata('penggunadihapus', 'Dihapus');
+            redirect('Auser');
+        } else {
+            echo "<script>alert('Gagal dihapus karena data dipakai di tabel relasi');history.go(-1);</script>";
+        }   
+        
     }
 
     function user_tambah(){
