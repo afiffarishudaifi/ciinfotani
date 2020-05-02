@@ -7,7 +7,7 @@ class Register extends CI_Controller{
         $this->load->library('upload');
     }
     // public function index(){    
-    //     $data['gambar'] = $this->GambarModel->view();    
+    //     $data['gambar'] = $this->GambarModel->view();     
     //     $this->load->view('gambar/view', $data);  
     // }
 
@@ -43,8 +43,14 @@ class Register extends CI_Controller{
 
     function petani_tambah(){
         if($this->input->post('password') != $this->input->post('passwordConf')){
-            echo "<script>alert('Password tidak sama');history.go(-1);</script>";
-        }
+            echo "<script>alert('Kata Sandi tidak sama');history.go(-1);</script>";
+        }else{
+        $username = $this->input->post('username');
+        $cek_petani = $this->Register_model->cek_petani($username)->result();
+        $cek_perusahaan = $this->Register_model->cek_perusahaan($username)->result();
+        if($cek_petani != FALSE || $cek_perusahaan != FALSE ){
+            echo "<script>alert('Nama Pengguna sudah ada!');history.go(-1);</script>";
+        }else{
         $config['upload_path'] = './img/user/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
@@ -76,13 +82,19 @@ class Register extends CI_Controller{
         }else{
             echo "<script>alert('Registrasi Gagal! Pastikan Semua data terisi');history.go(-1);</script>";
         }
-                 
+    }   }
     }
 
     function pengusaha_tambah(){
         if($this->input->post('password') != $this->input->post('passwordConf')){
-            echo "<script>alert('Password tidak sama');history.go(-1);</script>";
-        }
+            echo "<script>alert('Kata Sandi tidak sama');history.go(-1);</script>";
+        }else{
+        $username = $this->input->post('username');
+        $cek_petani = $this->Register_model->cek_petani($username)->result();
+        $cek_perusahaan = $this->Register_model->cek_perusahaan($username)->result();
+        if($cek_petani != FALSE || $cek_perusahaan != FALSE ){
+            echo "<script>alert('Nama Pengguna sudah ada!');history.go(-1);</script>";
+        }else{
         $config['upload_path'] = './img/perusahaan/siup/'; //path folder
         $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
         $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
@@ -114,7 +126,8 @@ class Register extends CI_Controller{
         }else{
             echo "<script>alert('Registrasi Gagal! Pastikan Semua data terisi');history.go(-1);</script>";
         }
-                 
+        }
+    }               
     }
 
 }
