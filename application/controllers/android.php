@@ -48,9 +48,10 @@ class android extends CI_Controller
             $username= $_POST['username'];
             $password = md5($_POST['password']);
             $passwordConf = md5($_POST['passwordconf']);
+            $foto = $_POST['foto'];
             if($password != $passwordConf){
                     $result["success"] = "0";
-                    $result["message"] = "error";
+                    $result["message"] = "Password Tidak sama";
                     echo json_encode($result);
             }else{
                 $cek = $this->android_model->cek_user($username)->result();
@@ -60,41 +61,35 @@ class android extends CI_Controller
                     $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
             
                     $this->upload->initialize($config);
-                    if(!empty($_FILES['foto']['name'])){
-        
-                        if ($this->upload->do_upload('foto')){
-                            $gbr = $this->upload->data();
-                            //Compress Image
-                            $config['image_library']='gd2';
-                            $config['source_image']='./img/user/'.$gbr['file_name'];
-                            $config['create_thumb']= FALSE;
-                            $config['maintain_ratio']= FALSE;
-                            $config['quality']= '50%';
-                            $config['width']= 600;
-                            $config['height']= 400;
-                            $config['new_image']= './img/user/'.$gbr['file_name'];
-                            $this->load->library('image_lib', $config);
-                            $this->image_lib->resize();
-            
-                            $gambar=$gbr['file_name'];
-                            $this->android_model->registerapi($username,$password,$gambar);
+                    if(!empty($foto)){
+                        //$random = random_word(20);
+                        $gambar = $username.".png";
+                        $path = "img/user/".$username.".png";
+                        
+                        // sesuiakan ip address laptop/pc atau URL server
+                        $actualpath = "http://192.168.10.177/android/upload_image/$path";
+                        
+                        $query = $this->android_model->registerapi($username,$password,$gambar);
+                        
+                        if ($query){
+                            file_put_contents($path,base64_decode($foto));
                             $result["success"] = "1";
-                            $result["message"] = "success";
+                            $result["message"] = "Registrasi Berhasil!";
                             echo json_encode($result);
                         }else{
                             $result["success"] = "0";
-                            $result["message"] = "error";
+                            $result["message"] = "Registrasi Gagal!";
                             echo json_encode($result);
                         }
                     }else{
                         $this->android_model->registerapi($username,$password,"");
                         $result["success"] = "1";
-                        $result["message"] = "success";
+                        $result["message"] = "Registrasi Berhasil!";
                         echo json_encode($result);
                     }
                 }else{
                     $result["success"] = "0";
-                            $result["message"] = "error";
+                            $result["message"] = "Registrasi Gagal!";
                             echo json_encode($result);
                 }
             }
