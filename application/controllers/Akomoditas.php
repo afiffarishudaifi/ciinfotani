@@ -24,6 +24,7 @@
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('admin/tambahkomoditas');
             } else {
+                
                 $this->Komoditas_model->tambahDataKomoditas();
                 //nama session dan isi
                 $this->session->set_flashdata('komoditasditambah', 'Ditambahkan');
@@ -54,6 +55,7 @@
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('admin/ubahkomoditas', $data);
             } else {
+                
                 $this->Komoditas_model->ubahDataKomoditas($id);
                 //nama session dan isi
                 $this->session->set_flashdata('komoditasdiubah', 'Diubah');

@@ -31,6 +31,21 @@ class Apetani extends CI_Controller{
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('admin/tambahpetani', $data);
         } else {
+            $post = $this->input->post();
+        $data = [
+            "KTP" => $post['ktp'],
+            "ID_DESA" => $post['iddesa'],
+            "ID_KOMODITAS" => $post['idkomoditas'],
+            "ID_USER" => $post['iduser'],
+            "ID_STATUS" => $post['idstatuspanen'],
+            "NAMA_PETANI" => $post['namapetani'],
+            "ALAMAT_PETANI" => $post['alamatpetani'],
+            "LUAS_SAWAH" => $post['luassawah'],
+            "ALAMAT_SAWAH" => $post['alamatsawah'],
+            "TANAM" => $post['tgltanam'],
+            "PANEN" => $post['tglpanen'],
+            "NO_HP" => $post['nohp']
+        ];
             $this->Petani_model->tambahDataPetani(); 
             $this->session->set_flashdata('petaniditambah', 'Ditambah');
             redirect('Apetani');
@@ -54,7 +69,7 @@ class Apetani extends CI_Controller{
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('admin/ubahpetani', $data);
         } else {
-            $this->Petani_model->ubahDataPetani($id);
+            $this->Petani_model->ubahDataPetani($id,$data);
             $this->session->set_flashdata('petanidiubah', 'Diubah');
             redirect('Apetani');
         }

@@ -35,8 +35,7 @@ class Desa_model extends CI_Model{
     public function ubahDataDesa($id)
     {
         $data = [
-            "NAMA_KECAMATAN" => $this->input->post('namadesa'),
-            "ID_KECAMATAN" => $this->input->post('idkecamatan')
+            "NAMA_DESA" => $this->input->post('namadesa'),
         ];
         $this->db->where('ID_DESA', $id);
         $this->db->update('desa', $data);

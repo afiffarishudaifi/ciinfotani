@@ -50,6 +50,7 @@
             if($this->form_validation->run() == FALSE){
                 $this->load->view('admin/ubahkecamatan', $data);
             } else {
+                
                 $this->Kecamatan_model->ubahDataKecamatan($id);
                 $this->session->set_flashdata('kecamatandiubah', 'Diubah');
                 redirect('Akecamatan');

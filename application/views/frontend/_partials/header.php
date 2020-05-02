@@ -1,4 +1,5 @@
-
+<?php 
+    $getId = $this->session->userdata('session_akses');?>
 <header class="header-area">
     <div class="main-header-area">
         <div class="classy-nav-container breakpoint-off">
@@ -31,7 +32,7 @@
 
                             <!-- Book Icon -->
                             <div class="book-now-btn ml-5 mt-4 mt-lg-0 ml-md-4">
-                                <a href="<?= base_url('login')?>" class="btn akame-btn"><?php if(isset($login_session)||isset($id_pengguna)){ 
+                                <a href="<?= base_url('login')?>?id=<?= $getId?>" class="btn akame-btn"><?php if(isset($getId)){ 
                                     echo "Dashboard";
                                     }else{ echo "Masuk";}?></a>
                             </div>

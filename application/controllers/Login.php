@@ -9,8 +9,20 @@ class Login extends CI_Controller{
 
     public function index()
     {
-        
+        if(isset($_GET['id'])){
+            $id= $_GET['id'];
+        }else{
+            $id = 0;
+        }
+        if($id == 1){
+            redirect('admin');
+        }elseif($id ==2){
+            redirect('user');
+        }elseif($id ==3){
+            redirect('pperusahaan');
+        }else{
         $this->load->view('frontend/login');
+        }
     }
     public function cek_login()
     {
@@ -48,10 +60,12 @@ class Login extends CI_Controller{
                     $id = $row->ID_PERUSAHAAN;
                     $user = $row->USERNAME;
                     $logo = $row->LOGO;
+                    $level = $row->ID_LEVEL;
                 }
                 $this->session->set_userdata('session_id_perusahaan', $id);
                 $this->session->set_userdata('session_username_perusahaan', $user);
                 $this->session->set_userdata('session_logo_perusahaan', $logo);
+                $this->session->set_userdata('session_akses', $level);
                 redirect('Pperusahaan');
             }
             $this->load->view('frontend/login');
