@@ -14,7 +14,7 @@ class Uriwayat extends CI_Controller{
         $getId = $this->session->userdata('session_id');
         if ($getUser == '' or $getAkses == '' or $getId == '') {
             //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
-            redirect('Login');
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             foreach ($data['getKtp'] = $this->Uriwayat_model->getKtp() as $row){
                 $ktp = $row['KTP'];

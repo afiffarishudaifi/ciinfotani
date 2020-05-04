@@ -11,7 +11,7 @@ class Pperusahaan extends CI_Controller{
         $getUser = $this->session->userdata('session_username_perusahaan');
         $getId = $this->session->userdata('session_id_perusahaan');
         if ($getUser == ' ' or $getId == ' ') {
-            redirect('Login');
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['cekdatakelengkapan'] = $this->Indexperusahaan_model->cekKelengkapan();
             foreach($data['cekdatakelengkapan'] as $row):

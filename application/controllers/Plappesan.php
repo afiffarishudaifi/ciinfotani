@@ -13,8 +13,8 @@ class Plappesan extends CI_Controller
     {
         $getUser = $this->session->userdata('session_username_perusahaan');
         $getId = $this->session->userdata('session_id_perusahaan');
-        if ($getUser == ' ' or $getId == ' ') {
-            redirect('Login');
+        if (isset($getUser) || isset($getId)) {
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['judul'] = "Info Tani";
             $data['lappesan'] = $this->Plappesan_model->get_all();

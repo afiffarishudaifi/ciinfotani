@@ -15,7 +15,7 @@ class Upetani extends CI_Controller{
         $getId = $this->session->userdata('session_id');
         if ($getUser == '' or $getAkses == '' or $getId == '') {
             //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
-            redirect('Login');
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['cekktp'] = $this->session->userdata('session_ktp');
             $data['lengkap'] = $this->Petani_model->cek_user();

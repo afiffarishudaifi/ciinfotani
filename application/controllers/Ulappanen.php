@@ -15,7 +15,7 @@ class Ulappanen extends CI_Controller{
         $getId = $this->session->userdata('session_id');
         if ($getUser == '' or $getAkses == '' or $getId == '') {
             //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
-            redirect('Login');
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['judul'] = "Info Tani";
             $data['cekktp'] = $this->Ulappanen_model->cekktp();
@@ -35,7 +35,7 @@ class Ulappanen extends CI_Controller{
         $getId = $this->session->userdata('session_id');
         if ($getUser == '' or $getAkses == '' or $getId == '') {
             //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
-            redirect('Login');
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             if ($this->input->post('pilih') != NULL) {
                 $data['cekktp'] = $this->Ulappanen_model->cekktp();

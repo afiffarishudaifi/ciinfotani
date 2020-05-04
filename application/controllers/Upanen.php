@@ -14,7 +14,7 @@ class Upanen extends CI_Controller{
         $getId = $this->session->userdata('session_id');
         if ($getUser == '' or $getAkses == '' or $getId == '') {
             //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
-            redirect('Login');
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['cekPanen'] = $this->Panen_model->cekPanen();
             $this->load->view('user/tambah_panen', $data);

@@ -13,7 +13,7 @@ class Priwayat extends CI_Controller{
         $getUser = $this->session->userdata('session_username_perusahaan');
         $getId = $this->session->userdata('session_id_perusahaan');
         if ($getUser == ' ' or $getId == ' ') {
-            redirect('Login');
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['getAll'] = $this->Priwayat_model->getAll();
             foreach($this->Priwayat_model->getAll() as $drow):
@@ -32,7 +32,7 @@ class Priwayat extends CI_Controller{
         $getUser = $this->session->userdata('session_username_perusahaan');
         $getId = $this->session->userdata('session_id_perusahaan');
         if ($getUser == ' ' or $getId == ' ') {
-            redirect('Login');
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $jmlpesan = $this->input->post('jmlpesan');
             foreach ($this->Priwayat_model->fixPemesanan() as $cekkurang) : 

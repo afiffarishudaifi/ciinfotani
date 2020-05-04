@@ -8,7 +8,7 @@ class Ukonfirmasi extends CI_Controller{
     }
     
     public function index(){
-        redirect('Login');
+        echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
     }
 
     public function Konfirmasi()
