@@ -4,10 +4,23 @@
         parent:: __construct();
         $this->load->model('perusahaan/Ppengaturan_model');
         }
-        public function index($id){
-            $where = array('ID_PERUSAHAAN' => $id);
-            $data['user'] = $this->Ppengaturan_model->edit_data($where,'perusahaan')->result();
-            $this->load->view('perusahaan/pengaturan',$data);
+        public function index(){
+            $getId = $this->session->userdata('session_id_perusahaan');
+            $getAkses = $this->session->userdata('session_akses');
+            if(isset($getAkses) && isset($getId)){
+                if($getAkses == 3){
+                    $where = array('ID_PERUSAHAAN' => $getId);
+                    $data['user'] = $this->Ppengaturan_model->edit_data($where,'perusahaan')->result();
+                    $this->load->view('perusahaan/pengaturan',$data);        
+                }elseif($getAkses == 2){
+                    redirect('Upengaturan');
+                }elseif($getAkses == 1){
+                    redirect('Apengaturan');
+                }
+            
+        }else{
+            echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
+        }
         }
         public function edit($id){
             $where = array('ID_PERUSAHAAN' => $id);

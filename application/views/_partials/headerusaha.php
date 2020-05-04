@@ -1,6 +1,7 @@
 <?php
 $getUser = $this->session->userdata('session_username_perusahaan');
 $getId = $this->session->userdata('session_id_perusahaan');
+$getAkses = $this->session->userdata('session_akses');
 $getLogo = $this->session->userdata('session_logo_perusahaan');
 if ($getUser == ' ' or $getId == ' ') {
   echo "<script>alert('Anda Harus Login');history.go(-1);</script>";

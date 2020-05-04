@@ -4,10 +4,22 @@
         parent:: __construct();
         $this->load->model('Admin/Pengaturan_model');
         }
-        public function index($id){
-            $where = array('ID_USER' => $id);
-            $data['user'] = $this->Pengaturan_model->edit_data($where,'user')->result();
-            $this->load->view('admin/pengaturan',$data);
+        public function index(){
+            $getId = $this->session->userdata('session_id');
+            $getAkses = $this->session->userdata('session_akses');
+            if(isset($getId) && isset($getAkses)){
+                if($getAkses == 1){
+                    $where = array('ID_USER' => $getId);
+                    $data['user'] = $this->Pengaturan_model->edit_data($where,'user')->result();
+                    $this->load->view('admin/pengaturan',$data);
+                }elseif($getAkses == 2){
+                    redirect('Upengaturan');
+                }elseif($getAkses == 3){
+                    redirect('Ppengaturan');
+                }
+            }else{
+                echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
+            }
         }
         public function edit($id){
             $where = array('ID_USER' => $id);
