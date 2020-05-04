@@ -77,29 +77,18 @@ class Apetani extends CI_Controller{
 
     public function hapus($id)
     {
-        foreach ($this->Petani_model->cekKeberadaanPanen($id) as $hasilada) :
-            $hasilPanen = $hasilada['ID_PANEN'];
-        endforeach;
-        foreach ($this->Petani_model->cekKeberadaanPemesanan($id) as $hasiladaa) :
-            if($hasiladaa['ID_PESAN'] != NULL) {
-                $hasilPesan = 0;    
-            } else {
-                $hasilPesan = $hasiladaa['ID_PESAN'];
-            }
-        endforeach;
-         if ($hasilPesan == 0) {
-            if($hasilPanen == 0){
+        $hasilPanen = $this->Petani_model->cekKeberadaanPanen($id);
+        $hasilPesan = $this->Petani_model->cekKeberadaanPemesanan($id);
+         if ($hasilPesan == FALSE || $hasilPanen == FALSE) {
                 $data['idpetani'] = $this->Petani_model->hapusDataPetani($id);
                 $this->session->set_flashdata('petanidhapus', 'Dihapus');
                 redirect('Apetani');
             } else {
-                //echo "<script>alert('Gagal dihapus karena data dipakai di tabel Panen');history.go(-1);</script>";
+                echo "<script>alert('Gagal dihapus karena data dipakai di tabel Panen atau Pemesanan');history.go(-1);</script>";
             }
-        } else {
-            echo "<script>alert('Gagal dihapus karena data dipakai di tabel Pemesanan');history.go(-1);</script>";
         }   
     }
 
-}
+
 
 ?>

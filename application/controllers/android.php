@@ -56,18 +56,10 @@ class android extends CI_Controller
             }else{
                 $cek = $this->android_model->cek_user($username)->result();
                 if($cek != TRUE){
-                    $config['upload_path'] = './img/user/'; //path folder
-                    $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
-                    $config['encrypt_name'] = TRUE; //Enkripsi nama yang terupload
-            
-                    $this->upload->initialize($config);
                     if(!empty($foto)){
                         //$random = random_word(20);
                         $gambar = $username.".png";
                         $path = "img/user/".$username.".png";
-                        
-                        // sesuiakan ip address laptop/pc atau URL server
-                        $actualpath = "http://192.168.10.177/android/upload_image/$path";
                         
                         $query = $this->android_model->registerapi($username,$password,$gambar);
                         

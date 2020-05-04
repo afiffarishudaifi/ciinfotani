@@ -78,17 +78,17 @@ class Petani_model extends CI_Model{
 
     public function cekKeberadaanPemesanan($id)
     {
-        $this->db->select("ID_PESAN");
+        $this->db->select("*");
         $this->db->from("pemesanan");
         $this->db->where("KTP", $id);
-        return $this->db->get()->result_array();
+        return $this->db->get()->result();
     }
     public function cekKeberadaanPanen($id)
     {
-        $this->db->select("ID_PANEN");
+        $this->db->select("*");
         $this->db->from("panen");
         $this->db->where("KTP", $id);
-        return $this->db->get()->result_array();
+        return $this->db->get()->result();
     }
     public function hapusDataPetani($id)
     {
