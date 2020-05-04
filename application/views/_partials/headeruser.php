@@ -5,7 +5,7 @@ $getId = $this->session->userdata('session_id');
 $getGambar = $this->session->userdata('session_gambar');
 $getktp = $this->session->userdata('session_ktp');
 if ($getUser == '' or $getAkses == '' or $getId == '') {
-  redirect('login');
+  echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
 }
 ?>
 
