@@ -42,9 +42,16 @@
         
         public function hapus($id)
         {
-            $this->Komoditas_model->hapusDataKomoditas($id);
-            $this->session->set_flashdata('komoditasdihapus', 'Dihapus');
-            redirect('Akomoditas');
+            foreach($this->Komoditas_model->cekKeberadaan($id) as $hasilada ):
+                $hasil = $hasilada['KTP'];
+            endforeach; 
+            if($hasil == 0){
+                $this->Komoditas_model->hapusDataKomoditas($id);
+                $this->session->set_flashdata('komoditasdihapus', 'Dihapus');
+                redirect('Akomoditas');
+            } else {
+                echo "<script>alert('Gagal dihapus karena data dipakai di tabel relasi');history.go(-1);</script>";
+            }
         }
 
         public function ubah($id)

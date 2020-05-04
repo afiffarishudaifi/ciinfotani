@@ -22,7 +22,6 @@ class Ukonfirmasi_model extends CI_Model{
 
     public function hapusPemesanan()
     {
-        
         $this->db->where('ID_PESAN', $this->input->post('idpesan'));
         $this->db->delete('pemesanan');
     }

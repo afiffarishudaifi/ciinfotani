@@ -9,19 +9,27 @@ class Uriwayat extends CI_Controller{
 
     public function index()
     {
-        foreach ($data['getKtp'] = $this->Uriwayat_model->getKtp() as $row){
-            $ktp = $row['KTP'];
-        }
-        $data['getAll'] = $this->Uriwayat_model->getAll($ktp);
-        foreach ($this->Uriwayat_model->getAll($ktp) as $row) :
-            if ($row['ID_PESAN'] != NULL || $row['ID_PESAN'] != "") {
-                $idpesan = $row['ID_PESAN'];
-                $data['dataPesan'] = $this->Uriwayat_model->getPemesanan($idpesan);
-            } else {
-                redirect('User');
+        $getUser = $this->session->userdata('session_user');
+        $getAkses = $this->session->userdata('session_akses');
+        $getId = $this->session->userdata('session_id');
+        if ($getUser == '' or $getAkses == '' or $getId == '') {
+            //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
+            redirect('Login');
+        } else {
+            foreach ($data['getKtp'] = $this->Uriwayat_model->getKtp() as $row){
+                $ktp = $row['KTP'];
             }
-        endforeach;
-        $this->load->view('user/riwayat.php', $data);
+            $data['getAll'] = $this->Uriwayat_model->getAll($ktp);
+            foreach ($this->Uriwayat_model->getAll($ktp) as $row) :
+                if ($row['ID_PESAN'] != NULL || $row['ID_PESAN'] != "") {
+                    $idpesan = $row['ID_PESAN'];
+                    $data['dataPesan'] = $this->Uriwayat_model->getPemesanan($idpesan);
+                } else {
+                    redirect('User');
+                }
+            endforeach;
+            $this->load->view('user/riwayat.php', $data);
+        }
     }
 
 }

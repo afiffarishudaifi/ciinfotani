@@ -4,14 +4,8 @@ $getAkses = $this->session->userdata('session_akses');
 $getId = $this->session->userdata('session_id');
 $getGambar = $this->session->userdata('session_gambar');
 if ($getUser == '' or $getAkses == '' or $getId == '') {
-  redirect('login');
-} /*else {
-  if ($getAkses == 1) {
-    redirect('Admin');
-  } elseif ($getAkses == 2) {
-    redirect('User');
-  } 
-}*/
+  echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
+} 
 ?>
 <header class="main-header">
   <!-- Logo -->

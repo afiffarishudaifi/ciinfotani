@@ -38,10 +38,16 @@
 
         public function hapus($id)
         {
+            foreach ($this->Desa_model->cekKeberadaan($id) as $hasilada) :
+                $hasil = $hasilada['KTP'];
+            endforeach;
+            if ($hasil == 0) {
             $this->Desa_model->hapusDataDesa($id);
             $this->session->set_flashdata('desadihapus', 'Dihapus');
             redirect('Adesa');
-            
+            } else {
+                echo "<script>alert('Gagal dihapus karena data dipakai di tabel relasi');history.go(-1);</script>";
+            }
         }
 
         public function ubah($id)

@@ -37,9 +37,17 @@
 
         public function hapus($id)
         {
-            $this->Kecamatan_model->hapusDataKecamatan($id);
-            $this->session->set_flashdata('kecamatandihapus', 'Dihapus');
-            redirect('Akecamatan');
+            foreach ($this->Kecamatan_model->cekKeberadaan($id) as $hasilada) :
+                $hasil = $hasilada['ID_DESA'];
+            endforeach;
+            if ($hasil == 0) {
+                $this->Kecamatan_model->hapusDataKecamatan($id);
+                $this->session->set_flashdata('kecamatandihapus', 'Dihapus');
+                redirect('Akecamatan');
+            } else {
+                echo "<script>alert('Gagal dihapus karena data dipakai di tabel relasi');history.go(-1);</script>";
+            }
+            
         }
 
         public function ubah($id)

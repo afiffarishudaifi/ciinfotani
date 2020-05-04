@@ -10,13 +10,21 @@ class Upetani extends CI_Controller{
 
     public function index()
     {
-        $data['cekktp'] = $this->session->userdata('session_ktp');
-        $data['lengkap'] = $this->Petani_model->cek_user();
-        $data['komoditas'] = $this->Petani_model->getKomoditas();
-        $data['desa'] = $this->Petani_model->getDesa();
-        $data['status'] = $this->Petani_model->getStatus();
-        $data['cek'] =  $this->Petani_model->dataPetaniPanen();
-        $this->load->view('user/viewpetani', $data);
+        $getUser = $this->session->userdata('session_user');
+        $getAkses = $this->session->userdata('session_akses');
+        $getId = $this->session->userdata('session_id');
+        if ($getUser == '' or $getAkses == '' or $getId == '') {
+            //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
+            redirect('Login');
+        } else {
+            $data['cekktp'] = $this->session->userdata('session_ktp');
+            $data['lengkap'] = $this->Petani_model->cek_user();
+            $data['komoditas'] = $this->Petani_model->getKomoditas();
+            $data['desa'] = $this->Petani_model->getDesa();
+            $data['status'] = $this->Petani_model->getStatus();
+            $data['cek'] =  $this->Petani_model->dataPetaniPanen();
+            $this->load->view('user/viewpetani', $data);
+        }
     }
 
     public function lengkapidata()
@@ -36,6 +44,8 @@ class Upetani extends CI_Controller{
         $this->form_validation->set_rules('idkomoditas', 'ID Komoditas', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('user/viewpetani');
+            //echo "<script>alert('Lengkapi Data Gagal! Pastikan Semua data Benar');history.go(-1);</script>";
+            //redirect('User');
         } else {
             $this->Petani_model->lengkapiData();
             $this->session->set_flashdata('petanilengkapidata', 'Tersimpan');

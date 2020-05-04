@@ -34,6 +34,14 @@ class Perusahaan_model extends CI_Model{
     {
         return $this->db->get_where('perusahaan', ['ID_PERUSAHAAN' => $id])->row_array();
     }
+
+    public function cekKeberadaan($id)
+    {
+        $this->db->select("ID_PESAN");
+        $this->db->from("pemesanan");
+        $this->db->where("ID_PERUSAHAAN", $id);
+        return $this->db->get()->result_array();
+    }
     public function hapusDataPerusahaan($id)
     {
         $this->db->where('ID_PERUSAHAAN', $id);

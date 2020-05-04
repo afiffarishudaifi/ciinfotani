@@ -187,14 +187,21 @@ class Aperusahaan extends CI_Controller{
 
     public function hapus($id)
     {
-        $data = $this->Perusahaan_model->ambil_foto($id);
-        $path = './img/perusahaan/siup/';
-        @unlink($path.$data->SIUP);
-        $path1 = './img/perusahaan/user/';
-        @unlink($path1.$data->LOGO);
-        $this->Perusahaan_model->hapusDataPerusahaan($id);
-        $this->session->set_flashdata('perusahaandihapus', 'Dihapus');
-        redirect('Aperusahaan');
+        foreach ($this->Perusahaan_model->cekKeberadaan($id) as $hasilada) :
+            $hasil = $hasilada['ID_PESAN'];
+        endforeach;
+        if ($hasil == 0) {
+            $data = $this->Perusahaan_model->ambil_foto($id);
+            $path = './img/perusahaan/siup/';
+            @unlink($path . $data->SIUP);
+            $path1 = './img/perusahaan/user/';
+            @unlink($path1 . $data->LOGO);
+            $this->Perusahaan_model->hapusDataPerusahaan($id);
+            $this->session->set_flashdata('perusahaandihapus', 'Dihapus');
+            redirect('Aperusahaan');
+        } else {
+            echo "<script>alert('Gagal dihapus karena data dipakai di tabel relasi');history.go(-1);</script>";
+        }
     }
 
 }

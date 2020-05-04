@@ -3,7 +3,7 @@ $getUser = $this->session->userdata('session_username_perusahaan');
 $getId = $this->session->userdata('session_id_perusahaan');
 $getLogo = $this->session->userdata('session_logo_perusahaan');
 if ($getUser == ' ' or $getId == ' ') {
-  redirect('login');
+  echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
 }
 ?>
 <header class="main-header">

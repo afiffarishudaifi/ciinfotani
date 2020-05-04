@@ -6,6 +6,10 @@ class Ukonfirmasi extends CI_Controller{
         parent:: __construct();
         $this->load->model('User/Ukonfirmasi_model');
     }
+    
+    public function index(){
+        redirect('Login');
+    }
 
     public function Konfirmasi()
     {

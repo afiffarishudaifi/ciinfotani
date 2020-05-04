@@ -21,6 +21,14 @@ class Kecamatan_model extends CI_Model{
         $this->db->insert('kecamatan', $data);
     }
 
+    public function cekKeberadaan($id)
+    {
+        $this->db->select("ID_DESA");
+        $this->db->from("desa");
+        $this->db->where("ID_KECAMATAN", $id);
+        return $this->db->get()->result_array();
+    }
+
     public function hapusDataKecamatan($id)
     {
         $this->db->where('ID_KECAMATAN', $id);

@@ -47,7 +47,7 @@ class Ulappesan_model extends CI_Model{
     public function jumlahSortTahun($ktp)
     {
         $tahunpilih = $this->input->post("pilih");
-        $data = $this->db->query("SELECT psum(pemesanan.JUMLAH_PESAN) as jumlah
+        $data = $this->db->query("SELECT sum(pemesanan.JUMLAH_PESAN) as jumlah
         from pemesanan, perusahaan, petani 
         WHERE pemesanan.ID_PERUSAHAAN=perusahaan.ID_PERUSAHAAN AND pemesanan.KTP=petani.KTP AND year(TANGGAL)=$tahunpilih and pemesanan.KTP=$ktp");
 

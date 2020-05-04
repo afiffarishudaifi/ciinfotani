@@ -9,8 +9,16 @@ class Upanen extends CI_Controller{
     }
     public function index()
     {
-        $data['cekPanen'] = $this->Panen_model->cekPanen();
-        $this->load->view('user/tambah_panen', $data);
+        $getUser = $this->session->userdata('session_user');
+        $getAkses = $this->session->userdata('session_akses');
+        $getId = $this->session->userdata('session_id');
+        if ($getUser == '' or $getAkses == '' or $getId == '') {
+            //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
+            redirect('Login');
+        } else {
+            $data['cekPanen'] = $this->Panen_model->cekPanen();
+            $this->load->view('user/tambah_panen', $data);
+        }
     }
     public function tambahpanen()
     {

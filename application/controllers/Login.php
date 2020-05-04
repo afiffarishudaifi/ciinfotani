@@ -67,6 +67,8 @@ class Login extends CI_Controller{
                 $this->session->set_userdata('session_logo_perusahaan', $logo);
                 $this->session->set_userdata('session_akses', $level);
                 redirect('Pperusahaan');
+            } else {
+                echo "<script>alert('Login Gagal! Pastikan Semua data terisi benar');</script>";
             }
             $this->load->view('frontend/login');
         }
