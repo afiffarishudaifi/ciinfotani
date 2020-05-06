@@ -27,4 +27,35 @@ class android_model extends CI_Model
             $hasil=$this->db->query("INSERT INTO user(ID_LEVEL,USERNAME,PASSWORD,FOTO_USER) VALUES (2,'$username','$password','$gambar')");
             return $hasil;
     }
+    function update_petani($ktp, $data){
+        $this->db->where('KTP', $ktp);
+        $this->db->update('petani', $data);
+    }
+    function insert_petani($data){
+        $this->db->insert('petani', $data);
+    }
+    function cek_petani($ktp,$id){
+        $this->db->select('*');
+        $this->db->from('petani');
+        $this->db->where('KTP', $ktp);
+        $this->db->where('ID_USER', $id);
+        $query = $this->db->get();
+        return $query;
+    }
+
+    //buat convert nama ke id
+    // function cek_desa($desa){
+    //     $this->db->select('*');
+    //     $this->db->where('NAMA_DESA',$desa);
+    //     $this->db->from('desa');
+    //     return $this->db->get();
+    // }
+
+    //buat nampilin
+    // function daftar_desa(){
+    //     $this->db->select('*');
+    //     $this->db->order_by('ID_DESA', 'ASC');
+    //     $this->db->from('desa');
+    //     return $this->db->get();
+    // }
 }

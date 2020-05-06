@@ -79,7 +79,7 @@ class Apetani extends CI_Controller{
     {
         $hasilPanen = $this->Petani_model->cekKeberadaanPanen($id);
         $hasilPesan = $this->Petani_model->cekKeberadaanPemesanan($id);
-         if ($hasilPesan == FALSE || $hasilPanen == FALSE) {
+         if ($hasilPesan == 0 || $hasilPanen == 0) {
                 $data['idpetani'] = $this->Petani_model->hapusDataPetani($id);
                 $this->session->set_flashdata('petanidhapus', 'Dihapus');
                 redirect('Apetani');

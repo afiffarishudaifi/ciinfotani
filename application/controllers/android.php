@@ -10,7 +10,10 @@ class android extends CI_Controller
     public function index(){
         echo 'infotani api';
     }
-
+    public function get_desa(){
+        $result = $this->android_model->daftar_desa()->result();
+        echo json_encode($result);
+    }
     public function loginapi(){
         if ($_SERVER['REQUEST_METHOD']=='POST') {
             $username = $_POST['username'];
@@ -86,6 +89,67 @@ class android extends CI_Controller
                 }
             }
         }
+    }
+
+    public function data_petaniapi(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['id_user'];
+            $username= $_POST['username'];
+            $ktp = $_POST['ktp'];
+            $alamat = $_POST['alamat'];
+            $desa = $_POST['desa'];
+            $nohp = $_POST['nohp'];
+            $komoditas = $_POST['komoditas'];
+            $tglpanen = $_POST['tglpanen'];
+            $date = new DateTime();
+            $tgltanam = $date->format('Y-m-d');
+
+            // $convertDesa = $this->android_model->cek_desa($desa)->result();
+            // foreach($convertDesa as $row){
+            //     $iddesa = $row->ID_DESA;
+            // }
+
+            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+                if($cek == FALSE){
+                   //insert data
+                   $data = [
+                       "KTP" => $ktp,
+                    "ID_DESA" => $desa,
+                    "ID_KOMODITAS" => $komoditas,
+                    "ID_USER" => $id,
+                    "ID_STATUS" => 2,
+                    "NAMA_PETANI" => $username,
+                    "ALAMAT_PETANI" => $alamat,
+                    "LUAS_SAWAH" => 1,
+                    "ALAMAT_SAWAH" => $alamat,
+                    "TANAM" => $tgltanam,
+                    "PANEN" => $tglpanen,
+                    "NO_HP" => $nohp
+                    ];
+                        $this->android_model->insert_petani($data);
+                        $result["success"] = "1";
+                        $result["message"] = "Tambah Data Berhasil!";
+                        echo json_encode($result);
+                }else{
+                    //update data
+                    
+                    $data = [
+                        "ID_DESA" => $desa,
+                        "ID_KOMODITAS" => $komoditas,
+                        "ID_STATUS" => 2,
+                        "ALAMAT_PETANI" => $alamat,
+                        "ALAMAT_SAWAH" => $alamat,
+                        "TANAM" => $tgltanam,
+                        "PANEN" => $tglpanen,
+                        "NO_HP" => $nohp
+                    ];
+                    $this->android_model->update_petani($ktp,$data);
+                    $result["success"] = "1";
+                    $result["message"] = "Update Data Berhasil!";
+                    echo json_encode($result);
+                }
+            }
+                
     }
 
 
