@@ -10,8 +10,14 @@ class android extends CI_Controller
     public function index(){
         echo 'infotani api';
     }
+    //nampilin dropdown desa
     public function get_desa(){
         $result = $this->android_model->daftar_desa()->result();
+        echo json_encode($result);
+    }
+    //nampilin dropdown komoditas
+    public function get_komoditas(){
+        $result = $this->android_model->daftar_komoditas()->result();
         echo json_encode($result);
     }
     public function loginapi(){
@@ -20,11 +26,21 @@ class android extends CI_Controller
             $password = md5($_POST['password']);
         
             $response = $this->android_model->loginapi($username, $password)->result();
-
+            foreach ($response as $user){
+                $id_user = $user->ID_USER;
+            }
+            $ambil_ktp = $this->android_model->cek_ktp($id_user)->result();
+            
             $result = array();
             $result['login'] = array();
             if ($response != FALSE ) {
-                
+                if($ambil_ktp != FALSE){
+                    foreach($ambil_ktp as $baris){
+                        $index['ktp'] = $baris->KTP;
+                    }
+                }else{
+                    $index['ktp'] = "0";
+                }    
                     foreach($response as $row){
                         $index['id_user'] = $row->ID_USER;
                         $index['username'] = $row->USERNAME;
@@ -35,13 +51,10 @@ class android extends CI_Controller
                     $result['success'] = "1";
                     $result['message'] = "success";
                     echo json_encode($result);
-        
                 } else {
-        
                     $result['success'] = "0";
                     $result['message'] = "error";
                     echo json_encode($result);
-        
                 }
             }
     }
@@ -91,6 +104,7 @@ class android extends CI_Controller
         }
     }
 
+//form datapetani
     public function data_petaniapi(){
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $id = $_POST['id_user'];
@@ -103,11 +117,6 @@ class android extends CI_Controller
             $tglpanen = $_POST['tglpanen'];
             $date = new DateTime();
             $tgltanam = $date->format('Y-m-d');
-
-            // $convertDesa = $this->android_model->cek_desa($desa)->result();
-            // foreach($convertDesa as $row){
-            //     $iddesa = $row->ID_DESA;
-            // }
 
             $cek = $this->android_model->cek_petani($ktp,$id)->result();
                 if($cek == FALSE){
@@ -148,9 +157,38 @@ class android extends CI_Controller
                     $result["message"] = "Update Data Berhasil!";
                     echo json_encode($result);
                 }
-            }
-                
+            }     
     }
+
+    public function fill_data(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['id_user'];
+            $ktp = $_POST['ktp'];
+            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            
+            $result = array();
+            $result['data'] = array();
+            if ($cek != FALSE ) {                    
+                foreach($cek as $row){
+                    $index['ktp'] = $row->KTP;
+                    $index['alamat'] = $row->ALAMAT_PETANI;
+                    $index['desa'] = $row->ID_DESA;
+                    $index['nohp'] = $row->NO_HP;
+                    $index['komoditas'] = $row->ID_KOMODITAS;
+                    $index['tglpanen'] = $row->PANEN;
+                }
+                    array_push($result['data'], $index);
+        
+                    $result['success'] = "1";
+                    $result['message'] = "success";
+                    echo json_encode($result);
+                } else {
+                    $result['success'] = "0";
+                    $result['message'] = "error";
+                    echo json_encode($result);
+                }
+            }
+        }
 
 
 }

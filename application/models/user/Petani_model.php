@@ -76,7 +76,7 @@ class Petani_model extends CI_Model{
             "ALAMAT_PETANI" => $this->input->post('alamatpetani'),
             "LUAS_SAWAH" => $this->input->post('luassawah'),
             "ALAMAT_SAWAH" => $this->input->post('alamatsawah'),
-            "TANAM" => $this->input->post('tgltanam'),
+            "TANAM" => $this->input->post('tgltanam'), 
             "PANEN" => $this->input->post('tglpanen'),
             "NO_HP" => $this->input->post('nohp')
         ];
