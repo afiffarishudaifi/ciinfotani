@@ -52,10 +52,10 @@ class android_model extends CI_Model
     // }
 
     //buat nampilin
-    // function daftar_desa(){
-    //     $this->db->select('*');
-    //     $this->db->order_by('ID_DESA', 'ASC');
-    //     $this->db->from('desa');
-    //     return $this->db->get();
-    // }
+    function daftar_desa(){
+        $this->db->select('*');
+        $this->db->order_by('ID_DESA', 'ASC');
+        $this->db->from('desa');
+        return $this->db->get();
+    }
 }
