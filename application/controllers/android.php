@@ -153,7 +153,7 @@ class android extends CI_Controller
                         "NO_HP" => $nohp
                     ];
                     $this->android_model->update_petani($ktp,$data);
-                    $result["success"] = "1";
+                    $result["success"] = "2";
                     $result["message"] = "Update Data Berhasil!";
                     echo json_encode($result);
                 }
