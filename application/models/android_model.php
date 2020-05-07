@@ -49,6 +49,10 @@ class android_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+    function cek_desaKomoditas($desa,$komoditas){
+        $hasil = $this->db->query("SELECT * FROM desa,komoditas where ID_DESA = $desa AND ID_KOMODITAS = $komoditas");
+        return $hasil;
+    }
 
     //buat nampilin spinner desa
     function daftar_desa(){

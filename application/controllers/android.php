@@ -12,12 +12,30 @@ class android extends CI_Controller
     }
     //nampilin dropdown desa
     public function get_desa(){
-        $result = $this->android_model->daftar_desa()->result();
+        $result = array();
+        $index['ID_DESA'] = "0";
+        $index['NAMA_DESA'] = "Pilih Desa";
+        array_push($result,$index);
+        $query = $this->android_model->daftar_desa()->result();
+        foreach($query as $row){
+            $index['ID_DESA'] = $row->ID_DESA;
+            $index['NAMA_DESA'] = $row->NAMA_DESA;
+            array_push($result,$index);
+        }
         echo json_encode($result);
     }
     //nampilin dropdown komoditas
     public function get_komoditas(){
-        $result = $this->android_model->daftar_komoditas()->result();
+        $result = array();
+        $index['ID_KOMODITAS'] = "0";
+        $index['NAMA_KOMODITAS'] = "Pilih Komoditas";
+        array_push($result,$index);
+        $query = $this->android_model->daftar_komoditas()->result();
+        foreach($query as $row){
+            $index['ID_KOMODITAS'] = $row->ID_KOMODITAS;
+            $index['NAMA_KOMODITAS'] = $row->NAMA_KOMODITAS;
+            array_push($result,$index);
+        }
         echo json_encode($result);
     }
     public function loginapi(){
@@ -165,10 +183,24 @@ class android extends CI_Controller
             $id = $_POST['id_user'];
             $ktp = $_POST['ktp'];
             $cek = $this->android_model->cek_petani($ktp,$id)->result();
-            
+            foreach($cek as $baris){
+                $desa = $baris->ID_DESA;
+                $komoditas = $baris->ID_KOMODITAS;
+            }
+            $cek_desaKomoditas = $this->android_model->cek_desaKomoditas($desa,$komoditas)->result();
+        
             $result = array();
             $result['data'] = array();
-            if ($cek != FALSE ) {                    
+            if ($cek != FALSE ) {
+                if($cek_desaKomoditas !=FALSE ){
+                    foreach($cek_desaKomoditas as $row){
+                        $index['nama_desa'] = $row->NAMA_DESA;
+                        $index['nama_komoditas'] = $row->NAMA_KOMODITAS;
+                    }
+                }else{
+                    $index['nama_desa'] = "Tidak Ada Desa";
+                    $index['nama_komoditas'] = "Tidak Ada Komoditas";
+                }                    
                 foreach($cek as $row){
                     $index['ktp'] = $row->KTP;
                     $index['alamat'] = $row->ALAMAT_PETANI;
@@ -182,7 +214,7 @@ class android extends CI_Controller
                     $result['success'] = "1";
                     $result['message'] = "success";
                     echo json_encode($result);
-                } else {
+            } else {
                     $result['success'] = "0";
                     $result['message'] = "error";
                     echo json_encode($result);
