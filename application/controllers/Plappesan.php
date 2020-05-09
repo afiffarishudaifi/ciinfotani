@@ -13,7 +13,7 @@ class Plappesan extends CI_Controller
     {
         $getUser = $this->session->userdata('session_username_perusahaan');
         $getId = $this->session->userdata('session_id_perusahaan');
-        if (isset($getUser) || isset($getId)) {
+        if ($getUser == ' ' or $getId == ' ') {
             echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['judul'] = "Info Tani";
