@@ -221,6 +221,113 @@ class android extends CI_Controller
                 }
             }
         }
+    
+        //form panen
+    public function data_panenapi(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $ktp = $_POST['ktp'];
+            $komoditas= $_POST['komoditas'];
+            $tglpanen = $_POST['tglpanen'];
+            $hasil = $_POST['hasil'];
+            $harga = $_POST['harga'];
+            $date = new DateTime();
+            $tglskrg= $date->format('Y-m-d');
+
+            if($tglpanen <= $tglskrg){
+                   $data = [
+                       "KTP" => $ktp,
+                    "KOMODITAS" => $komoditas,
+                    "TGL_PANEN" => $tglpanen,
+                    "HASIL_AWAL" => $hasil,
+                    "HASIL" => $hasil,
+                    "HARGA" => $harga,
+                    "STATUS_PANEN" => "Panen"                
+                ];
+                        $this->android_model->insert_panen($data);
+                        $result["success"] = "1";
+                        $result["message"] = "Tambah Panen Berhasil!";
+                        echo json_encode($result);
+            }else{
+                $result["success"] = "0";
+                $result["message"] = "Belum Waktunya Panen";
+                echo json_encode($result);
+            }
+        }     
+    }
+
+    public function fill_data_panen(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['id_user'];
+            $ktp = $_POST['ktp'];
+            
+            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            foreach($cek as $baris){
+                $desa = $baris->ID_DESA;
+                $komoditas = $baris->ID_KOMODITAS;
+            }
+            $cek_desaKomoditas = $this->android_model->cek_desaKomoditas($desa,$komoditas)->result();
+        
+            $result = array();
+            $result['data'] = array();
+            if ($cek != FALSE ) {
+                if($cek_desaKomoditas !=FALSE ){
+                    foreach($cek_desaKomoditas as $row){
+                        $index['nama_komoditas'] = $row->NAMA_KOMODITAS;
+                    }
+                }else{
+                    $index['nama_komoditas'] = "Tidak Ada Komoditas";
+                }        
+                    foreach($cek as $row){
+                        $index['ktp'] = $row->KTP;
+                        $index['id_komoditas'] = $row->ID_KOMODITAS;
+                        $index['tglpanen'] = $row->PANEN;
+                    }
+                    array_push($result['data'], $index);
+        
+                    $result['success'] = "1";
+                    $result['message'] = "success";
+                    echo json_encode($result);
+            } else {
+                    $result['success'] = "0";
+                    $result['message'] = "Tidak Ada Data Petani";
+                    echo json_encode($result);
+                }
+            }
+        }
+
+        public function cek_panen(){
+            if ($_SERVER['REQUEST_METHOD'] =='POST'){
+                $id = $_POST['id_user'];
+                $ktp = $_POST['ktp'];
+                $date = new DateTime();
+                    $tglskrg= $date->format('Y-m-d');
+
+                $cek = $this->android_model->cek_petani($ktp,$id)->result();
+                foreach($cek as $baris){
+                    $tglpanen = $baris->PANEN;
+                }
+
+                if($cek != FALSE ){
+                    if($tglpanen <= $tglskrg){
+                        $data = [
+                            "ID_STATUS" => 1
+                        ];
+                        $this->android_model->update_petani($ktp,$data);
+                        $result["success"] = "1";
+                        $result["message"] = "Saatnya Panen!";
+                        echo json_encode($result);
+                    }else{
+                        $result["success"] = "0";
+                        $result["message"] = "Belum Waktunya Panen";
+                        echo json_encode($result);
+                    }
+                }else{
+                    $result["success"] = "0";
+                    $result["message"] = "Belum Mengisi Data Petani";
+                    echo json_encode($result);
+                }
+            }
+        }
 
 
 }

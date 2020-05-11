@@ -68,4 +68,9 @@ class android_model extends CI_Model
         $this->db->from('komoditas');
         return $this->db->get();
     }
+
+    //tambah panen
+    function insert_panen($data){
+        $this->db->insert('panen', $data);
+    }
 }
