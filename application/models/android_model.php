@@ -73,4 +73,10 @@ class android_model extends CI_Model
     function insert_panen($data){
         $this->db->insert('panen', $data);
     }
+
+    function cek_panen($ktp){
+        $hasil = $this->db->query("SELECT * FROM panen,komoditas where panen.KOMODITAS = komoditas.ID_KOMODITAS AND KTP = $ktp");
+        return $hasil;
+    }
+    
 }
