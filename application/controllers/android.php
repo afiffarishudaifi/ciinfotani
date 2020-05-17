@@ -329,7 +329,7 @@ class android extends CI_Controller
         }
     }
 
-    
+    //show data menurut ktp
     public function lap_panen(){
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $ktp = $_POST['ktp'];
@@ -373,5 +373,49 @@ class android extends CI_Controller
         }
     }
 
+    //show data panen filter
+    public function lap_panenTahun(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $ktp = $_POST['ktp'];
+            $tgl = $_POST['tahun'];
+            $cek = $this->android_model->cek_panenTahun($ktp,$tgl)->result();
+        
+            $result = array();
+            $result['data'] = array();
+            if ($cek != FALSE ) {
+                $index['komoditas'] = "Komoditas";
+                    $index['hasil'] = "Hasil";
+                    $index['sisa'] = "Sisa";
+                    $index['tgl'] = "Tgl Panen";
+                    $index['harga'] = "Harga";
+                    $index['id'] = "0";
+                    
+                    array_push($result['data'], $index);
+                foreach($cek as $row){
+                    $index['komoditas'] = $row->NAMA_KOMODITAS;
+                    $index['hasil'] = $row->HASIL_AWAL;
+                    $index['sisa'] = $row->HASIL;
+                    $index['tgl'] = $row->TGL_PANEN;
+                    $index['harga'] = $row->HARGA;
+                    $index['id'] = $row->ID_PANEN;
+                
+                    array_push($result['data'], $index);
+                }
+                $su = $this->android_model->sum_hasilSisaTahun($ktp,$tgl)->result();
+                    
+                foreach($su as $row){
+                    $result['jmlhasil'] = $row->jmhasil;
+                    $result['jmlsisa'] = $row->jmsisa;
+                }
+                    $result['success'] = "1";
+                    $result['message'] = "success";
+                    echo json_encode($result);
+            } else {
+                    $result['success'] = "0";
+                    $result['message'] = "error";
+                    echo json_encode($result);
+            }
+        }
+    }
 
 }

@@ -82,5 +82,12 @@ class android_model extends CI_Model
         $hasil = $this->db->query("SELECT SUM(HASIL_AWAL) as jmhasil, SUM(HASIL) as jmsisa FROM panen where KTP = $ktp");
         return $hasil;
     }
-    
+    function cek_panenTahun($ktp,$tgl){
+        $hasil = $this->db->query("SELECT * FROM panen,komoditas where panen.KOMODITAS = komoditas.ID_KOMODITAS AND KTP = $ktp AND year(TGL_PANEN) = $tgl ");
+        return $hasil;
+    }
+    function sum_hasilSisaTahun($ktp,$tgl){
+        $hasil = $this->db->query("SELECT SUM(HASIL_AWAL) as jmhasil, SUM(HASIL) as jmsisa FROM panen where KTP = $ktp AND year(TGL_PANEN) = $tgl ");
+        return $hasil;
+    }
 }
