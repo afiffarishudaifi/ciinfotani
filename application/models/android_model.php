@@ -68,7 +68,7 @@ class android_model extends CI_Model
         $this->db->from('komoditas');
         return $this->db->get();
     }
-
+    
     //tambah panen
     function insert_panen($data){
         $this->db->insert('panen', $data);
@@ -76,6 +76,10 @@ class android_model extends CI_Model
 
     function cek_panen($ktp){
         $hasil = $this->db->query("SELECT * FROM panen,komoditas where panen.KOMODITAS = komoditas.ID_KOMODITAS AND KTP = $ktp");
+        return $hasil;
+    }
+    function sum_hasilSisa($ktp){
+        $hasil = $this->db->query("SELECT SUM(HASIL_AWAL) as jmhasil, SUM(HASIL) as jmsisa FROM panen where KTP = $ktp");
         return $hasil;
     }
     
