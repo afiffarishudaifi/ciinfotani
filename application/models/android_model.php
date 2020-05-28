@@ -90,4 +90,28 @@ class android_model extends CI_Model
         $hasil = $this->db->query("SELECT SUM(HASIL_AWAL) as jmhasil, SUM(HASIL) as jmsisa FROM panen where KTP = $ktp AND year(TGL_PANEN) = $tgl ");
         return $hasil;
     }
+
+    //cari petani
+    function cari_petani($user, $nohp)
+    {
+        $this->db->select('user.ID_USER');
+        $this->db->from('user');
+        $this->db->join('petani', 'petani.ID_USER=user.ID_USER');
+        $this->db->where('USERNAME', $user);
+        $this->db->where('NO_HP', $nohp);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    
+    function update_data($user, $data)
+    {
+        $this->db->where('ID_USER', $user);
+        $this->db->update('user', $data);
+    }
+
+    function update_datas($where, $data, $table)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
+    }
 }
