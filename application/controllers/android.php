@@ -426,6 +426,113 @@ class android extends CI_Controller
         }
     }
 
+    //tanya ke admin
+    public function tanya()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $nama = $_POST['nama'];
+            $email = $_POST['email'];
+            $komentar = $_POST['pesan'];
+            if($nama == "" or $email == "" or $komentar == "") {
+                $result['success'] = "0";
+                $result['message'] = "Lengkapi Data";
+                echo json_encode($result);
+            } else {
+                // Konfigurasi email
+                $config = [
+                    'mailtype'  => 'html',
+                    'charset'   => 'utf-8',
+                    'protocol'  => 'smtp',
+                    'smtp_host' => 'smtp.gmail.com',
+                    'smtp_user' => 'infotani.mif@gmail.com',  // Email gmail
+                    'smtp_pass'   => 'infotani123',  // Password gmail
+                    'smtp_crypto' => 'ssl',
+                    'smtp_port'   => 465,
+                    'crlf'    => "\r\n",
+                    'newline' => "\r\n"
+                ];
+
+                // Load library email dan konfigurasinya
+                $this->load->library('email', $config);
+
+                // Email dan nama pengirim
+                $this->email->from( $_POST['email'], $_POST['nama']);
+
+                // Email penerima
+                $this->email->to('infotani.mif@gmail.com'); // Ganti dengan email tujuan
+                //$this->email->to('afiffaris5@gmail.com');
+
+                // // Lampiran email, isi dengan url/path file
+                // $this->email->attach('https://masrud.com/content/images/20181215150137-codeigniter-smtp-gmail.png');
+
+                // Subject email
+                $this->email->subject('Ada Pesan Dari ' . $_POST['nama']);
+
+                // Isi email
+                $this->email->message($_POST['pesan']);
+
+                // Tampilkan pesan sukses atau error
+                if ($this->email->send()) {
+                    $result['success'] = "1";
+                    $result['message'] = "Sudah Terkirim";
+                    echo json_encode($result);
+                } else {
+                    $result['success'] = "0";
+                    $result['message'] = "Belum Terkirim";
+                    echo json_encode($result);
+                }
+            }
+        }
+    }
+
+    //cari akun
+    public function passpetani()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $username = $_POST['username'];
+            $nohp = $_POST['nohp'];
+            $data = $this->android_model->cari_petani($username, $nohp);
+            if ($data != FALSE) {
+                $result['success'] = "1";
+                $result['message'] = "Akun ditemukan";
+                foreach ($this->android_model->cari_petani($username, $nohp) as $cek) :
+                    $hasil = $cek['ID_USER'];
+                endforeach;
+                $result['id'] = $hasil;
+                echo json_encode($result);
+            } else {
+                $result['success'] = "0";
+                $result['message'] = "Akun tidak ditemukan";
+                echo json_encode($result);
+            }
+        }
+    }
+
+    //update password
+    public function update_petani()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = $_POST['id'];
+            $pass = $_POST['password'];
+            $konfpass = $_POST['konfpass'];
+            if ($pass != $konfpass){
+                $result['success'] = "0";
+                $result['message'] = "Password harus sama dengan konfirmasi password";
+                echo json_encode($result);
+            } else {
+                $data = [
+                    'PASSWORD' => md5($_POST['password'])
+                ];
+                $where = array('ID_USER' => $_POST['id']);
+                $this->android_model->update_data($user, $data);
+                //$this->android_model->update_datas($where, $data, 'user');
+                $result["success"] = "1";
+                $result["message"] = "Update Data Berhasil!";
+                echo json_encode($result);
+            }
+        }
+    }
+
     public function pemesanan(){
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $ktp = $_POST['ktp'];
@@ -521,6 +628,5 @@ class android extends CI_Controller
             }
         }
     }
-
-
+    
 }

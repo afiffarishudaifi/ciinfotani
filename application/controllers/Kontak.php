@@ -36,7 +36,7 @@ class Kontak extends CI_Controller{
         $this->email->from($email, $nama);
 
         // Email penerima
-        $this->email->to('infotani.mif@gmail.com'); // Ganti dengan email tujuan
+        $this->email->to('afiffaris5@gmail.com'); // Ganti dengan email tujuan
 
         // // Lampiran email, isi dengan url/path file
         // $this->email->attach('https://masrud.com/content/images/20181215150137-codeigniter-smtp-gmail.png');
