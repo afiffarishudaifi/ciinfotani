@@ -78,6 +78,10 @@ class android_model extends CI_Model
         $hasil = $this->db->query("SELECT * FROM panen,komoditas where panen.KOMODITAS = komoditas.ID_KOMODITAS AND KTP = $ktp");
         return $hasil;
     }
+    function cek_fillpanen($ktp,$tglpanen){
+        $hasil = $this->db->query("SELECT * FROM panen where KTP = $ktp AND TGL_PANEN = '$tglpanen'");
+        return $hasil;
+    }
     function sum_hasilSisa($ktp){
         $hasil = $this->db->query("SELECT SUM(HASIL_AWAL) as jmhasil, SUM(HASIL) as jmsisa FROM panen where KTP = $ktp");
         return $hasil;
@@ -88,6 +92,28 @@ class android_model extends CI_Model
     }
     function sum_hasilSisaTahun($ktp,$tgl){
         $hasil = $this->db->query("SELECT SUM(HASIL_AWAL) as jmhasil, SUM(HASIL) as jmsisa FROM panen where KTP = $ktp AND year(TGL_PANEN) = $tgl ");
+        return $hasil;
+    }
+
+    //riwayat_pemesanan
+    function cek_pemesanan($ktp,$stat){
+        $hasil = $this->db->query("SELECT ID_PESAN, perusahaan.NAMA_PERUSAHAAN, TANGGAL, JUMLAH_PESAN, TOTAL_BIAYA, ID_PESAN_STATUS, pemesanan.ID_PANEN, komoditas.NAMA_KOMODITAS 
+        FROM pemesanan,panen,komoditas, perusahaan where pemesanan.ID_PERUSAHAAN = perusahaan.ID_PERUSAHAAN AND pemesanan.ID_PANEN = panen.ID_PANEN 
+        and panen.KOMODITAS = komoditas.ID_KOMODITAS and pemesanan.KTP = $ktp AND ID_PESAN_STATUS = $stat");
+        return $hasil;
+    }
+    function sum_pemesanan($ktp,$stat){
+        $hasil = $this->db->query("SELECT SUM(JUMLAH_PESAN) as jmpesan, SUM(TOTAL_BIAYA) as totbiaya FROM pemesanan where KTP = $ktp AND ID_PESAN_STATUS = $stat");
+        return $hasil;
+    }
+    function cek_pemesananTahun($ktp,$tahun,$stat){
+        $hasil = $this->db->query("SELECT ID_PESAN, perusahaan.NAMA_PERUSAHAAN, TANGGAL, JUMLAH_PESAN, TOTAL_BIAYA, ID_PESAN_STATUS, pemesanan.ID_PANEN, komoditas.NAMA_KOMODITAS 
+        FROM pemesanan,panen,komoditas, perusahaan where pemesanan.ID_PERUSAHAAN = perusahaan.ID_PERUSAHAAN AND pemesanan.ID_PANEN = panen.ID_PANEN 
+        and panen.KOMODITAS = komoditas.ID_KOMODITAS and pemesanan.KTP = $ktp AND year(TANGGAL)=$tahun AND ID_PESAN_STATUS = $stat");
+        return $hasil;
+    }
+    function sum_pemesananTahun($ktp,$tahun,$stat){
+        $hasil = $this->db->query("SELECT SUM(JUMLAH_PESAN) as jmpesan, SUM(TOTAL_BIAYA) as totbiaya FROM pemesanan where KTP = $ktp AND year(TANGGAL)=$tahun AND ID_PESAN_STATUS = $stat");
         return $hasil;
     }
 }

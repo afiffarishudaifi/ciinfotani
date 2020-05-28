@@ -315,6 +315,14 @@ class android extends CI_Controller
                     $this->android_model->update_petani($ktp,$data);
                     $result["success"] = "1";
                     $result["message"] = "Saatnya Panen!";
+                $cek_fillpanen = $this->android_model->cek_fillpanen($ktp,$tglpanen)->result();
+                if($cek_fillpanen != FALSE){
+                    $result["donepanen"] = "1";
+                    $result["donemessage"] = "Telah Panen! Silahkan Perbarui Data Petani!";
+                }else{
+                    $result["donepanen"] = "0";
+                    $result["donemessage"] = "Isi Data Panen! Lalu Perbarui Data Petani!";
+                }
                     echo json_encode($result);
                 }else{
                     $result["success"] = "0";
@@ -417,5 +425,102 @@ class android extends CI_Controller
             }
         }
     }
+
+    public function pemesanan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $ktp = $_POST['ktp'];
+            $stat = $_POST['status'];
+            $cek = $this->android_model->cek_pemesanan($ktp,$stat)->result();
+        
+            $result = array();
+            $result['data'] = array();
+            if ($cek != FALSE ) {
+                $index['id_pesan'] = "ID Pesan";
+                    $index['nama_perusahaan'] = "Nama Perusahaan";
+                    $index['tanggal'] = "Tanggal";
+                    $index['jml_pesan'] = "Jumlah Pesan";
+                    $index['tot_biaya'] = "Total Biaya";
+                    $index['status'] = "Status";
+                    $index['id_panen'] = "0";
+                    $index['komoditas'] = "Komoditas";
+                    
+                    array_push($result['data'], $index);
+                foreach($cek as $row){
+                    $index['id_pesan'] = $row->ID_PESAN;
+                    $index['nama_perusahaan'] = $row->NAMA_PERUSAHAAN;
+                    $index['tanggal'] = $row->TANGGAL;
+                    $index['jml_pesan'] = $row->JUMLAH_PESAN;
+                    $index['tot_biaya'] = $row->TOTAL_BIAYA;
+                    $index['status'] = $row->ID_PESAN_STATUS;
+                    $index['id_panen'] = $row->ID_PANEN;
+                    $index['komoditas'] = $row->NAMA_KOMODITAS;
+                
+                    array_push($result['data'], $index);
+                }
+                $su = $this->android_model->sum_pemesanan($ktp,$stat)->result();
+                    
+                foreach($su as $row){
+                    $result['jmlpesan'] = $row->jmpesan;
+                    $result['totbiaya'] = $row->totbiaya;
+                }
+                    $result['success'] = "1";
+                    $result['message'] = "success";
+                    echo json_encode($result);
+            } else {
+                    $result['success'] = "0";
+                    $result['message'] = "Tidak Ada Pemesanan";
+                    echo json_encode($result);
+            }
+        }
+    }
+    public function pemesananTahun(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $ktp = $_POST['ktp'];
+            $tahun = $_POST['tahun'];
+            $stat = $_POST['status'];
+            $cek = $this->android_model->cek_pemesananTahun($ktp,$tahun,$stat)->result();
+        
+            $result = array();
+            $result['data'] = array();
+            if ($cek != FALSE ) {
+                $index['id_pesan'] = "ID Pesan";
+                    $index['nama_perusahaan'] = "Nama Perusahaan";
+                    $index['tanggal'] = "Tanggal";
+                    $index['jml_pesan'] = "Jumlah Pesan";
+                    $index['tot_biaya'] = "Total Biaya";
+                    $index['status'] = "Status";
+                    $index['id_panen'] = "0";
+                    $index['komoditas'] = "Komoditas";
+                    
+                    array_push($result['data'], $index);
+                foreach($cek as $row){
+                    $index['id_pesan'] = $row->ID_PESAN;
+                    $index['nama_perusahaan'] = $row->NAMA_PERUSAHAAN;
+                    $index['tanggal'] = $row->TANGGAL;
+                    $index['jml_pesan'] = $row->JUMLAH_PESAN;
+                    $index['tot_biaya'] = $row->TOTAL_BIAYA;
+                    $index['status'] = $row->ID_PESAN_STATUS;
+                    $index['id_panen'] = $row->ID_PANEN;
+                    $index['komoditas'] = $row->NAMA_KOMODITAS;
+                
+                    array_push($result['data'], $index);
+                }
+                $su = $this->android_model->sum_pemesananTahun($ktp,$tahun,$stat)->result();
+                    
+                foreach($su as $row){
+                    $result['jmlpesan'] = $row->jmpesan;
+                    $result['totbiaya'] = $row->totbiaya;
+                }
+                    $result['success'] = "1";
+                    $result['message'] = "success";
+                    echo json_encode($result);
+            } else {
+                    $result['success'] = "0";
+                    $result['message'] = "Tidak Ada Pemesanan";
+                    echo json_encode($result);
+            }
+        }
+    }
+
 
 }
