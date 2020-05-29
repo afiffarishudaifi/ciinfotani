@@ -6,7 +6,10 @@ class android_model extends CI_Model
     {
         parent::__construct();
     }
-
+    function hapus_data($where,$table){
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
     function loginapi($user, $pass)
     {
         $this->db->select('*');
@@ -116,7 +119,11 @@ class android_model extends CI_Model
         $hasil = $this->db->query("SELECT SUM(JUMLAH_PESAN) as jmpesan, SUM(TOTAL_BIAYA) as totbiaya FROM pemesanan where KTP = $ktp AND year(TANGGAL)=$tahun AND ID_PESAN_STATUS = $stat");
         return $hasil;
     }
-
+    function konfirmasi_pemesanan($id, $data)
+    {
+        $this->db->where('ID_PESAN', $id);
+        $this->db->update('pemesanan', $data);
+    }
     //cari petani
     function cari_petani($user, $nohp)
     {

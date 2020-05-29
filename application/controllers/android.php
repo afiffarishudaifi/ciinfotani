@@ -628,5 +628,26 @@ class android extends CI_Controller
             }
         }
     }
-    
+    public function konfirmasi_pemesanan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['idpesan'];
+                    //update data
+                    $data = [
+                        "ID_PESAN_STATUS" => 2,
+                    ];
+                    $this->android_model->konfirmasi_pemesanan($id,$data);
+                    $result["success"] = "1";
+                    $result["message"] = "Pemesanan Berhasil Dikonfirmasi!";
+                    echo json_encode($result);
+        }     
+    }    
+    public function tolak_pemesanan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['idpesan'];
+                    $this->android_model->tolak_pemesanan($id,"pemesanan");
+                    $result["success"] = "1";
+                    $result["message"] = "Pemesanan Ditolak/Dihapus!";
+                    echo json_encode($result);
+        }     
+    }    
 }
