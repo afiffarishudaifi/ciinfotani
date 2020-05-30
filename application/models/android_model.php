@@ -124,6 +124,14 @@ class android_model extends CI_Model
         $this->db->where('ID_PESAN', $id);
         $this->db->update('pemesanan', $data);
     }
+    function cek_panenPesanan($id){
+        $hasil = $this->db->query("SELECT * FROM panen where ID_PANEN = $id");
+        return $hasil;
+    }
+    function update_hasilPanen($id, $data){
+        $this->db->where('ID_PANEN', $id);
+        $this->db->update('panen', $data);
+    }
     //cari petani
     function cari_petani($user, $nohp)
     {

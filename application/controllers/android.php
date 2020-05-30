@@ -633,7 +633,7 @@ class android extends CI_Controller
             $id = $_POST['idpesan'];
                     //update data
                     $data = [
-                        "ID_PESAN_STATUS" => 2,
+                        "ID_PESAN_STATUS" => 2
                     ];
                     $this->android_model->konfirmasi_pemesanan($id,$data);
                     $result["success"] = "1";
@@ -644,10 +644,28 @@ class android extends CI_Controller
     public function tolak_pemesanan(){
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $id = $_POST['idpesan'];
-                    $this->android_model->tolak_pemesanan($id,"pemesanan");
+            $idpanen = $_POST['idpanen'];
+            $jmlpesan = (int)$_POST['jmlpesan'];
+                    $cekPanenPesanan = $this->android_model->cek_panenPesanan($idpanen)->result();
+                    foreach($cekPanenPesanan as $row){
+                        $hasil = $row->HASIL;
+                    }
+                    if($cekPanenPesanan != FALSE){
+                        $increHasil = $hasil+$jmlpesan;
+                        $data = [
+                            "HASIL" => $increHasil
+                        ];
+                        $this->android_model->update_hasilPanen($idpanen,$data);
+                        $where = array('ID_PESAN' => $id);
+                    $this->android_model->hapus_data($where,"pemesanan");
                     $result["success"] = "1";
                     $result["message"] = "Pemesanan Ditolak/Dihapus!";
                     echo json_encode($result);
+                    }else{
+                        $result["success"] = "1";
+                        $result["message"] = "Gagal!";
+                        echo json_encode($result);        
+                    }
         }     
     }    
 }
