@@ -31,13 +31,13 @@
                     <!-- Form -->
                     <form action="<?= base_url('kontak/send_mail')?>" method="post" class="akame-contact-form border-0 p-0">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-sm-6 ">
                                 <input type="text" name="nama" class="form-control mb-30" placeholder="Masukkan Nama" required>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-sm-6 ">
                                 <input type="email" name="email" class="form-control mb-30" placeholder="Masukkan Email" required>
                             </div>
-                            <div class="col-12">
+                            <div class="col-lg-12">
                                 <textarea name="komentar" class="form-control mb-30" placeholder="Masukkan pertanyaan"  required></textarea>
                             </div>
                             <div class="col-12 text-center">
