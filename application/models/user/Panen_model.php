@@ -4,12 +4,6 @@ class Panen_model extends CI_Model{
     public function cekPanen()
     {
         $getId = $this->session->userdata('session_id');
-        /*$this->db->select('MAX(ID_PANEN) as max, panen.KTP, komoditas.NAMA_KOMODITAS, panen.TGL_PANEN, HASIL');
-        $this->db->from('petani');
-        $this->db->join('komoditas', 'komoditas.ID_KOMODITAS=petani.ID_KOMODITAS');
-        $this->db->join('panen', 'petani.KTP=panen.KTP');
-        $this->db->where(["petani.ID_USER" => $getId], ["HASIL" => 0]);
-        return $this->db->get()->result_array();*/
         $query = $this->db->query("select MAX(ID_PANEN) as max, panen.KTP, komoditas.NAMA_KOMODITAS, panen.TGL_PANEN, HASIL from petani, panen, komoditas
                     WHERE komoditas.ID_KOMODITAS=petani.ID_KOMODITAS and petani.KTP=panen.KTP and petani.id_user= ".$getId." AND HASIL=0");
         return $query->result_array();
