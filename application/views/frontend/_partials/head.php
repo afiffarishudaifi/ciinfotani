@@ -13,7 +13,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/style.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/frontend/css/cariHasil.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/frontend/css/carihasil.css')?>">
     <!--manual CSS-->
     <link rel="stylesheet" href="<?php echo base_url('assets/frontend/css/tentangkami.css')?>">
     
