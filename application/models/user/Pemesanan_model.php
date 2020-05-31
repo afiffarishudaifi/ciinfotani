@@ -1,6 +1,6 @@
 <?php
 
-class Pemesanan_model extends CI_Model{
+class pemesanan_model extends CI_Model{
     
 } 
 

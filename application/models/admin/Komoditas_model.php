@@ -1,6 +1,6 @@
 <?php
 
-class Komoditas_model extends CI_Model{
+class komoditas_model extends CI_Model{
 
     private $_table = "komoditas";
 

@@ -5,7 +5,7 @@ class Ulappanen extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('user/Ulappanen_model');
+        $this->load->model('user/ulappanen_model');
     }
 
     public function index()
@@ -18,13 +18,13 @@ class Ulappanen extends CI_Controller{
             echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['judul'] = "Info Tani";
-            $data['cekktp'] = $this->Ulappanen_model->cekktp();
+            $data['cekktp'] = $this->ulappanen_model->cekktp();
             foreach($data['cekktp'] as $hasil):
                 $hasilktp = $hasil['KTP'];
             endforeach;
-            $data['lappanen'] = $this->Ulappanen_model->get_all($hasilktp);
-            $data['getKomo'] = $this->Ulappanen_model->getKomoditas();
-            $data['jumpanen'] = $this->Ulappanen_model->jumlahIndex($hasilktp);
+            $data['lappanen'] = $this->ulappanen_model->get_all($hasilktp);
+            $data['getKomo'] = $this->ulappanen_model->getKomoditas();
+            $data['jumpanen'] = $this->ulappanen_model->jumlahIndex($hasilktp);
             $this->load->view('user/viewlappanen', $data);
         }
     }
@@ -38,22 +38,22 @@ class Ulappanen extends CI_Controller{
             echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             if ($this->input->post('pilih') != NULL) {
-                $data['cekktp'] = $this->Ulappanen_model->cekktp();
+                $data['cekktp'] = $this->ulappanen_model->cekktp();
                 foreach ($data['cekktp'] as $hasil) :
                     $hasilktp = $hasil['KTP'];
                 endforeach;
-                $data['getKomo'] = $this->Ulappanen_model->getKomoditas();
-                $data['lappanen'] = $this->Ulappanen_model->sortKomoditas($hasilktp);
-                $data['jumpanen'] = $this->Ulappanen_model->jumlahSortKomoditas($hasilktp);
+                $data['getKomo'] = $this->ulappanen_model->getKomoditas();
+                $data['lappanen'] = $this->ulappanen_model->sortKomoditas($hasilktp);
+                $data['jumpanen'] = $this->ulappanen_model->jumlahSortKomoditas($hasilktp);
                 $this->load->view('user/viewlappanen', $data);
             } else {
-                $data['cekktp'] = $this->Ulappanen_model->cekktp();
+                $data['cekktp'] = $this->ulappanen_model->cekktp();
                 foreach ($data['cekktp'] as $hasil) :
                     $hasilktp = $hasil['KTP'];
                 endforeach;
-                $data['lappanen'] = $this->Ulappanen_model->get_all($hasilktp);
-                $data['getKomo'] = $this->Ulappanen_model->getKomoditas();
-                $data['jumpanen'] = $this->Ulappanen_model->jumlahIndex($hasilktp);
+                $data['lappanen'] = $this->ulappanen_model->get_all($hasilktp);
+                $data['getKomo'] = $this->ulappanen_model->getKomoditas();
+                $data['jumpanen'] = $this->ulappanen_model->jumlahIndex($hasilktp);
                 $this->load->view('user/viewlappanen', $data);
             }
         }

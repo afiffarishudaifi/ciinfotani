@@ -4,7 +4,7 @@ class Uriwayat extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('user/Uriwayat_model');
+        $this->load->model('user/uriwayat_model');
     }
 
     public function index()
@@ -16,14 +16,14 @@ class Uriwayat extends CI_Controller{
             //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
             echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
-            foreach ($data['getKtp'] = $this->Uriwayat_model->getKtp() as $row){
+            foreach ($data['getKtp'] = $this->uriwayat_model->getKtp() as $row){
                 $ktp = $row['KTP'];
             }
-            $data['getAll'] = $this->Uriwayat_model->getAll($ktp);
-            foreach ($this->Uriwayat_model->getAll($ktp) as $row) :
+            $data['getAll'] = $this->uriwayat_model->getAll($ktp);
+            foreach ($this->uriwayat_model->getAll($ktp) as $row) :
                 if ($row['ID_PESAN'] != NULL || $row['ID_PESAN'] != "") {
                     $idpesan = $row['ID_PESAN'];
-                    $data['dataPesan'] = $this->Uriwayat_model->getPemesanan($idpesan);
+                    $data['dataPesan'] = $this->uriwayat_model->getPemesanan($idpesan);
                 } else {
                     redirect('User');
                 }

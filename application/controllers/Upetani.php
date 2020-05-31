@@ -5,7 +5,7 @@ class Upetani extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('user/Petani_model');
+        $this->load->model('user/petani_model');
     }
 
     public function index()
@@ -18,11 +18,11 @@ class Upetani extends CI_Controller{
             echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
             $data['cekktp'] = $this->session->userdata('session_ktp');
-            $data['lengkap'] = $this->Petani_model->cek_user();
-            $data['komoditas'] = $this->Petani_model->getKomoditas();
-            $data['desa'] = $this->Petani_model->getDesa();
-            $data['status'] = $this->Petani_model->getStatus();
-            $data['cek'] =  $this->Petani_model->dataPetaniPanen();
+            $data['lengkap'] = $this->petani_model->cek_user();
+            $data['komoditas'] = $this->petani_model->getKomoditas();
+            $data['desa'] = $this->petani_model->getDesa();
+            $data['status'] = $this->petani_model->getStatus();
+            $data['cek'] =  $this->petani_model->dataPetaniPanen();
             $this->load->view('user/viewpetani', $data);
         }
     }
@@ -47,7 +47,7 @@ class Upetani extends CI_Controller{
             //echo "<script>alert('Lengkapi Data Gagal! Pastikan Semua data Benar');history.go(-1);</script>";
             //redirect('User');
         } else {
-            $this->Petani_model->lengkapiData();
+            $this->petani_model->lengkapiData();
             $this->session->set_flashdata('petanilengkapidata', 'Tersimpan');
             redirect('Login/logout');
         }
@@ -63,7 +63,7 @@ class Upetani extends CI_Controller{
         if ($this->form_validation->run() == FALSE) {
             redirect('Upetani');
         } else {
-            $this->Petani_model->update();
+            $this->petani_model->update();
             $this->session->set_flashdata('petaniupdate', 'Diubah');
             redirect('Upetani');
         }

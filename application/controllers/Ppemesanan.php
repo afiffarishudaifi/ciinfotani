@@ -4,7 +4,7 @@ class Ppemesanan extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('perusahaan/Ppemesanan_model');
+        $this->load->model('perusahaan/ppemesanan_model');
     } 
 
     public function index()
@@ -13,8 +13,8 @@ class Ppemesanan extends CI_Controller{
         $tgl = $_GET['tgl'];
         $idusaha = $_GET['idanda'];
                                 $data['geid']= $tgl;
-        $data['getUsaha'] = $this->Ppemesanan_model->getUsaha($idusaha)->result();
-        $data['getPesanan'] = $this->Ppemesanan_model->getPesanan($id, $tgl);
+        $data['getUsaha'] = $this->ppemesanan_model->getUsaha($idusaha)->result();
+        $data['getPesanan'] = $this->ppemesanan_model->getPesanan($id, $tgl);
         $this->form_validation->set_rules('idperusahaan', 'ID Perusahaan', 'required');
         $this->form_validation->set_rules('ktp', 'KTP', 'required');
         $this->form_validation->set_rules('jmlpesan', 'Jumlah Pesan', 'required');
@@ -29,11 +29,11 @@ class Ppemesanan extends CI_Controller{
             $total = $this->input->post('total');
             $total_fix = str_replace(".", "", $total);
 
-            $this->Ppemesanan_model->insertPemesanan();
-            foreach($this->Ppemesanan_model->cekJumlah() as $cek):
+            $this->ppemesanan_model->insertPemesanan();
+            foreach($this->ppemesanan_model->cekJumlah() as $cek):
                 $hasil = $cek['HASIL'] - $total_fix;
             endforeach;
-            $this->Ppemesanan_model->setDataKurang($hasil);
+            $this->ppemesanan_model->setDataKurang($hasil);
             redirect('Plappesan');
         }
         
@@ -65,15 +65,15 @@ class Ppemesanan extends CI_Controller{
             'ID_PESAN_STATUS' => 1, 
             'ID_PANEN' => $idpanen
         );
-        $this->Ppemesanan_model->insertPesanan($data);
+        $this->ppemesanan_model->insertPesanan($data);
         $where = array(
             'ID_PANEN' => $idpanen
         );
         $data1 = array(
             'HASIL' => $hasil_fix
         );
-        $this->Ppemesanan_model->kurangHasil($where, $data1);
-        redirect('priwayat');
+        $this->ppemesanan_model->kurangHasil($where, $data1);
+        redirect('Priwayat');
     
     }
 }

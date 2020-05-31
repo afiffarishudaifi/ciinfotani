@@ -1,6 +1,6 @@
 <?php
 
-class Indexuser_model extends CI_Model{
+class indexuser_model extends CI_Model{
 
     public function cekktp()
     {

@@ -5,22 +5,22 @@ class Apetani extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('admin/Petani_model');
+        $this->load->model('admin/petani_model');
     }
 
     public function index()
     {
         $data['judul'] = "Info Tani";
-        $data['petani'] = $this->Petani_model->get_all();
+        $data['petani'] = $this->petani_model->get_all();
         $this->load->view('admin/viewpetani', $data);
     }
 
     public function tambah()
     {
-        $data['iddesa'] = $this->Petani_model->tambahIdDesa();
-        $data['iduser'] = $this->Petani_model->tambahIdUser();
-        $data['idkomoditas'] = $this->Petani_model->tambahIdKomoditas();
-        $data['idstatus'] = $this->Petani_model->tambahIdStatus();
+        $data['iddesa'] = $this->petani_model->tambahIdDesa();
+        $data['iduser'] = $this->petani_model->tambahIdUser();
+        $data['idkomoditas'] = $this->petani_model->tambahIdKomoditas();
+        $data['idstatus'] = $this->petani_model->tambahIdStatus();
         $this->form_validation->set_rules('namapetani', 'Nama Petani', 'required');
         $this->form_validation->set_rules('nohp', 'No Hp', 'integer|required|max_length[14]');
         $this->form_validation->set_rules('tgltanam', 'Tanggal Tanam', 'required');
@@ -46,7 +46,7 @@ class Apetani extends CI_Controller{
             "PANEN" => $post['tglpanen'],
             "NO_HP" => $post['nohp']
         ];
-            $this->Petani_model->tambahDataPetani(); 
+            $this->petani_model->tambahDataPetani(); 
             $this->session->set_flashdata('petaniditambah', 'Ditambah');
             redirect('Apetani');
         }
@@ -54,11 +54,11 @@ class Apetani extends CI_Controller{
 
     public function ubah($id)
     {
-        $data['petani'] = $this->Petani_model->getPetaniById($id);
-        $data['iddesa'] = $this->Petani_model->tambahIdDesa();
-        $data['iduser'] = $this->Petani_model->tambahIdUser();
-        $data['idkomoditas'] = $this->Petani_model->tambahIdKomoditas();
-        $data['idstatus'] = $this->Petani_model->tambahIdStatus();
+        $data['petani'] = $this->petani_model->getPetaniById($id);
+        $data['iddesa'] = $this->petani_model->tambahIdDesa();
+        $data['iduser'] = $this->petani_model->tambahIdUser();
+        $data['idkomoditas'] = $this->petani_model->tambahIdKomoditas();
+        $data['idstatus'] = $this->petani_model->tambahIdStatus();
         $this->form_validation->set_rules('namapetani', 'Nama Petani', 'required');
         $this->form_validation->set_rules('nohp', 'No Hp', 'integer|required|max_length[14]');
         $this->form_validation->set_rules('tgltanam', 'Tanggal Tanam', 'required');
@@ -69,7 +69,7 @@ class Apetani extends CI_Controller{
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('admin/ubahpetani', $data);
         } else {
-            $this->Petani_model->ubahDataPetani($id,$data);
+            $this->petani_model->ubahDataPetani($id,$data);
             $this->session->set_flashdata('petanidiubah', 'Diubah');
             redirect('Apetani');
         }
@@ -77,10 +77,10 @@ class Apetani extends CI_Controller{
 
     public function hapus($id)
     {
-        $hasilPanen = $this->Petani_model->cekKeberadaanPanen($id);
-        $hasilPesan = $this->Petani_model->cekKeberadaanPemesanan($id);
+        $hasilPanen = $this->petani_model->cekKeberadaanPanen($id);
+        $hasilPesan = $this->petani_model->cekKeberadaanPemesanan($id);
          if ($hasilPesan == 0 || $hasilPanen == 0) {
-                $data['idpetani'] = $this->Petani_model->hapusDataPetani($id);
+                $data['idpetani'] = $this->petani_model->hapusDataPetani($id);
                 $this->session->set_flashdata('petanidhapus', 'Dihapus');
                 redirect('Apetani');
             } else {

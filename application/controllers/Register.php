@@ -3,7 +3,7 @@
 class Register extends CI_Controller{
     function __construct(){
         parent:: __construct();
-        $this->load->model('frontend/Register_model');
+        $this->load->model('frontend/register_model');
         $this->load->library('upload');
     }
     // public function index(){    
@@ -46,8 +46,8 @@ class Register extends CI_Controller{
             echo "<script>alert('Kata Sandi tidak sama');history.go(-1);</script>";
         }else{
         $username = $this->input->post('username');
-        $cek_petani = $this->Register_model->cek_petani($username)->result();
-        $cek_perusahaan = $this->Register_model->cek_perusahaan($username)->result();
+        $cek_petani = $this->register_model->cek_petani($username)->result();
+        $cek_perusahaan = $this->register_model->cek_perusahaan($username)->result();
         if($cek_petani != FALSE || $cek_perusahaan != FALSE ){
             echo "<script>alert('Nama Pengguna sudah ada!');history.go(-1);</script>";
         }else{
@@ -75,7 +75,7 @@ class Register extends CI_Controller{
                 $gambar=$gbr['file_name'];
                 $username=$this->input->post('username');
                 $password = md5($this->input->post('password'));
-                $this->Register_model->simpan_Petani($username,$password,$gambar);
+                $this->register_model->simpan_Petani($username,$password,$gambar);
                 redirect('login');    
             }
             echo "<script>alert('Registrasi Gagal! Pastikan Semua data terisi');history.go(-1);</script>";          
@@ -90,8 +90,8 @@ class Register extends CI_Controller{
             echo "<script>alert('Kata Sandi tidak sama');history.go(-1);</script>";
         }else{
         $username = $this->input->post('username');
-        $cek_petani = $this->Register_model->cek_petani($username)->result();
-        $cek_perusahaan = $this->Register_model->cek_perusahaan($username)->result();
+        $cek_petani = $this->register_model->cek_petani($username)->result();
+        $cek_perusahaan = $this->register_model->cek_perusahaan($username)->result();
         if($cek_petani != FALSE || $cek_perusahaan != FALSE ){
             echo "<script>alert('Nama Pengguna sudah ada!');history.go(-1);</script>";
         }else{
@@ -119,7 +119,7 @@ class Register extends CI_Controller{
                 $gambar=$gbr['file_name'];
                 $username=$this->input->post('username');
                 $password = md5($this->input->post('password'));
-                $this->Register_model->simpan_Perusahaan($username,$password,$gambar);
+                $this->register_model->simpan_Perusahaan($username,$password,$gambar);
                 redirect('login');    
             }
             echo "<script>alert('Registrasi Gagal! Pastikan Semua data terisi');history.go(-1);</script>";          

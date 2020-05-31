@@ -21,7 +21,7 @@ class Ptambahdata extends CI_Controller{
         
             $where = array('ID_PERUSAHAAN'=>$id);
 
-            $cek = $this->Ppengaturan_model->cek_id($id,'perusahaan')->result();
+            $cek = $this->ppengaturan_model->cek_id($id,'perusahaan')->result();
             if($cek != FALSE){
                 $config['upload_path'] = 'img/perusahaan/user'; //path folder
                 $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
@@ -65,7 +65,7 @@ class Ptambahdata extends CI_Controller{
                                     'NAMA_MANAGER' => $manager
                                 );
                 }
-                    $this->Ppengaturan_model->update_data($where,$data);
+                    $this->ppengaturan_model->update_data($where,$data);
                     redirect('Pperusahaan');
             }else{
                     echo "<script>alert('Katasandi Saat Ini Salah!');history.go(-1);</script>";

@@ -1,6 +1,6 @@
 <?php
 
-class Ulappesan_model extends CI_Model{
+class ulappesan_model extends CI_Model{
 
     public function cekktp()
     {

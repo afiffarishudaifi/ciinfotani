@@ -5,13 +5,13 @@ class Aperusahaan extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('admin/Perusahaan_model');
+        $this->load->model('admin/perusahaan_model');
     } 
 
     public function index()
     {
         $data['judul'] = "Info Tani";
-        $data['perusahaan'] = $this->Perusahaan_model->get_all();
+        $data['perusahaan'] = $this->perusahaan_model->get_all();
         $this->load->view('admin/viewperusahaan.php', $data);
     }
     public function formtambah(){ //membuka form tambah
@@ -84,13 +84,13 @@ class Aperusahaan extends CI_Controller{
                     'NAMA_MANAGER' => $manager,
                     'ID_LEVEL' => 3
                 );
-                $this->Perusahaan_model->input_data($data,'perusahaan');
+                $this->perusahaan_model->input_data($data,'perusahaan');
                 redirect('Aperusahaan');
     }
                  
     
     public function ubah($id){ //membuka form ubah
-        $data['perusahaan'] = $this->Perusahaan_model->getPerusahaanById($id);
+        $data['perusahaan'] = $this->perusahaan_model->getPerusahaanById($id);
             $this->load->view('admin/ubahperusahaan', $data);
     }
     public function update(){ //fungsi mengubah
@@ -108,7 +108,7 @@ class Aperusahaan extends CI_Controller{
         $manager = $this->input->post('manager');
         $where = array('ID_PERUSAHAAN'=>$id);
 
-        $cek = $this->Perusahaan_model->cek_id($id,'perusahaan')->result();
+        $cek = $this->perusahaan_model->cek_id($id,'perusahaan')->result();
         if($cek != FALSE){
             if(!empty($_FILES['siup']['name'])){
                 $config['upload_path'] = './img/perusahaan/siup/'; //path folder
@@ -178,7 +178,7 @@ class Aperusahaan extends CI_Controller{
                 'NO_TELP_PERUSAHAAN' => $notelp,
                 'NAMA_MANAGER' => $manager,
             );
-                $this->Perusahaan_model->update_data($where,$data);
+                $this->perusahaan_model->update_data($where,$data);
                 redirect('aperusahaan');
         }else{
                 echo "<script>alert('Data Tidak Ditemukan!');history.go(-1);</script>";
@@ -187,16 +187,16 @@ class Aperusahaan extends CI_Controller{
 
     public function hapus($id)
     {
-        foreach ($this->Perusahaan_model->cekKeberadaan($id) as $hasilada) :
+        foreach ($this->perusahaan_model->cekKeberadaan($id) as $hasilada) :
             $hasil = $hasilada['ID_PESAN'];
         endforeach;
         if ($hasil == 0) {
-            $data = $this->Perusahaan_model->ambil_foto($id);
+            $data = $this->perusahaan_model->ambil_foto($id);
             $path = './img/perusahaan/siup/';
             @unlink($path . $data->SIUP);
             $path1 = './img/perusahaan/user/';
             @unlink($path1 . $data->LOGO);
-            $this->Perusahaan_model->hapusDataPerusahaan($id);
+            $this->perusahaan_model->hapusDataPerusahaan($id);
             $this->session->set_flashdata('perusahaandihapus', 'Dihapus');
             redirect('Aperusahaan');
         } else {
