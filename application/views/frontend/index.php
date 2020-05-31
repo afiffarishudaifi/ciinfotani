@@ -192,7 +192,11 @@ foreach($panen as $row){  //merubah array dari objek ke array yang biasanya
         <td><?php echo $row->ALAMAT_PETANI;?></td>
         <td><?php echo $row->NAMA_DESA;?></td>
         <td><?php echo $row->NO_HP;?></td>
-        <td class="uang"><?php echo $row->HASIL;?></td>
+        <?php if($row->HASIL != 0){ ?>
+        <td class="uang"><?php echo $row->HASIL; ?></td>
+        <?php }else{ ?>
+            <td><?php echo "Belum Diinput"; ?></td>
+        <?php } ?>
     </tr>
 <?php } ?>
     </tbody>

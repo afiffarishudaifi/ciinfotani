@@ -1,6 +1,6 @@
 <?php
 
-class Indexperusahaan_model extends CI_Model{
+class indexperusahaan_model extends CI_Model{
 
     public function cekKelengkapan()
     {
