@@ -5,7 +5,7 @@ class Ptambahdata extends CI_Controller{
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('perusahaan/Ppengaturan_model');
+        $this->load->model('perusahaan/ppengaturan_model');
     }
 
     public function tambahData()
@@ -68,7 +68,7 @@ class Ptambahdata extends CI_Controller{
                     $this->ppengaturan_model->update_data($where,$data);
                     redirect('Pperusahaan');
             }else{
-                    echo "<script>alert('Katasandi Saat Ini Salah!');history.go(-1);</script>";
+                    echo "<script>alert('Gagal!');history.go(-1);</script>";
             }
             
         }    
