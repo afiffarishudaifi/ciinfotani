@@ -2,7 +2,7 @@
     class Upengaturan extends CI_Controller{
         public function __construct(){
         parent:: __construct();
-        $this->load->model('User/Upengaturan_model');
+        $this->load->model('user/Upengaturan_model');
         }
         public function index(){
             $getId = $this->session->userdata('session_id');

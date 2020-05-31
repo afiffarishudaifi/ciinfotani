@@ -4,7 +4,7 @@ class Ukonfirmasi extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('User/Ukonfirmasi_model');
+        $this->load->model('user/Ukonfirmasi_model');
     }
     
     public function index(){

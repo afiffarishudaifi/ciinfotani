@@ -5,7 +5,7 @@ class Pperusahaan extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('Perusahaan/Indexperusahaan_model');
+        $this->load->model('perusahaan/Indexperusahaan_model');
     }
     public function index(){
         $getUser = $this->session->userdata('session_username_perusahaan');

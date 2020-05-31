@@ -2,7 +2,7 @@
     class Apengaturan extends CI_Controller{
         public function __construct(){
         parent:: __construct();
-        $this->load->model('Admin/Pengaturan_model');
+        $this->load->model('admin/Pengaturan_model');
         }
         public function index(){
             $getId = $this->session->userdata('session_id');
