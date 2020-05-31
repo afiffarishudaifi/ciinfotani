@@ -25,7 +25,7 @@ class Petani_model extends CI_Model{
     public function cek_user()
     {
         $getId = $this->session->userdata('session_id');
-        $query = $this->db->query("SELECT USERNAME, ID_USER FROM USER WHERE ID_USER = $getId");
+        $query = $this->db->query("SELECT USERNAME, ID_USER FROM user WHERE ID_USER = $getId");
         return $query->result_array();
     }
     public function getKomoditas()
