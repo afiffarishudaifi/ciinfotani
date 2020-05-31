@@ -1,6 +1,6 @@
 <?php
 
-class Uriwayat_model extends CI_Model{
+class uriwayat_model extends CI_Model{
 
     public function getKtp()
     {

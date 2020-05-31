@@ -1,6 +1,6 @@
 <?php
 
-class Perusahaan_model extends CI_Model{
+class perusahaan_model extends CI_Model{
 
     public function get_all()
     {

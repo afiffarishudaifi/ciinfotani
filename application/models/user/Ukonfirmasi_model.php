@@ -1,6 +1,6 @@
 <?php
 
-class Ukonfirmasi_model extends CI_Model{
+class ukonfirmasi_model extends CI_Model{
 
     public function getAll($idpesan)
     {

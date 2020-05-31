@@ -5,39 +5,39 @@ class Auser extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('admin/User_model');
+        $this->load->model('admin/user_model');
         
     }
 
     public function index()
     {
         $data['judul'] = "Info Tani";
-        $data['user'] = $this->User_model->get_all();
+        $data['user'] = $this->user_model->get_all();
         $this->load->view('admin/viewuser', $data);
     }
 
     public function tambah()
     {
-        $data['idlevel'] = $this->User_model->tambahIdLevel();
+        $data['idlevel'] = $this->user_model->tambahIdLevel();
             $this->load->view('admin/tambahuser', $data);
     }
 
     public function ubah($id)
     {
-        $data['idlevel'] = $this->User_model->tambahIdLevel();
-        $data['user'] = $this->User_model->getUserById($id);
+        $data['idlevel'] = $this->user_model->tambahIdLevel();
+        $data['user'] = $this->user_model->getUserById($id);
         $this->load->view('admin/ubahuser', $data);
         
     }
     public function hapus($id){
-        foreach ($this->User_model->cekKeberadaan($id) as $hasilada) :
+        foreach ($this->user_model->cekKeberadaan($id) as $hasilada) :
             $hasil = $hasilada['KTP'];
         endforeach;
         if ($hasil == 0) {
-            $data = $this->User_model->ambil_foto($id);
+            $data = $this->user_model->ambil_foto($id);
             $path = './img/user/';
             @unlink($path . $data->FOTO_USER);
-            $this->User_model->hapusDataUser($id);
+            $this->user_model->hapusDataUser($id);
             $this->session->set_flashdata('penggunadihapus', 'Dihapus');
             redirect('Auser');
         } else {
@@ -72,7 +72,7 @@ class Auser extends CI_Controller{
                 $id_level=$this->input->post('idlevel');
                 $username=$this->input->post('namapengguna');
                 $password = md5($this->input->post('password'));
-                $this->User_model->simpan_user($id_level,$username,$password,$gambar);
+                $this->user_model->simpan_user($id_level,$username,$password,$gambar);
                 redirect('Auser');    
             }         
         }else{
@@ -89,7 +89,7 @@ class Auser extends CI_Controller{
         $idlevel = $this->input->post('idlevel');
         $where = array('ID_USER'=>$id);
 
-        $cek = $this->User_model->cek_id($id,'user')->result();
+        $cek = $this->user_model->cek_id($id,'user')->result();
         if($cek != FALSE){
             $config['upload_path'] = './img/user/'; //path folder
             $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
@@ -127,7 +127,7 @@ class Auser extends CI_Controller{
                     'USERNAME' => $username
                 );
             }
-                $this->User_model->update_data($where,$data);
+                $this->user_model->update_data($where,$data);
                 echo "<script>alert('Update Data Berhasil!');history.go(-1);</script>";
         }else{
                 echo "<script>alert('Data Tidak Ditemukan!');history.go(-1);</script>";

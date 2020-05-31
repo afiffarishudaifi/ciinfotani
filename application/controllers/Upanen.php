@@ -5,7 +5,7 @@ class Upanen extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('user/Panen_model');
+        $this->load->model('user/panen_model');
     }
     public function index()
     {
@@ -16,7 +16,7 @@ class Upanen extends CI_Controller{
             //echo "<script>alert('Anda Harus Login');history.go(-1);</script>";
             echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
-            $data['cekPanen'] = $this->Panen_model->cekPanen();
+            $data['cekPanen'] = $this->panen_model->cekPanen();
             $this->load->view('user/tambah_panen', $data);
         }
     }
@@ -30,7 +30,7 @@ class Upanen extends CI_Controller{
             redirect('Upanen');
         } else {
         
-            $this->Panen_model->tambahPanen();
+            $this->panen_model->tambahPanen();
             $this->session->set_flashdata('panenditambah', 'Ditambah');
             redirect('Upanen');
         }

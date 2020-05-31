@@ -1,11 +1,7 @@
 <?php
 
-class Desa_model extends CI_Model{
+class desa_model extends CI_Model{
 
-    private $_table = "desa";
-
-
-    
     public function get_all()
     {
         $query = $this->db->query('select * from desa');

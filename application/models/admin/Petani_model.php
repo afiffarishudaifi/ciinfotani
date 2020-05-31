@@ -1,6 +1,6 @@
 <?php
 
-class Petani_model extends CI_Model{
+class petani_model extends CI_Model{
 
     public function get_all()
     {

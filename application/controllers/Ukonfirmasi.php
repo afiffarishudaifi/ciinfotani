@@ -4,7 +4,7 @@ class Ukonfirmasi extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('user/Ukonfirmasi_model');
+        $this->load->model('user/ukonfirmasi_model');
     }
     
     public function index(){
@@ -15,14 +15,14 @@ class Ukonfirmasi extends CI_Controller{
     {
         $pilihan = $this->uri->segment(3);
         $idpesan = $this->uri->segment(4);
-        $data['getAll'] = $this->Ukonfirmasi_model->getAll($idpesan);
+        $data['getAll'] = $this->ukonfirmasi_model->getAll($idpesan);
         $data['pilih'] = $pilihan;
         $this->load->view('user/konfirmasi', $data);
     }
 
     public function fixPemesanan()
     {
-        $this->Ukonfirmasi_model->fixPemesanan();
+        $this->ukonfirmasi_model->fixPemesanan();
         redirect('Uriwayat');
     }
 
@@ -30,7 +30,7 @@ class Ukonfirmasi extends CI_Controller{
     {
         $pilihan = $this->uri->segment(3);
         $idpesan = $this->uri->segment(4);
-        $data['getAll'] = $this->Ukonfirmasi_model->getAll($idpesan);
+        $data['getAll'] = $this->ukonfirmasi_model->getAll($idpesan);
         $data['pilih'] = $pilihan;
         $this->form_validation->set_rules('idpesan', 'ID Pesan', 'required');
         $this->form_validation->set_rules('jmlpesan', 'Jumlah Pesan', 'required');
@@ -45,11 +45,11 @@ class Ukonfirmasi extends CI_Controller{
             $jmlpesan = $this->input->post('jmlpesan');
             $pesan_fix = str_replace(".", "", $jmlpesan);
 
-            foreach ($this->Ukonfirmasi_model->cekJumlah() as $cek) :
+            foreach ($this->ukonfirmasi_model->cekJumlah() as $cek) :
                 $hasil = $cek['HASIL'] + $pesan_fix;
             endforeach;
-            $this->Ukonfirmasi_model->setDataKurang($hasil);
-            $this->Ukonfirmasi_model->hapusPemesanan();
+            $this->ukonfirmasi_model->setDataKurang($hasil);
+            $this->ukonfirmasi_model->hapusPemesanan();
             redirect('Uriwayat');
         }
     }

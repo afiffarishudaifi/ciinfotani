@@ -1,6 +1,6 @@
 <?php
 
-class Alappesan_model extends CI_Model{
+class alappesan_model extends CI_Model{
 
     public function get_all()
     {

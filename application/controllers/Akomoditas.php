@@ -5,7 +5,7 @@
         public function __construct()
         {
             parent:: __construct();
-            $this->load->model('admin/Komoditas_model');
+            $this->load->model('admin/komoditas_model');
             $this->load->library('form_validation');
         }
         
@@ -13,7 +13,7 @@
         {
             
             $data['judul'] = "Info Tani";
-            $data['komoditas'] = $this->Komoditas_model->get_all();
+            $data['komoditas'] = $this->komoditas_model->get_all();
             $this->load->view('admin/viewkomoditas', $data);
         }
 
@@ -25,7 +25,7 @@
                 $this->load->view('admin/tambahkomoditas');
             } else {
                 
-                $this->Komoditas_model->tambahDataKomoditas();
+                $this->komoditas_model->tambahDataKomoditas();
                 //nama session dan isi
                 $this->session->set_flashdata('komoditasditambah', 'Ditambahkan');
                 redirect('Akomoditas');
@@ -36,17 +36,17 @@
         public function detail($id)
         {
             //memanggil model getkomoditasbyid dengan parameter id
-            $data['komoditas'] = $this->Komoditas_model->getKomoditasById($id);
+            $data['komoditas'] = $this->komoditas_model->getKomoditasById($id);
             $this->load->view('admin/ubahkomoditas', $data);
         }
         
         public function hapus($id)
         {
-            foreach($this->Komoditas_model->cekKeberadaan($id) as $hasilada ):
+            foreach($this->komoditas_model->cekKeberadaan($id) as $hasilada ):
                 $hasil = $hasilada['KTP'];
             endforeach; 
             if($hasil == 0){
-                $this->Komoditas_model->hapusDataKomoditas($id);
+                $this->komoditas_model->hapusDataKomoditas($id);
                 $this->session->set_flashdata('komoditasdihapus', 'Dihapus');
                 redirect('Akomoditas');
             } else {
@@ -56,14 +56,14 @@
 
         public function ubah($id)
         {
-            $data['komoditas'] = $this->Komoditas_model->getKomoditasById($id);
+            $data['komoditas'] = $this->komoditas_model->getKomoditasById($id);
             $this->form_validation->set_rules('namakomoditas', 'Nama Komoditas', 'required|alpha_numeric_spaces');
             //mengecek rules(name input,'nama ketika error',aturan rules)
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('admin/ubahkomoditas', $data);
             } else {
                 
-                $this->Komoditas_model->ubahDataKomoditas($id);
+                $this->komoditas_model->ubahDataKomoditas($id);
                 //nama session dan isi
                 $this->session->set_flashdata('komoditasdiubah', 'Diubah');
                 redirect('Akomoditas');

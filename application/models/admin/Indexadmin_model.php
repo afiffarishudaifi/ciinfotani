@@ -1,8 +1,7 @@
 <?php
 
-class Indexadmin_model extends CI_Model{
+class indexadmin_model extends CI_Model{
 
-    private $_table = "kecamatan";
     public function jumDesa()
     {
         $data = $this->db->query('select count(*) as jumlah from desa');

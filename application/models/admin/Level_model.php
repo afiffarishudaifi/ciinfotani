@@ -1,6 +1,6 @@
 <?php
 
-class Level_model extends CI_Model{
+class level_model extends CI_Model{
 
     public function get_all()
     {

@@ -2,7 +2,7 @@
     class Upengaturan extends CI_Controller{
         public function __construct(){
         parent:: __construct();
-        $this->load->model('user/Upengaturan_model');
+        $this->load->model('user/upengaturan_model');
         }
         public function index(){
             $getId = $this->session->userdata('session_id');
@@ -10,7 +10,7 @@
             if(isset($getAkses) && isset($getId)){
                 if($getAkses == 2){
                     $where = array('ID_USER' => $getId);
-                    $data['user'] = $this->Upengaturan_model->edit_data($where,'user')->result();
+                    $data['user'] = $this->upengaturan_model->edit_data($where,'user')->result();
                     $this->load->view('user/pengaturan',$data);
                 }elseif($getAkses == 1){
                     redirect('Apengaturan');
@@ -23,7 +23,7 @@
         }
         public function edit($id){
             $where = array('ID_USER' => $id);
-            $data['user'] = $this->Upengaturan_model->edit_data($where,'user')->result();
+            $data['user'] = $this->upengaturan_model->edit_data($where,'user')->result();
             $this->load->view('user/pengaturan',$data);
         }
         
@@ -36,7 +36,7 @@
             $passkonf = md5($this->input->post('pass_konf'));
             $where = array('ID_USER'=>$id);
 
-            $cek = $this->Upengaturan_model->cek_pass($id,$passlama,'user')->result();
+            $cek = $this->upengaturan_model->cek_pass($id,$passlama,'user')->result();
             if($cek != FALSE){
                 $config['upload_path'] = './img/user/'; //path folder
                 $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
@@ -74,7 +74,7 @@
                         echo "<script>alert('Katasandi Baru Tidak Sama dengan konfirmasi kata sandi!');history.go(-1);</script>"; 
                     }
                 }
-                    $this->Upengaturan_model->update_data($where,$data);
+                    $this->upengaturan_model->update_data($where,$data);
                     echo "<script>alert('Update Data Berhasil!');history.go(-1);</script>";
             }else{
                     echo "<script>alert('Katasandi Saat Ini Salah!');history.go(-1);</script>";

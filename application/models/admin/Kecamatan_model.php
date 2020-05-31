@@ -1,6 +1,6 @@
 <?php
 
-class Kecamatan_model extends CI_Model{
+class kecamatan_model extends CI_Model{
 
     private $_table = "kecamatan";
 

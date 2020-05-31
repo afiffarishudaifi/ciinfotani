@@ -1,6 +1,6 @@
 <?php
 
-class Panen_model extends CI_Model{
+class panen_model extends CI_Model{
     public function cekPanen()
     {
         $getId = $this->session->userdata('session_id');
