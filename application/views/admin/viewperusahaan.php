@@ -78,7 +78,7 @@ $this->load->view("_partials/head.php");
                                                 <!--memangambil data dari tabel dengan mengisikan data di table-->
                                                 <td><?php echo $row['ID_PERUSAHAAN']; ?></td>
                                                 <td><?php echo $row['USERNAME']; ?></td>
-                                                <td><img style="height:160px; width:120px;" src="<?php echo base_url('img/perusahaan/SIUP/') . $row['SIUP']; ?>"></td>
+                                                <td><img style="height:160px; width:120px;" src="<?php echo base_url('img/perusahaan/siup/') . $row['SIUP']; ?>"></td>
                                                 <td><img style="height:160px; width:120px;" src="<?php echo base_url('img/perusahaan/user/') . $row['LOGO']; ?>"></td>
                                                 <td><?php echo $row['NAMA_PERUSAHAAN']; ?></td>
                                                 <td><?php echo $row['EMAIL']; ?></td>
