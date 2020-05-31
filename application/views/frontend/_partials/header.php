@@ -8,7 +8,7 @@
                 <nav class="classy-navbar justify-content-between" id="akameNav">
 
                     <!-- Logo -->
-                    <a class="nav-brand" href="index"><h3>INFO TANI</h3></a>
+                    <a class="nav-brand" href="<?= base_url('beranda')?>"><h3>INFO TANI</h3></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -48,7 +48,7 @@
 <div id="popup_searchBox" style="display:none;">
   <button class='keluar' onclick="document.getElementById('popup_searchBox').style.display = 'none';">Close</button>
   <div id="popup_searchBox_Data">
-    <div class="search-form-wrapper" style="display: block;">
+    <div class="search-form-wrapper" style="display: block;"> 
       <form action="<?= base_url('carihasil/search')?>" class="search-form" method="post">
         <input class="search-text" placeholder="Cari Data" name="cari" type="text" value="" />
         <button type="submit" class="btn btn-md" name="submitcari" ><svg width="15px" height="15px" style="color:white;">
