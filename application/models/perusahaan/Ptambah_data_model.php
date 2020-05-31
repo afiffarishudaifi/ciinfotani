@@ -1,6 +1,6 @@
 <?php
 
-class Ptambah_data_model extends CI_Model{
+class ptambah_data_model extends CI_Model{
 
     public function getAll()
     {

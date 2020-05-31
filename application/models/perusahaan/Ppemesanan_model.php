@@ -1,6 +1,6 @@
 <?php
 
-class Ppemesanan_model extends CI_Model{
+class ppemesanan_model extends CI_Model{
 
     public function getAll()
     {

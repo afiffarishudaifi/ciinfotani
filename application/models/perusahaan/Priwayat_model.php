@@ -1,6 +1,6 @@
 <?php
 
-class Priwayat_model extends CI_Model{
+class priwayat_model extends CI_Model{
 
     public function getAll()
     {

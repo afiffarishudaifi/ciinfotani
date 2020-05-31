@@ -1,6 +1,6 @@
 <?php
 
-class Ppengaturan_model extends CI_Model{
+class ppengaturan_model extends CI_Model{
 
     public function edit_data($where,$table){
         return $this->db->get_where($table,$where);
