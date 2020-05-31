@@ -138,6 +138,7 @@
                 </thead>
                 <?php $no = $this->uri->segment('3')+1;
                 foreach($alldata as $row){
+                    if($row->HASIL !=0){
                 echo "<tbody>";
                     ?>
                     <tr>
@@ -154,10 +155,14 @@
                         <td class="uang text-right"><?php echo $row->HASIL ?></td>
                     </form>
                     <?php $getId = $this->session->userdata('session_id_perusahaan');?>
+                    <?php if($row->HASIL !=0){?>
                     <td class="text-center"><a href="<?=base_url('Ppemesanan')?>?id=<?php echo $row->ID_PANEN ?>&tgl=<?php echo $row->TGL_PANEN ?>&idanda=<?= $getId?>"><button class="pilih btn btn-primary btn-xs">Pesan</button></a></td>
+                <?php }else{?>
+                    <td class="text-center"><a href="<?=base_url('Ppemesanan')?>?id=<?php echo $row->ID_PANEN ?>&tgl=<?php echo $row->TGL_PANEN ?>&idanda=<?= $getId?>"><button class="pilih btn btn-primary btn-xs" disabled>Pesan</button></a></td>
+                <?php } ?>
                     </tr>
                     <?php
-                    } ?>
+                    } }?>
                     </tbody>
                     </table>
                     <br/>

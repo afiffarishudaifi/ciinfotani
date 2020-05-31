@@ -19,6 +19,7 @@
             $this->db->join('komoditas','komoditas.ID_KOMODITAS=panen.KOMODITAS','inner');
             $this->db->join('desa','desa.ID_DESA=petani.ID_DESA','inner');
             $this->db->join('kecamatan','kecamatan.ID_KECAMATAN=desa.ID_KECAMATAN','inner');
+            $this->db->where("HASIL != 0");
             
             $query=$this->db->get('panen',$number,$offset);
 
@@ -34,7 +35,8 @@
             $this->db->join('komoditas','komoditas.ID_KOMODITAS=panen.KOMODITAS','inner');
             $this->db->join('desa','desa.ID_DESA=petani.ID_DESA','inner');
             $this->db->join('kecamatan','kecamatan.ID_KECAMATAN=desa.ID_KECAMATAN','inner');
-			$this->db->like('NAMA_KOMODITAS',$keyword);
+            $this->db->where("HASIL != 0");
+            $this->db->like('NAMA_KOMODITAS',$keyword);
             $this->db->or_like('NAMA_PETANI',$keyword);
             $this->db->or_like('ALAMAT_PETANI',$keyword);
             $this->db->or_like('NAMA_DESA',$keyword);
@@ -52,6 +54,7 @@
             $this->db->join('komoditas','komoditas.ID_KOMODITAS=panen.KOMODITAS','inner');
             $this->db->join('desa','desa.ID_DESA=petani.ID_DESA','inner');
             $this->db->join('kecamatan','kecamatan.ID_KECAMATAN=desa.ID_KECAMATAN','inner');
+            $this->db->where("HASIL != 0");
             $this->db->where('KOMODITAS',$komo);
             if(isset($keca)){
             foreach($keca as $kec){
