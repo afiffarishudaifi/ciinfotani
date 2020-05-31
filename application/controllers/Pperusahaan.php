@@ -5,7 +5,7 @@ class Pperusahaan extends CI_Controller{
     public function __construct()
     {
         parent:: __construct();
-        $this->load->model('perusahaan/Indexperusahaan_model');
+        $this->load->model('perusahaan/indexperusahaan_model');
     }
     public function index(){
         $getUser = $this->session->userdata('session_username_perusahaan');
@@ -13,7 +13,7 @@ class Pperusahaan extends CI_Controller{
         if ($getUser == ' ' or $getId == ' ') {
             echo "<script>alert('Harap Login Terlebih Dahulu');history.go(-1);</script>";
         } else {
-            $data['cekdatakelengkapan'] = $this->Indexperusahaan_model->cekKelengkapan();
+            $data['cekdatakelengkapan'] = $this->indexperusahaan_model->cekKelengkapan();
             foreach($data['cekdatakelengkapan'] as $row):
                 $nama = $row['NAMA_PERUSAHAAN'];
                 $email = $row['EMAIL'];
@@ -24,7 +24,7 @@ class Pperusahaan extends CI_Controller{
                     echo "<script>alert('Lengkapi Data!');</script>";
                     $this->load->view('perusahaan/tambah_data');
                 } else {
-                    $data['pemesanan'] = $this->Indexperusahaan_model->dataPemesanan();
+                    $data['pemesanan'] = $this->indexperusahaan_model->dataPemesanan();
                     $this->load->view('perusahaan/index', $data);
                 }
             endforeach;

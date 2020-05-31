@@ -2,7 +2,7 @@
     class Ppengaturan extends CI_Controller{
         public function __construct(){
         parent:: __construct();
-        $this->load->model('perusahaan/Ppengaturan_model');
+        $this->load->model('perusahaan/ppengaturan_model');
         }
         public function index(){
             $getId = $this->session->userdata('session_id_perusahaan');
@@ -10,7 +10,7 @@
             if(isset($getAkses) && isset($getId)){
                 if($getAkses == 3){
                     $where = array('ID_PERUSAHAAN' => $getId);
-                    $data['user'] = $this->Ppengaturan_model->edit_data($where,'perusahaan')->result();
+                    $data['user'] = $this->ppengaturan_model->edit_data($where,'perusahaan')->result();
                     $this->load->view('perusahaan/pengaturan',$data);        
                 }elseif($getAkses == 2){
                     redirect('Upengaturan');
@@ -24,7 +24,7 @@
         }
         public function edit($id){
             $where = array('ID_PERUSAHAAN' => $id);
-            $data['user'] = $this->Ppengaturan_model->edit_data($where,'perusahaan')->result();
+            $data['user'] = $this->ppengaturan_model->edit_data($where,'perusahaan')->result();
             $this->load->view('perusahaan/pengaturan',$data);
         }
         
@@ -37,7 +37,7 @@
             $passkonf = md5($this->input->post('pass_konf'));
             $where = array('ID_PERUSAHAAN'=>$id);
 
-            $cek = $this->Ppengaturan_model->cek_pass($id,$passlama,'perusahaan')->result();
+            $cek = $this->ppengaturan_model->cek_pass($id,$passlama,'perusahaan')->result();
             if($cek != FALSE){
                 $config['upload_path'] = './img/perusahaan/user'; //path folder
                 $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
@@ -75,7 +75,7 @@
                         echo "<script>alert('Katasandi Baru Tidak Sama dengan konfirmasi kata sandi!');history.go(-1);</script>"; 
                     }
                 }
-                    $this->Ppengaturan_model->update_data($where,$data);
+                    $this->ppengaturan_model->update_data($where,$data);
                     echo "<script>alert('Update Data Berhasil!');history.go(-1);</script>";
             }else{
                     echo "<script>alert('Katasandi Saat Ini Salah!');history.go(-1);</script>";
