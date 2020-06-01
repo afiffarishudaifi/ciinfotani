@@ -57,8 +57,8 @@ $this->load->view('_partials/head');
               <input type="hidden" name="iduser" value="<?php echo $id_user; ?>">
               <div class="form-group">
                 <label>KTP</label>
-
                 <input type="text" class="form-control" name="KTP" placeholder="Masukkan KTP" maxlength="20" required onkeypress="return hanyaAngka(event)">
+                <h6 class="text-success text-form">*Max 16 karakter tidak boleh huruf</h6>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
                     <?php echo form_error('KTP') ?>
@@ -78,8 +78,8 @@ $this->load->view('_partials/head');
               </div>
               <div class="form-group">
                 <label>Nama Petani</label>
-
                 <input type="text" class="form-control" name="namapetani" placeholder="Masukkan Nama Petani" maxlength="30" required onkeypress="return hanyaTulisan(event)">
+                <h6 class="text-success text-form">*Harus huruf</h6>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
                     <?php echo form_error('namapetani') ?>
@@ -88,7 +88,6 @@ $this->load->view('_partials/head');
               </div>
               <div class="form-group">
                 <label title="Alamat Tinggal Yang Dekat Dengan Sawah Anda">Alamat Petani</label>
-
                 <input type="text" class="form-control" name="alamatpetani" placeholder="Masukkan Alamat Tinggal Saat Ini" maxlength="100" required>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
@@ -100,7 +99,6 @@ $this->load->view('_partials/head');
 
               <div class="form-group">
                 <label>No HP Petani</label>
-
                 <input type="text" class="form-control" name="nohp" placeholder="Masukkan No hp" maxlength="15" required>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
@@ -111,7 +109,6 @@ $this->load->view('_partials/head');
 
               <div class="form-group">
                 <label>Komoditas</label>
-
                 <?php
 
                 // ----------------------------------------
@@ -122,12 +119,12 @@ $this->load->view('_partials/head');
                 endforeach;
                 echo "</select>";
                 ?>
-                <h6>*Hubungi admin jika komoditas tidak tersedia</h6>
+                <h6 class="text-success text-form">*Hubungi admin jika komoditas tidak tersedia</h6>
               </div>
               <div class="form-group">
                 <label>Luas Sawah (ha)</label>
-
                 <input type="text" class="form-control" name="luassawah" placeholder="Masukkan Luas Sawah" required>
+                <h6 class="text-success text-form">*Harus angka</h6>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
                     <?php echo form_error('luassawah') ?>
@@ -136,7 +133,6 @@ $this->load->view('_partials/head');
               </div>
               <div class="form-group">
                 <label>Alamat Sawah</label>
-
                 <input type="text" class="form-control" name="alamatsawah" placeholder="Masukkan Alamat Sawah" maxlength="100" required>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
@@ -146,9 +142,7 @@ $this->load->view('_partials/head');
               </div>
               <div class="form-group">
                 <label>Desa/Kelurahan</label>
-
                 <?php
-
                 echo "<select name='iddesa' class='form-control' onchange='changeValue(this.value)' required>";
                 echo "<option value='' selected>=== Pilih Desa ===</option>";
                 foreach ($desa as $row2) :
@@ -156,12 +150,11 @@ $this->load->view('_partials/head');
                 endforeach;
                 echo "</select>";
                 ?>
-                <h6>*Hubungi admin jika Desa/Kel. tidak tersedia</h6>
+                <h6 class="text-success text-form">*Hubungi admin jika Desa/Kel. tidak tersedia</h6>
               </div>
 
               <div class="form-group">
                 <label>Tanggal Tanam</label>
-
                 <input type="text" class="form-control" id="tgl" name="tgltanam" placeholder="Masukkan tanggal tanam" required>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
@@ -171,7 +164,6 @@ $this->load->view('_partials/head');
               </div>
               <div class="form-group">
                 <label>Tanggal Panen</label>
-
                 <input type="text" class="form-control" id="tgl2" name="tglpanen" placeholder="Masukkan tanggal panen" required>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
@@ -181,7 +173,6 @@ $this->load->view('_partials/head');
               </div>
               <div class="form-group">
                 <label>Status</label>
-
                 <?php
 
                 echo "<select name='idstatus' class='form-control' onchange='changeValue(this.value)' required>";
@@ -226,7 +217,6 @@ $this->load->view('_partials/head');
                     </div>
                   </div>
                   <div class="form-group">
-
                     <input type="hidden" class="form-control" name="namapetani" value="<?php echo $datas['NAMA_PETANI'] ?>" required onkeypress="return hanyaTulisan(event)" readonly>
                     <div class="invalid-feedback">
                       <h5 class="text-danger text-form">
@@ -235,7 +225,6 @@ $this->load->view('_partials/head');
                     </div>
                   </div>
                   <div class="form-group">
-
                     <input type="hidden" class="form-control" name="alamatpetani" value="<?php echo $datas['ALAMAT_PETANI'] ?>" required readonly>
                     <div class="invalid-feedback">
                       <h5 class="text-danger text-form">
@@ -245,7 +234,6 @@ $this->load->view('_partials/head');
                   </div>
 
                   <div class="form-group">
-
                     <input type="hidden" class="form-control" name="nohp" value="<?php echo $datas['NO_HP'] ?>" required readonly>
                     <div class="invalid-feedback">
                       <h5 class="text-danger text-form">
@@ -278,7 +266,6 @@ $this->load->view('_partials/head');
                     </div>
                   </div>
                   <div class="form-group">
-
                     <input type="hidden" class="form-control" name="iddesa" value="<?php echo $datas['ID_DESA'] ?>" required readonly>
                     <div class="invalid-feedback">
                       <h5 class="text-danger text-form">
@@ -288,7 +275,6 @@ $this->load->view('_partials/head');
                   </div>
                   <div class="form-group">
                     <label>Tanggal Tanam</label>
-
                     <input type="text" class="form-control" id="tgl" name="tgltanam" value="<?php echo $datas['TANAM'] ?>" required readonly>
                     <div class="invalid-feedback">
                       <h5 class="text-danger text-form">
@@ -298,7 +284,6 @@ $this->load->view('_partials/head');
                   </div>
                   <div class="form-group">
                     <label>Tanggal Panen</label>
-
                     <input type="text" class="form-control" id="tgl2" name="tglpanen" value="<?php echo $datas['PANEN'] ?>" required>
                     <div class="invalid-feedback">
                       <h5 class="text-danger text-form">

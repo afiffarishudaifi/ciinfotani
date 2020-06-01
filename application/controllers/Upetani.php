@@ -43,8 +43,8 @@ class Upetani extends CI_Controller{
         $this->form_validation->set_rules('idstatus', 'ID Status', 'required');
         $this->form_validation->set_rules('idkomoditas', 'ID Komoditas', 'required');
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('user/viewpetani');
-            //echo "<script>alert('Lengkapi Data Gagal! Pastikan Semua data Benar');history.go(-1);</script>";
+            //$this->load->view('user/viewpetani');
+            echo "<script>alert('Lengkapi Data Gagal! Pastikan Semua data Benar');history.go(-1);</script>";
             //redirect('User');
         } else {
             $this->petani_model->lengkapiData();
@@ -53,7 +53,7 @@ class Upetani extends CI_Controller{
         }
     }
     public function update(){
-        $this->form_validation->set_rules('KTP', 'KTP', 'required');
+        $this->form_validation->set_rules('KTP', 'KTP', 'integer|required|min_length[16]|max_length[16]');
         $this->form_validation->set_rules('nohp', 'No Hp', 'integer|required|max_length[16]');
         $this->form_validation->set_rules('idstatus', 'ID Status', 'required');
         $this->form_validation->set_rules('idkomoditas', 'ID Komoditas', 'required');
