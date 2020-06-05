@@ -49,7 +49,12 @@ class Upetani extends CI_Controller{
         } else {
             $this->petani_model->lengkapiData();
             $this->session->set_flashdata('petanilengkapidata', 'Tersimpan');
-            redirect('Login/logout');
+            echo "<script>alert('Mungkin Anda Harus Login Kembali!');</script>";
+            ?> <script>
+            window.location.href='<?php echo base_url('Login/logout'); ?>';
+            </script>
+            <?php
+            // redirect('Login/logout');
         }
     }
     public function update(){

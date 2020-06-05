@@ -57,8 +57,8 @@ $this->load->view('_partials/head');
               <input type="hidden" name="iduser" value="<?php echo $id_user; ?>">
               <div class="form-group">
                 <label>KTP</label>
-                <input type="text" class="form-control" name="KTP" placeholder="Masukkan KTP" maxlength="20" required onkeypress="return hanyaAngka(event)">
-                <h6 class="text-success text-form">*Max 16 karakter tidak boleh huruf</h6>
+                <input type="text" class="form-control" name="KTP" placeholder="Masukkan KTP" maxlength="16" minlength="16" required onkeypress="return hanyaAngka(event)">
+                <h6 class="text-success text-form">*Input KTP dengan 16 digit angka</h6>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
                     <?php echo form_error('KTP') ?>
@@ -99,7 +99,7 @@ $this->load->view('_partials/head');
 
               <div class="form-group">
                 <label>No HP Petani</label>
-                <input type="text" class="form-control" name="nohp" placeholder="Masukkan No hp" maxlength="15" required>
+                <input type="text" class="form-control" name="nohp" placeholder="Masukkan No hp" maxlength="15" onkeypress="return hanyaAngka(event)" required>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
                     <?php echo form_error('nohp') ?>
@@ -123,7 +123,7 @@ $this->load->view('_partials/head');
               </div>
               <div class="form-group">
                 <label>Luas Sawah (ha)</label>
-                <input type="text" class="form-control" name="luassawah" placeholder="Masukkan Luas Sawah" required>
+                <input type="text" class="form-control" name="luassawah" placeholder="Masukkan Luas Sawah" onkeypress="return hanyaAngka(event)" required>
                 <h6 class="text-success text-form">*Harus angka</h6>
                 <div class="invalid-feedback">
                   <h5 class="text-danger text-form">
