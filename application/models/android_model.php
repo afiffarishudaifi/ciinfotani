@@ -160,8 +160,11 @@ class android_model extends CI_Model
         $this->db->where('ID_USER', $id);
         $this->db->update('user', $data);
     }
-    function cekuser_pengaturan($id, $pass)
-    {
+    function update_foto($id, $foto){
+        $hasil = $this->db->query("UPDATE user SET FOTO_USER = '$foto' where ID_USER = $id");
+        return $hasil;
+    }
+    function cekuser_pengaturan($id, $pass){
         $this->db->select('*');
         $this->db->from('user');
         $this->db->where('ID_USER', $id);

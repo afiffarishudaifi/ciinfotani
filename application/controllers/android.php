@@ -700,5 +700,42 @@ class android extends CI_Controller
         }
     }
 
+    public function update_foto(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['iduser'];
+            $username = $_POST['user'];
+            $fotolama = $_POST['fotolama'];
+            $foto = $_POST['foto'];
+
+            $gambar = $username.".png";
+            $path = "img/user/".$username.".png";
+            
+            if(file_exists($lok=FCPATH.'/img/user/'.$fotolama)){
+                unlink($lok);
+            }
+            if(file_exists($lok1=FCPATH.'/img/user/'.$gambar)){
+                unlink($lok1);
+            }
+            if(!empty($foto)){
+                $query = $this->android_model->update_foto($id, $gambar);
+                
+                if ($query){
+                    file_put_contents($path,base64_decode($foto));
+                    $result["success"] = "1";
+                    $result["message"] = "Update Foto Berhasil!";
+                    echo json_encode($result);
+                }else{
+                    $result["success"] = "0";
+                    $result["message"] = "Update Foto Gagal!";
+                    echo json_encode($result);
+                }
+            }else{
+                $result["success"] = "2";
+                $result["message"] = "Update Foto Gagal!";
+                echo json_encode($result);
+            }
+        }
+    }
+
 
 }
