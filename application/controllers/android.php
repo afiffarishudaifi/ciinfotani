@@ -668,4 +668,37 @@ class android extends CI_Controller
                     }
         }     
     }    
+
+    public function pengaturan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['iduser'];
+            $passlama = md5($_POST['passlama']);
+            $passbaru = $_POST['passbaru'];
+            $passbarukonf = $_POST['passbarukonf'];
+            $passupdate = md5($_POST['passbaru']);
+
+            $cek_user = $this->android_model->cekuser_pengaturan($id,$passlama)->result();
+            if($cek_user != FALSE){
+                    if($passbaru != $passbarukonf){
+                         $result["success"] = "1";
+                        $result["message"] = "Konfirmasi Password Tidak Sama!";
+                        echo json_encode($result);
+                    }else{
+                        $data = [
+                            "PASSWORD" => $passupdate
+                        ];
+                    $updateData = $this->android_model->update_pengaturan($id,$data);
+                        $result["success"] = "1";
+                        $result["message"] = "Ganti Password Berhasil!";
+                        echo json_encode($result);
+                    }
+            }else{
+                $result["success"] = "1";
+                $result["message"] = "Password Salah!";
+                echo json_encode($result);
+            }    
+        }
+    }
+
+
 }

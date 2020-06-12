@@ -155,4 +155,18 @@ class android_model extends CI_Model
         $this->db->where($where);
         $this->db->update($table, $data);
     }
+
+    function update_pengaturan($id, $data){
+        $this->db->where('ID_USER', $id);
+        $this->db->update('user', $data);
+    }
+    function cekuser_pengaturan($id, $pass)
+    {
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where('ID_USER', $id);
+        $this->db->where('PASSWORD', $pass);
+        $query = $this->db->get();
+        return $query;
+    }
 }
