@@ -10,6 +10,7 @@
                     <a href="<?= base_url('beranda')?>" class="footer-logo">Info Tani</a>
 
                     <p class="mb-30">Kita akan berusaha memberikan pelayanan yang maksimal untuk Anda</p>
+                    <a href="<?php echo base_url('apk/infotani.apk')?>"><img src="assets/frontend/img/gplaybadge.png" style="height:100px; width:200px"></a>
 
                     <!-- Copywrite Text -->
                     <div class="copywrite-text">

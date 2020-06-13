@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class android_model extends CI_Model
+class Android_model extends CI_Model
 {
     function __construct()
     {

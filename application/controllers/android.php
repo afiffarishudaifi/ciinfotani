@@ -1,10 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class android extends CI_Controller
+class Android extends CI_Controller
 {
     public function __construct(){
         parent::__construct();
-        $this->load->model('android_model');
+        $this->load->model('Android_model');
     }
 
     public function index(){
@@ -16,7 +16,7 @@ class android extends CI_Controller
         $index['ID_DESA'] = "0";
         $index['NAMA_DESA'] = "Pilih Desa";
         array_push($result,$index);
-        $query = $this->android_model->daftar_desa()->result();
+        $query = $this->Android_model->daftar_desa()->result();
         foreach($query as $row){
             $index['ID_DESA'] = $row->ID_DESA;
             $index['NAMA_DESA'] = $row->NAMA_DESA;
@@ -30,7 +30,7 @@ class android extends CI_Controller
         $index['ID_KOMODITAS'] = "0";
         $index['NAMA_KOMODITAS'] = "Pilih Komoditas";
         array_push($result,$index);
-        $query = $this->android_model->daftar_komoditas()->result();
+        $query = $this->Android_model->daftar_komoditas()->result();
         foreach($query as $row){
             $index['ID_KOMODITAS'] = $row->ID_KOMODITAS;
             $index['NAMA_KOMODITAS'] = $row->NAMA_KOMODITAS;
@@ -43,11 +43,11 @@ class android extends CI_Controller
             $username = $_POST['username'];
             $password = md5($_POST['password']);
         
-            $response = $this->android_model->loginapi($username, $password)->result();
+            $response = $this->Android_model->loginapi($username, $password)->result();
             foreach ($response as $user){
                 $id_user = $user->ID_USER;
             }
-            $ambil_ktp = $this->android_model->cek_ktp($id_user)->result();
+            $ambil_ktp = $this->Android_model->cek_ktp($id_user)->result();
             
             $result = array();
             $result['login'] = array();
@@ -88,14 +88,14 @@ class android extends CI_Controller
                     $result["message"] = "Password Tidak sama";
                     echo json_encode($result);
             }else{
-                $cek = $this->android_model->cek_user($username)->result();
+                $cek = $this->Android_model->cek_user($username)->result();
                 if($cek != TRUE){
                     if(!empty($foto)){
                         //$random = random_word(20);
                         $gambar = $username.".png";
                         $path = "img/user/".$username.".png";
                         
-                        $query = $this->android_model->registerapi($username,$password,$gambar);
+                        $query = $this->Android_model->registerapi($username,$password,$gambar);
                         
                         if ($query){
                             file_put_contents($path,base64_decode($foto));
@@ -108,7 +108,7 @@ class android extends CI_Controller
                             echo json_encode($result);
                         }
                     }else{
-                        $this->android_model->registerapi($username,$password,"");
+                        $this->Android_model->registerapi($username,$password,"");
                         $result["success"] = "1";
                         $result["message"] = "Registrasi Berhasil!";
                         echo json_encode($result);
@@ -136,7 +136,7 @@ class android extends CI_Controller
             $date = new DateTime();
             $tgltanam = $date->format('Y-m-d');
 
-            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            $cek = $this->Android_model->cek_petani($ktp,$id)->result();
                 if($cek == FALSE){
                    //insert data
                    $data = [
@@ -153,7 +153,7 @@ class android extends CI_Controller
                     "PANEN" => $tglpanen,
                     "NO_HP" => $nohp
                     ];
-                        $this->android_model->insert_petani($data);
+                        $this->Android_model->insert_petani($data);
                         $result["success"] = "1";
                         $result["message"] = "Tambah Data Berhasil!";
                         echo json_encode($result);
@@ -170,7 +170,7 @@ class android extends CI_Controller
                         "PANEN" => $tglpanen,
                         "NO_HP" => $nohp
                     ];
-                    $this->android_model->update_petani($ktp,$data);
+                    $this->Android_model->update_petani($ktp,$data);
                     $result["success"] = "2";
                     $result["message"] = "Update Data Berhasil!";
                     echo json_encode($result);
@@ -182,12 +182,12 @@ class android extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $id = $_POST['id_user'];
             $ktp = $_POST['ktp'];
-            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            $cek = $this->Android_model->cek_petani($ktp,$id)->result();
             foreach($cek as $baris){
                 $desa = $baris->ID_DESA;
                 $komoditas = $baris->ID_KOMODITAS;
             }
-            $cek_desaKomoditas = $this->android_model->cek_desaKomoditas($desa,$komoditas)->result();
+            $cek_desaKomoditas = $this->Android_model->cek_desaKomoditas($desa,$komoditas)->result();
         
             $result = array();
             $result['data'] = array();
@@ -243,7 +243,7 @@ class android extends CI_Controller
                     "HARGA" => $harga,
                     "STATUS_PANEN" => "Panen"                
                 ];
-                        $this->android_model->insert_panen($data);
+                        $this->Android_model->insert_panen($data);
                         $result["success"] = "1";
                         $result["message"] = "Tambah Panen Berhasil!";
                         echo json_encode($result);
@@ -260,12 +260,12 @@ class android extends CI_Controller
             $id = $_POST['id_user'];
             $ktp = $_POST['ktp'];
             
-            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            $cek = $this->Android_model->cek_petani($ktp,$id)->result();
             foreach($cek as $baris){
                 $desa = $baris->ID_DESA;
                 $komoditas = $baris->ID_KOMODITAS;
             }
-            $cek_desaKomoditas = $this->android_model->cek_desaKomoditas($desa,$komoditas)->result();
+            $cek_desaKomoditas = $this->Android_model->cek_desaKomoditas($desa,$komoditas)->result();
         
             $result = array();
             $result['data'] = array();
@@ -302,7 +302,7 @@ class android extends CI_Controller
             $date = new DateTime();
                 $tglskrg= $date->format('Y-m-d');
 
-            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            $cek = $this->Android_model->cek_petani($ktp,$id)->result();
             foreach($cek as $baris){
                 $tglpanen = $baris->PANEN;
             }
@@ -312,10 +312,10 @@ class android extends CI_Controller
                     $data = [
                             "ID_STATUS" => 1
                         ];
-                    $this->android_model->update_petani($ktp,$data);
+                    $this->Android_model->update_petani($ktp,$data);
                     $result["success"] = "1";
                     $result["message"] = "Saatnya Panen!";
-                $cek_fillpanen = $this->android_model->cek_fillpanen($ktp,$tglpanen)->result();
+                $cek_fillpanen = $this->Android_model->cek_fillpanen($ktp,$tglpanen)->result();
                 if($cek_fillpanen != FALSE){
                     $result["donepanen"] = "1";
                     $result["donemessage"] = "Telah Panen! Silahkan Perbarui Data Petani!";
@@ -341,7 +341,7 @@ class android extends CI_Controller
     public function lap_panen(){
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $ktp = $_POST['ktp'];
-            $cek = $this->android_model->cek_panen($ktp)->result();
+            $cek = $this->Android_model->cek_panen($ktp)->result();
         
             $result = array();
             $result['data'] = array();
@@ -364,7 +364,7 @@ class android extends CI_Controller
                 
                     array_push($result['data'], $index);
                 }
-                $su = $this->android_model->sum_hasilSisa($ktp)->result();
+                $su = $this->Android_model->sum_hasilSisa($ktp)->result();
                     
                 foreach($su as $row){
                     $result['jmlhasil'] = $row->jmhasil;
@@ -386,7 +386,7 @@ class android extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $ktp = $_POST['ktp'];
             $tgl = $_POST['tahun'];
-            $cek = $this->android_model->cek_panenTahun($ktp,$tgl)->result();
+            $cek = $this->Android_model->cek_panenTahun($ktp,$tgl)->result();
         
             $result = array();
             $result['data'] = array();
@@ -409,7 +409,7 @@ class android extends CI_Controller
                 
                     array_push($result['data'], $index);
                 }
-                $su = $this->android_model->sum_hasilSisaTahun($ktp,$tgl)->result();
+                $su = $this->Android_model->sum_hasilSisaTahun($ktp,$tgl)->result();
                     
                 foreach($su as $row){
                     $result['jmlhasil'] = $row->jmhasil;
@@ -491,11 +491,11 @@ class android extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = $_POST['username'];
             $nohp = $_POST['nohp'];
-            $data = $this->android_model->cari_petani($username, $nohp);
+            $data = $this->Android_model->cari_petani($username, $nohp);
             if ($data != FALSE) {
                 $result['success'] = "1";
                 $result['message'] = "Akun ditemukan";
-                foreach ($this->android_model->cari_petani($username, $nohp) as $cek) :
+                foreach ($this->Android_model->cari_petani($username, $nohp) as $cek) :
                     $hasil = $cek['ID_USER'];
                 endforeach;
                 $result['id'] = $hasil;
@@ -524,8 +524,8 @@ class android extends CI_Controller
                     'PASSWORD' => md5($_POST['password'])
                 ];
                 $where = array('ID_USER' => $_POST['id']);
-                $this->android_model->update_data($user, $data);
-                //$this->android_model->update_datas($where, $data, 'user');
+                $this->Android_model->update_data($user, $data);
+                //$this->Android_model->update_datas($where, $data, 'user');
                 $result["success"] = "1";
                 $result["message"] = "Update Data Berhasil!";
                 echo json_encode($result);
@@ -537,7 +537,7 @@ class android extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $ktp = $_POST['ktp'];
             $stat = $_POST['status'];
-            $cek = $this->android_model->cek_pemesanan($ktp,$stat)->result();
+            $cek = $this->Android_model->cek_pemesanan($ktp,$stat)->result();
         
             $result = array();
             $result['data'] = array();
@@ -564,7 +564,7 @@ class android extends CI_Controller
                 
                     array_push($result['data'], $index);
                 }
-                $su = $this->android_model->sum_pemesanan($ktp,$stat)->result();
+                $su = $this->Android_model->sum_pemesanan($ktp,$stat)->result();
                     
                 foreach($su as $row){
                     $result['jmlpesan'] = $row->jmpesan;
@@ -585,7 +585,7 @@ class android extends CI_Controller
             $ktp = $_POST['ktp'];
             $tahun = $_POST['tahun'];
             $stat = $_POST['status'];
-            $cek = $this->android_model->cek_pemesananTahun($ktp,$tahun,$stat)->result();
+            $cek = $this->Android_model->cek_pemesananTahun($ktp,$tahun,$stat)->result();
         
             $result = array();
             $result['data'] = array();
@@ -612,7 +612,7 @@ class android extends CI_Controller
                 
                     array_push($result['data'], $index);
                 }
-                $su = $this->android_model->sum_pemesananTahun($ktp,$tahun,$stat)->result();
+                $su = $this->Android_model->sum_pemesananTahun($ktp,$tahun,$stat)->result();
                     
                 foreach($su as $row){
                     $result['jmlpesan'] = $row->jmpesan;
@@ -635,7 +635,7 @@ class android extends CI_Controller
                     $data = [
                         "ID_PESAN_STATUS" => 2
                     ];
-                    $this->android_model->konfirmasi_pemesanan($id,$data);
+                    $this->Android_model->konfirmasi_pemesanan($id,$data);
                     $result["success"] = "1";
                     $result["message"] = "Pemesanan Berhasil Dikonfirmasi!";
                     echo json_encode($result);
@@ -646,7 +646,7 @@ class android extends CI_Controller
             $id = $_POST['idpesan'];
             $idpanen = $_POST['idpanen'];
             $jmlpesan = (int)$_POST['jmlpesan'];
-                    $cekPanenPesanan = $this->android_model->cek_panenPesanan($idpanen)->result();
+                    $cekPanenPesanan = $this->Android_model->cek_panenPesanan($idpanen)->result();
                     foreach($cekPanenPesanan as $row){
                         $hasil = $row->HASIL;
                     }
@@ -655,9 +655,9 @@ class android extends CI_Controller
                         $data = [
                             "HASIL" => $increHasil
                         ];
-                        $this->android_model->update_hasilPanen($idpanen,$data);
+                        $this->Android_model->update_hasilPanen($idpanen,$data);
                         $where = array('ID_PESAN' => $id);
-                    $this->android_model->hapus_data($where,"pemesanan");
+                    $this->Android_model->hapus_data($where,"pemesanan");
                     $result["success"] = "1";
                     $result["message"] = "Pemesanan Ditolak/Dihapus!";
                     echo json_encode($result);
@@ -677,20 +677,26 @@ class android extends CI_Controller
             $passbarukonf = $_POST['passbarukonf'];
             $passupdate = md5($_POST['passbaru']);
 
-            $cek_user = $this->android_model->cekuser_pengaturan($id,$passlama)->result();
+            $cek_user = $this->Android_model->cekuser_pengaturan($id,$passlama)->result();
             if($cek_user != FALSE){
                     if($passbaru != $passbarukonf){
                          $result["success"] = "1";
                         $result["message"] = "Konfirmasi Password Tidak Sama!";
                         echo json_encode($result);
                     }else{
-                        $data = [
-                            "PASSWORD" => $passupdate
-                        ];
-                    $updateData = $this->android_model->update_pengaturan($id,$data);
+                        if($passbaru != NULL || $passbarukonf != NULL || $passbaru != "" || $passbarukonf != ""){
+                            $data = [
+                                "PASSWORD" => $passupdate
+                            ];
+                            $updateData = $this->Android_model->update_pengaturan($id,$data);
+                            $result["success"] = "1";
+                            $result["message"] = "Ganti Password Berhasil!";
+                            echo json_encode($result);
+                    }else{
                         $result["success"] = "1";
-                        $result["message"] = "Ganti Password Berhasil!";
-                        echo json_encode($result);
+                            $result["message"] = "Password baru tidak boleh kosong!";
+                            echo json_encode($result);
+                    }
                     }
             }else{
                 $result["success"] = "1";
@@ -717,7 +723,7 @@ class android extends CI_Controller
                 unlink($lok1);
             }
             if(!empty($foto)){
-                $query = $this->android_model->update_foto($id, $gambar);
+                $query = $this->Android_model->update_foto($id, $gambar);
                 
                 if ($query){
                     file_put_contents($path,base64_decode($foto));
