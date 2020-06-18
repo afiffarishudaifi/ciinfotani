@@ -41,7 +41,7 @@ class Auser extends CI_Controller{
             $this->session->set_flashdata('penggunadihapus', 'Dihapus');
             redirect('Auser');
         } else {
-            echo "<script>alert('Gagal dihapus karena data dipakai di tabel relasi');history.go(-1);</script>";
+            echo "<script>alert('Gagal dihapus karena terdapat relasi di Data Petani! Coba hapus Data Petani terlebih dahulu!');history.go(-1);</script>";
         }   
         
     }

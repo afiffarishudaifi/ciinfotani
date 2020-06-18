@@ -69,6 +69,7 @@ $this->load->view("_partials/head.php");
                                         <?php
 
                                         foreach ($user as $row) {  //merubah array dari objek ke array yang biasanya
+                                            if($row['ID_LEVEL'] != 1){
                                         ?>
                                             <tr>
                                                 <!--memangambil data dari tabel dengan mengisikan data di table-->
@@ -86,7 +87,7 @@ $this->load->view("_partials/head.php");
                                                 </td>
                                             </tr>
                                         <?php
-                                        } ?>
+                                        } }?>
                                     </tbody>
                                 </table>
                             </div>

@@ -681,7 +681,7 @@ class Android extends CI_Controller
             if($cek_user != FALSE){
                     if($passbaru != $passbarukonf){
                          $result["success"] = "1";
-                        $result["message"] = "Konfirmasi Password Tidak Sama!";
+                        $result["message"] = "Konfirmasi Katasandi Tidak Sama!";
                         echo json_encode($result);
                     }else{
                         if($passbaru != NULL || $passbarukonf != NULL || $passbaru != "" || $passbarukonf != ""){
@@ -690,11 +690,11 @@ class Android extends CI_Controller
                             ];
                             $updateData = $this->Android_model->update_pengaturan($id,$data);
                             $result["success"] = "1";
-                            $result["message"] = "Ganti Password Berhasil!";
+                            $result["message"] = "Ganti Katasandi Berhasil!";
                             echo json_encode($result);
                     }else{
                         $result["success"] = "1";
-                            $result["message"] = "Password baru tidak boleh kosong!";
+                            $result["message"] = "Katasandi baru tidak boleh kosong!";
                             echo json_encode($result);
                     }
                     }
@@ -742,6 +742,56 @@ class Android extends CI_Controller
             }
         }
     }
+    public function pengaturan_danfoto(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['iduser'];
+            $passlama = md5($_POST['passlama']);
+            $passbaru = $_POST['passbaru'];
+            $passbarukonf = $_POST['passbarukonf'];
+            $passupdate = md5($_POST['passbaru']);
+            
+            $username = $_POST['user'];
+            $fotolama = $_POST['fotolama'];
+            $foto = $_POST['foto'];
 
+            $gambar = $username.".png";
+            $path = "img/user/".$username.".png";
+
+            $cek_user = $this->Android_model->cekuser_pengaturan($id,$passlama)->result();
+            if($cek_user != FALSE){
+                    if($passbaru != $passbarukonf){
+                         $result["success"] = "1";
+                        $result["message"] = "Konfirmasi Katasandi Tidak Sama!";
+                        echo json_encode($result);
+                    }else{
+                        if(file_exists($lok=FCPATH.'/img/user/'.$fotolama)){
+                            unlink($lok);
+                        }
+                        if(file_exists($lok1=FCPATH.'/img/user/'.$gambar)){
+                            unlink($lok1);
+                        }
+                        if(!empty($foto)){
+                            $data = [
+                                "PASSWORD" => $passupdate,
+                                "FOTO_USER" => $gambar
+                            ];
+                            $updateData = $this->Android_model->update_pengaturan($id,$data);
+                            file_put_contents($path,base64_decode($foto));
+                            $result["success"] = "1";
+                            $result["message"] = "Katasandi dan Foto Berhasil dirubah!";
+                            echo json_encode($result);
+                        }else{
+                            $result["success"] = "1";
+                            $result["message"] = "Gagal merubah data!";
+                            echo json_encode($result);
+                        }
+                    }
+            }else{
+                $result["success"] = "1";
+                $result["message"] = "Katasandi Salah!";
+                echo json_encode($result);
+            }    
+        }
+    }
 
 }

@@ -79,12 +79,12 @@ class Apetani extends CI_Controller{
     {
         $hasilPanen = $this->petani_model->cekKeberadaanPanen($id);
         $hasilPesan = $this->petani_model->cekKeberadaanPemesanan($id);
-         if ($hasilPesan == FALSE || $hasilPanen == FALSE) {
+         if ($hasilPesan == 0 || $hasilPanen == 0) {
                 $data['idpetani'] = $this->petani_model->hapusDataPetani($id);
                 $this->session->set_flashdata('petanidhapus', 'Dihapus');
                 redirect('Apetani');
             } else {
-                echo "<script>alert('Gagal dihapus karena data dipakai di tabel Panen atau Pemesanan');history.go(-1);</script>";
+                echo "<script>alert('Gagal dihapus! Anda tidak dapat menghapus petani yang telah memiliki data panen dan pemesanan');history.go(-1);</script>";
             }
         }   
     }

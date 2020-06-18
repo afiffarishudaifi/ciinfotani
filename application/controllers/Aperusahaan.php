@@ -200,7 +200,7 @@ class Aperusahaan extends CI_Controller{
             $this->session->set_flashdata('perusahaandihapus', 'Dihapus');
             redirect('Aperusahaan');
         } else {
-            echo "<script>alert('Gagal dihapus karena data dipakai di tabel relasi');history.go(-1);</script>";
+            echo "<script>alert('Gagal dihapus! Anda tidak dapat menghapus perusahaan yang memiliki data pemesanan');history.go(-1);</script>";
         }
     }
 
