@@ -1,10 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class android extends CI_Controller
+class Android extends CI_Controller
 {
     public function __construct(){
         parent::__construct();
-        $this->load->model('android_model');
+        $this->load->model('Android_model');
     }
 
     public function index(){
@@ -16,7 +16,7 @@ class android extends CI_Controller
         $index['ID_DESA'] = "0";
         $index['NAMA_DESA'] = "Pilih Desa";
         array_push($result,$index);
-        $query = $this->android_model->daftar_desa()->result();
+        $query = $this->Android_model->daftar_desa()->result();
         foreach($query as $row){
             $index['ID_DESA'] = $row->ID_DESA;
             $index['NAMA_DESA'] = $row->NAMA_DESA;
@@ -30,7 +30,7 @@ class android extends CI_Controller
         $index['ID_KOMODITAS'] = "0";
         $index['NAMA_KOMODITAS'] = "Pilih Komoditas";
         array_push($result,$index);
-        $query = $this->android_model->daftar_komoditas()->result();
+        $query = $this->Android_model->daftar_komoditas()->result();
         foreach($query as $row){
             $index['ID_KOMODITAS'] = $row->ID_KOMODITAS;
             $index['NAMA_KOMODITAS'] = $row->NAMA_KOMODITAS;
@@ -43,11 +43,11 @@ class android extends CI_Controller
             $username = $_POST['username'];
             $password = md5($_POST['password']);
         
-            $response = $this->android_model->loginapi($username, $password)->result();
+            $response = $this->Android_model->loginapi($username, $password)->result();
             foreach ($response as $user){
                 $id_user = $user->ID_USER;
             }
-            $ambil_ktp = $this->android_model->cek_ktp($id_user)->result();
+            $ambil_ktp = $this->Android_model->cek_ktp($id_user)->result();
             
             $result = array();
             $result['login'] = array();
@@ -88,34 +88,28 @@ class android extends CI_Controller
                     $result["message"] = "Password Tidak sama";
                     echo json_encode($result);
             }else{
-                $cek = $this->android_model->cek_user($username)->result();
+                $cek = $this->Android_model->cek_user($username)->result();
                 if($cek != TRUE){
                     if(!empty($foto)){
                         //$random = random_word(20);
                         $gambar = $username.".png";
                         $path = "img/user/".$username.".png";
                         
-                        $query = $this->android_model->registerapi($username,$password,$gambar);
+                        $query = $this->Android_model->registerapi($username,$password,$gambar);
                         
-                        if ($query){
                             file_put_contents($path,base64_decode($foto));
                             $result["success"] = "1";
                             $result["message"] = "Registrasi Berhasil!";
                             echo json_encode($result);
-                        }else{
-                            $result["success"] = "0";
-                            $result["message"] = "Registrasi Gagal!";
-                            echo json_encode($result);
-                        }
                     }else{
-                        $this->android_model->registerapi($username,$password,"");
+                        $this->Android_model->registerapi($username,$password,"");
                         $result["success"] = "1";
                         $result["message"] = "Registrasi Berhasil!";
                         echo json_encode($result);
                     }
                 }else{
                     $result["success"] = "0";
-                            $result["message"] = "Registrasi Gagal!";
+                            $result["message"] = "Registrasi Gagal! User Telah Terdaftar!";
                             echo json_encode($result);
                 }
             }
@@ -136,7 +130,7 @@ class android extends CI_Controller
             $date = new DateTime();
             $tgltanam = $date->format('Y-m-d');
 
-            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            $cek = $this->Android_model->cek_petani($ktp,$id)->result();
                 if($cek == FALSE){
                    //insert data
                    $data = [
@@ -153,7 +147,7 @@ class android extends CI_Controller
                     "PANEN" => $tglpanen,
                     "NO_HP" => $nohp
                     ];
-                        $this->android_model->insert_petani($data);
+                        $this->Android_model->insert_petani($data);
                         $result["success"] = "1";
                         $result["message"] = "Tambah Data Berhasil!";
                         echo json_encode($result);
@@ -170,7 +164,7 @@ class android extends CI_Controller
                         "PANEN" => $tglpanen,
                         "NO_HP" => $nohp
                     ];
-                    $this->android_model->update_petani($ktp,$data);
+                    $this->Android_model->update_petani($ktp,$data);
                     $result["success"] = "2";
                     $result["message"] = "Update Data Berhasil!";
                     echo json_encode($result);
@@ -182,12 +176,12 @@ class android extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $id = $_POST['id_user'];
             $ktp = $_POST['ktp'];
-            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            $cek = $this->Android_model->cek_petani($ktp,$id)->result();
             foreach($cek as $baris){
                 $desa = $baris->ID_DESA;
                 $komoditas = $baris->ID_KOMODITAS;
             }
-            $cek_desaKomoditas = $this->android_model->cek_desaKomoditas($desa,$komoditas)->result();
+            $cek_desaKomoditas = $this->Android_model->cek_desaKomoditas($desa,$komoditas)->result();
         
             $result = array();
             $result['data'] = array();
@@ -243,7 +237,7 @@ class android extends CI_Controller
                     "HARGA" => $harga,
                     "STATUS_PANEN" => "Panen"                
                 ];
-                        $this->android_model->insert_panen($data);
+                        $this->Android_model->insert_panen($data);
                         $result["success"] = "1";
                         $result["message"] = "Tambah Panen Berhasil!";
                         echo json_encode($result);
@@ -260,12 +254,12 @@ class android extends CI_Controller
             $id = $_POST['id_user'];
             $ktp = $_POST['ktp'];
             
-            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            $cek = $this->Android_model->cek_petani($ktp,$id)->result();
             foreach($cek as $baris){
                 $desa = $baris->ID_DESA;
                 $komoditas = $baris->ID_KOMODITAS;
             }
-            $cek_desaKomoditas = $this->android_model->cek_desaKomoditas($desa,$komoditas)->result();
+            $cek_desaKomoditas = $this->Android_model->cek_desaKomoditas($desa,$komoditas)->result();
         
             $result = array();
             $result['data'] = array();
@@ -302,7 +296,7 @@ class android extends CI_Controller
             $date = new DateTime();
                 $tglskrg= $date->format('Y-m-d');
 
-            $cek = $this->android_model->cek_petani($ktp,$id)->result();
+            $cek = $this->Android_model->cek_petani($ktp,$id)->result();
             foreach($cek as $baris){
                 $tglpanen = $baris->PANEN;
             }
@@ -312,10 +306,10 @@ class android extends CI_Controller
                     $data = [
                             "ID_STATUS" => 1
                         ];
-                    $this->android_model->update_petani($ktp,$data);
+                    $this->Android_model->update_petani($ktp,$data);
                     $result["success"] = "1";
                     $result["message"] = "Saatnya Panen!";
-                $cek_fillpanen = $this->android_model->cek_fillapanen($ktp,$tglpanen)->result();
+                $cek_fillpanen = $this->Android_model->cek_fillpanen($ktp,$tglpanen)->result();
                 if($cek_fillpanen != FALSE){
                     $result["donepanen"] = "1";
                     $result["donemessage"] = "Telah Panen! Silahkan Perbarui Data Petani!";
@@ -341,7 +335,7 @@ class android extends CI_Controller
     public function lap_panen(){
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $ktp = $_POST['ktp'];
-            $cek = $this->android_model->cek_panen($ktp)->result();
+            $cek = $this->Android_model->cek_panen($ktp)->result();
         
             $result = array();
             $result['data'] = array();
@@ -364,7 +358,7 @@ class android extends CI_Controller
                 
                     array_push($result['data'], $index);
                 }
-                $su = $this->android_model->sum_hasilSisa($ktp)->result();
+                $su = $this->Android_model->sum_hasilSisa($ktp)->result();
                     
                 foreach($su as $row){
                     $result['jmlhasil'] = $row->jmhasil;
@@ -386,7 +380,7 @@ class android extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] =='POST'){
             $ktp = $_POST['ktp'];
             $tgl = $_POST['tahun'];
-            $cek = $this->android_model->cek_panenTahun($ktp,$tgl)->result();
+            $cek = $this->Android_model->cek_panenTahun($ktp,$tgl)->result();
         
             $result = array();
             $result['data'] = array();
@@ -409,7 +403,7 @@ class android extends CI_Controller
                 
                     array_push($result['data'], $index);
                 }
-                $su = $this->android_model->sum_hasilSisaTahun($ktp,$tgl)->result();
+                $su = $this->Android_model->sum_hasilSisaTahun($ktp,$tgl)->result();
                     
                 foreach($su as $row){
                     $result['jmlhasil'] = $row->jmhasil;
@@ -426,100 +420,6 @@ class android extends CI_Controller
         }
     }
 
-<<<<<<< HEAD
-    public function pemesanan(){
-        if ($_SERVER['REQUEST_METHOD'] =='POST'){
-            $ktp = $_POST['ktp'];
-            $stat = $_POST['status'];
-            $cek = $this->android_model->cek_pemesanan($ktp,$stat)->result();
-        
-            $result = array();
-            $result['data'] = array();
-            if ($cek != FALSE ) {
-                $index['id_pesan'] = "ID Pesan";
-                    $index['nama_perusahaan'] = "Nama Perusahaan";
-                    $index['tanggal'] = "Tanggal";
-                    $index['jml_pesan'] = "Jumlah Pesan";
-                    $index['tot_biaya'] = "Total Biaya";
-                    $index['status'] = "Status";
-                    $index['id_panen'] = "0";
-                    $index['komoditas'] = "Komoditas";
-                    
-                    array_push($result['data'], $index);
-                foreach($cek as $row){
-                    $index['id_pesan'] = $row->ID_PESAN;
-                    $index['nama_perusahaan'] = $row->NAMA_PERUSAHAAN;
-                    $index['tanggal'] = $row->TANGGAL;
-                    $index['jml_pesan'] = $row->JUMLAH_PESAN;
-                    $index['tot_biaya'] = $row->TOTAL_BIAYA;
-                    $index['status'] = $row->ID_PESAN_STATUS;
-                    $index['id_panen'] = $row->ID_PANEN;
-                    $index['komoditas'] = $row->NAMA_KOMODITAS;
-                
-                    array_push($result['data'], $index);
-                }
-                $su = $this->android_model->sum_pemesanan($ktp,$stat)->result();
-                    
-                foreach($su as $row){
-                    $result['jmlpesan'] = $row->jmpesan;
-                    $result['totbiaya'] = $row->totbiaya;
-                }
-                    $result['success'] = "1";
-                    $result['message'] = "success";
-                    echo json_encode($result);
-            } else {
-                    $result['success'] = "0";
-                    $result['message'] = "Tidak Ada Pemesanan";
-                    echo json_encode($result);
-            }
-        }
-    }
-    public function pemesananTahun(){
-        if ($_SERVER['REQUEST_METHOD'] =='POST'){
-            $ktp = $_POST['ktp'];
-            $tahun = $_POST['tahun'];
-            $stat = $_POST['status'];
-            $cek = $this->android_model->cek_pemesananTahun($ktp,$tahun,$stat)->result();
-        
-            $result = array();
-            $result['data'] = array();
-            if ($cek != FALSE ) {
-                $index['id_pesan'] = "ID Pesan";
-                    $index['nama_perusahaan'] = "Nama Perusahaan";
-                    $index['tanggal'] = "Tanggal";
-                    $index['jml_pesan'] = "Jumlah Pesan";
-                    $index['tot_biaya'] = "Total Biaya";
-                    $index['status'] = "Status";
-                    $index['id_panen'] = "0";
-                    $index['komoditas'] = "Komoditas";
-                    
-                    array_push($result['data'], $index);
-                foreach($cek as $row){
-                    $index['id_pesan'] = $row->ID_PESAN;
-                    $index['nama_perusahaan'] = $row->NAMA_PERUSAHAAN;
-                    $index['tanggal'] = $row->TANGGAL;
-                    $index['jml_pesan'] = $row->JUMLAH_PESAN;
-                    $index['tot_biaya'] = $row->TOTAL_BIAYA;
-                    $index['status'] = $row->ID_PESAN_STATUS;
-                    $index['id_panen'] = $row->ID_PANEN;
-                    $index['komoditas'] = $row->NAMA_KOMODITAS;
-                
-                    array_push($result['data'], $index);
-                }
-                $su = $this->android_model->sum_pemesananTahun($ktp,$tahun,$stat)->result();
-                    
-                foreach($su as $row){
-                    $result['jmlpesan'] = $row->jmpesan;
-                    $result['totbiaya'] = $row->totbiaya;
-                }
-                    $result['success'] = "1";
-                    $result['message'] = "success";
-                    echo json_encode($result);
-            } else {
-                    $result['success'] = "0";
-                    $result['message'] = "Tidak Ada Pemesanan";
-                    echo json_encode($result);
-=======
     //tanya ke admin
     public function tanya()
     {
@@ -585,11 +485,11 @@ class android extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $username = $_POST['username'];
             $nohp = $_POST['nohp'];
-            $data = $this->android_model->cari_petani($username, $nohp);
+            $data = $this->Android_model->cari_petani($username, $nohp);
             if ($data != FALSE) {
                 $result['success'] = "1";
                 $result['message'] = "Akun ditemukan";
-                foreach ($this->android_model->cari_petani($username, $nohp) as $cek) :
+                foreach ($this->Android_model->cari_petani($username, $nohp) as $cek) :
                     $hasil = $cek['ID_USER'];
                 endforeach;
                 $result['id'] = $hasil;
@@ -598,14 +498,10 @@ class android extends CI_Controller
                 $result['success'] = "0";
                 $result['message'] = "Akun tidak ditemukan";
                 echo json_encode($result);
->>>>>>> c75048f6ce421769d45ec816594a287ebf793a65
             }
         }
     }
 
-<<<<<<< HEAD
-
-=======
     //update password
     public function update_petani()
     {
@@ -622,14 +518,274 @@ class android extends CI_Controller
                     'PASSWORD' => md5($_POST['password'])
                 ];
                 $where = array('ID_USER' => $_POST['id']);
-                $this->android_model->update_data($user, $data);
-                //$this->android_model->update_datas($where, $data, 'user');
+                $this->Android_model->update_data($user, $data);
+                //$this->Android_model->update_datas($where, $data, 'user');
                 $result["success"] = "1";
                 $result["message"] = "Update Data Berhasil!";
                 echo json_encode($result);
             }
         }
     }
-    
->>>>>>> c75048f6ce421769d45ec816594a287ebf793a65
+
+    public function pemesanan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $ktp = $_POST['ktp'];
+            $stat = $_POST['status'];
+            $cek = $this->Android_model->cek_pemesanan($ktp,$stat)->result();
+        
+            $result = array();
+            $result['data'] = array();
+            if ($cek != FALSE ) {
+                $index['id_pesan'] = "ID Pesan";
+                    $index['nama_perusahaan'] = "Nama Perusahaan";
+                    $index['tanggal'] = "Tanggal";
+                    $index['jml_pesan'] = "Jumlah Pesan";
+                    $index['tot_biaya'] = "Total Biaya";
+                    $index['status'] = "Status";
+                    $index['id_panen'] = "0";
+                    $index['komoditas'] = "Komoditas";
+                    
+                    array_push($result['data'], $index);
+                foreach($cek as $row){
+                    $index['id_pesan'] = $row->ID_PESAN;
+                    $index['nama_perusahaan'] = $row->NAMA_PERUSAHAAN;
+                    $index['tanggal'] = $row->TANGGAL;
+                    $index['jml_pesan'] = $row->JUMLAH_PESAN;
+                    $index['tot_biaya'] = $row->TOTAL_BIAYA;
+                    $index['status'] = $row->ID_PESAN_STATUS;
+                    $index['id_panen'] = $row->ID_PANEN;
+                    $index['komoditas'] = $row->NAMA_KOMODITAS;
+                
+                    array_push($result['data'], $index);
+                }
+                $su = $this->Android_model->sum_pemesanan($ktp,$stat)->result();
+                    
+                foreach($su as $row){
+                    $result['jmlpesan'] = $row->jmpesan;
+                    $result['totbiaya'] = $row->totbiaya;
+                }
+                    $result['success'] = "1";
+                    $result['message'] = "success";
+                    echo json_encode($result);
+            } else {
+                    $result['success'] = "0";
+                    $result['message'] = "Tidak Ada Pemesanan";
+                    echo json_encode($result);
+            }
+        }
+    }
+    public function pemesananTahun(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $ktp = $_POST['ktp'];
+            $tahun = $_POST['tahun'];
+            $stat = $_POST['status'];
+            $cek = $this->Android_model->cek_pemesananTahun($ktp,$tahun,$stat)->result();
+        
+            $result = array();
+            $result['data'] = array();
+            if ($cek != FALSE ) {
+                $index['id_pesan'] = "ID Pesan";
+                    $index['nama_perusahaan'] = "Nama Perusahaan";
+                    $index['tanggal'] = "Tanggal";
+                    $index['jml_pesan'] = "Jumlah Pesan";
+                    $index['tot_biaya'] = "Total Biaya";
+                    $index['status'] = "Status";
+                    $index['id_panen'] = "0";
+                    $index['komoditas'] = "Komoditas";
+                    
+                    array_push($result['data'], $index);
+                foreach($cek as $row){
+                    $index['id_pesan'] = $row->ID_PESAN;
+                    $index['nama_perusahaan'] = $row->NAMA_PERUSAHAAN;
+                    $index['tanggal'] = $row->TANGGAL;
+                    $index['jml_pesan'] = $row->JUMLAH_PESAN;
+                    $index['tot_biaya'] = $row->TOTAL_BIAYA;
+                    $index['status'] = $row->ID_PESAN_STATUS;
+                    $index['id_panen'] = $row->ID_PANEN;
+                    $index['komoditas'] = $row->NAMA_KOMODITAS;
+                
+                    array_push($result['data'], $index);
+                }
+                $su = $this->Android_model->sum_pemesananTahun($ktp,$tahun,$stat)->result();
+                    
+                foreach($su as $row){
+                    $result['jmlpesan'] = $row->jmpesan;
+                    $result['totbiaya'] = $row->totbiaya;
+                }
+                    $result['success'] = "1";
+                    $result['message'] = "success";
+                    echo json_encode($result);
+            } else {
+                    $result['success'] = "0";
+                    $result['message'] = "Tidak Ada Pemesanan";
+                    echo json_encode($result);
+            }
+        }
+    }
+    public function konfirmasi_pemesanan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['idpesan'];
+                    //update data
+                    $data = [
+                        "ID_PESAN_STATUS" => 2
+                    ];
+                    $this->Android_model->konfirmasi_pemesanan($id,$data);
+                    $result["success"] = "1";
+                    $result["message"] = "Pemesanan Berhasil Dikonfirmasi!";
+                    echo json_encode($result);
+        }     
+    }    
+    public function tolak_pemesanan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['idpesan'];
+            $idpanen = $_POST['idpanen'];
+            $jmlpesan = (int)$_POST['jmlpesan'];
+                    $cekPanenPesanan = $this->Android_model->cek_panenPesanan($idpanen)->result();
+                    foreach($cekPanenPesanan as $row){
+                        $hasil = $row->HASIL;
+                    }
+                    if($cekPanenPesanan != FALSE){
+                        $increHasil = $hasil+$jmlpesan;
+                        $data = [
+                            "HASIL" => $increHasil
+                        ];
+                        $this->Android_model->update_hasilPanen($idpanen,$data);
+                        $where = array('ID_PESAN' => $id);
+                    $this->Android_model->hapus_data($where,"pemesanan");
+                    $result["success"] = "1";
+                    $result["message"] = "Pemesanan Ditolak/Dihapus!";
+                    echo json_encode($result);
+                    }else{
+                        $result["success"] = "1";
+                        $result["message"] = "Gagal!";
+                        echo json_encode($result);        
+                    }
+        }     
+    }    
+
+    public function pengaturan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['iduser'];
+            $passlama = md5($_POST['passlama']);
+            $passbaru = $_POST['passbaru'];
+            $passbarukonf = $_POST['passbarukonf'];
+            $passupdate = md5($_POST['passbaru']);
+
+            $cek_user = $this->Android_model->cekuser_pengaturan($id,$passlama)->result();
+            if($cek_user != FALSE){
+                    if($passbaru != $passbarukonf){
+                         $result["success"] = "1";
+                        $result["message"] = "Konfirmasi Katasandi Tidak Sama!";
+                        echo json_encode($result);
+                    }else{
+                        if($passbaru != NULL || $passbarukonf != NULL || $passbaru != "" || $passbarukonf != ""){
+                            $data = [
+                                "PASSWORD" => $passupdate
+                            ];
+                            $updateData = $this->Android_model->update_pengaturan($id,$data);
+                            $result["success"] = "1";
+                            $result["message"] = "Ganti Katasandi Berhasil!";
+                            echo json_encode($result);
+                    }else{
+                        $result["success"] = "1";
+                            $result["message"] = "Katasandi baru tidak boleh kosong!";
+                            echo json_encode($result);
+                    }
+                    }
+            }else{
+                $result["success"] = "1";
+                $result["message"] = "Password Salah!";
+                echo json_encode($result);
+            }    
+        }
+    }
+
+    public function update_foto(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['iduser'];
+            $username = $_POST['user'];
+            $fotolama = $_POST['fotolama'];
+            $foto = $_POST['foto'];
+
+            $gambar = $username.".png";
+            $path = "img/user/".$username.".png";
+            
+            if(file_exists($lok=FCPATH.'/img/user/'.$fotolama)){
+                unlink($lok);
+            }
+            if(file_exists($lok1=FCPATH.'/img/user/'.$gambar)){
+                unlink($lok1);
+            }
+            if(!empty($foto)){
+                $query = $this->Android_model->update_foto($id, $gambar);
+                
+                if ($query){
+                    file_put_contents($path,base64_decode($foto));
+                    $result["success"] = "1";
+                    $result["message"] = "Update Foto Berhasil!";
+                    echo json_encode($result);
+                }else{
+                    $result["success"] = "0";
+                    $result["message"] = "Update Foto Gagal!";
+                    echo json_encode($result);
+                }
+            }else{
+                $result["success"] = "2";
+                $result["message"] = "Update Foto Gagal!";
+                echo json_encode($result);
+            }
+        }
+    }
+    public function pengaturan_danfoto(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $id = $_POST['iduser'];
+            $passlama = md5($_POST['passlama']);
+            $passbaru = $_POST['passbaru'];
+            $passbarukonf = $_POST['passbarukonf'];
+            $passupdate = md5($_POST['passbaru']);
+            
+            $username = $_POST['user'];
+            $fotolama = $_POST['fotolama'];
+            $foto = $_POST['foto'];
+
+            $gambar = $username.".png";
+            $path = "img/user/".$username.".png";
+
+            $cek_user = $this->Android_model->cekuser_pengaturan($id,$passlama)->result();
+            if($cek_user != FALSE){
+                    if($passbaru != $passbarukonf){
+                         $result["success"] = "1";
+                        $result["message"] = "Konfirmasi Katasandi Tidak Sama!";
+                        echo json_encode($result);
+                    }else{
+                        if(file_exists($lok=FCPATH.'/img/user/'.$fotolama)){
+                            unlink($lok);
+                        }
+                        if(file_exists($lok1=FCPATH.'/img/user/'.$gambar)){
+                            unlink($lok1);
+                        }
+                        if(!empty($foto)){
+                            $data = [
+                                "PASSWORD" => $passupdate,
+                                "FOTO_USER" => $gambar
+                            ];
+                            $updateData = $this->Android_model->update_pengaturan($id,$data);
+                            file_put_contents($path,base64_decode($foto));
+                            $result["success"] = "1";
+                            $result["message"] = "Katasandi dan Foto Berhasil dirubah!";
+                            echo json_encode($result);
+                        }else{
+                            $result["success"] = "1";
+                            $result["message"] = "Gagal merubah data!";
+                            echo json_encode($result);
+                        }
+                    }
+            }else{
+                $result["success"] = "1";
+                $result["message"] = "Katasandi Salah!";
+                echo json_encode($result);
+            }    
+        }
+    }
+
 }
