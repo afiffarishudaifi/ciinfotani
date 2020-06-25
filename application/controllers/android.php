@@ -97,16 +97,10 @@ class Android extends CI_Controller
                         
                         $query = $this->Android_model->registerapi($username,$password,$gambar);
                         
-                        if ($query){
                             file_put_contents($path,base64_decode($foto));
                             $result["success"] = "1";
                             $result["message"] = "Registrasi Berhasil!";
                             echo json_encode($result);
-                        }else{
-                            $result["success"] = "0";
-                            $result["message"] = "Registrasi Gagal!";
-                            echo json_encode($result);
-                        }
                     }else{
                         $this->Android_model->registerapi($username,$password,"");
                         $result["success"] = "1";
@@ -115,7 +109,7 @@ class Android extends CI_Controller
                     }
                 }else{
                     $result["success"] = "0";
-                            $result["message"] = "Registrasi Gagal!";
+                            $result["message"] = "Registrasi Gagal! User Telah Terdaftar!";
                             echo json_encode($result);
                 }
             }
@@ -793,5 +787,25 @@ class Android extends CI_Controller
             }    
         }
     }
+
+    public function cek_notifpemesanan(){
+        if ($_SERVER['REQUEST_METHOD'] =='POST'){
+            $ktp = $_POST['ktp'];
+
+            $cek = $this->Android_model->cek_notifpemesanan($ktp)->result();
+            if($cek != FALSE ){
+                    $result["success"] = "1";
+                    $result["message"] = "Ada Pemesanan Masuk!";
+                    $result["pemesanan"] = "1";
+                    echo json_encode($result);
+            }else{
+                $result["success"] = "0";
+                $result["message"] = "Tidak Ada Pemesanan";
+                $result["pemesanan"] = "0";
+                echo json_encode($result);
+            }
+        }
+    }
+
 
 }

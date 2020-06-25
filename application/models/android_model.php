@@ -172,4 +172,13 @@ class Android_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+    function cek_notifpemesanan($ktp){
+        $this->db->select('*');
+        $this->db->from('pemesanan');
+        $this->db->where('KTP', $ktp);
+        $this->db->where('ID_PESAN_STATUS', "1");
+        $query = $this->db->get();
+        return $query;
+    }
+
 }
